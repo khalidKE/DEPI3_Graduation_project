@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:books/colors/colors.dart';
+import 'package:books/helper/hive_helper.dart';
+import 'package:books/screens/login_screen.dart';
 import 'package:books/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +18,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 3), () => Get.off(OnboardingScreen()));
+    Timer(Duration(seconds: 3), () {
+      if (HiveHelper.showEnboarding == true) {
+        HiveHelper.ChangeShowenboardingState();
+        Get.off(OnboardingScreen());
+      } else
+        Get.off(LogInScreen());
+    });
     super.initState();
   }
 
