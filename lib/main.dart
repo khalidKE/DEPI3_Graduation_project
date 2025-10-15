@@ -1,5 +1,7 @@
 import 'package:books/helpers/dio_helper.dart';
 import 'package:books/screens/login_screen.dart';
+import 'package:books/screens/signup_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' show GetMaterialApp;
@@ -13,6 +15,7 @@ void main() async {
     clientId:
         '682142070711-at8660uq8tf7fe6vmdegjsiejle2uv6d.apps.googleusercontent.com',
   );
+
   runApp(const MyApp());
 }
 

@@ -2,6 +2,7 @@ import 'package:books/colors/colors.dart';
 import 'package:books/cubits/login_cubit.dart';
 import 'package:books/cubits/login_state.dart';
 import 'package:books/models/user_model.dart';
+import 'package:books/screens/signup_screen.dart';
 import 'package:books/widgets/email_text_field.dart';
 import 'package:books/widgets/password_text_field.dart';
 import 'package:books/widgets/rounded_purple_button.dart';
@@ -141,7 +142,9 @@ class _LogInScreenState extends State<LogInScreen> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Get.off(SignUpScreen());
+                            },
                             child: Text(
                               'Sign Up',
                               style: TextStyle(
