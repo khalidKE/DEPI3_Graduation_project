@@ -3,10 +3,9 @@ import 'package:books/colors/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-final TextEditingController enteredEmail = TextEditingController();
-
 class Emailtextfield extends StatefulWidget {
-  const Emailtextfield({super.key});
+  TextEditingController enteredEmail;
+  Emailtextfield({super.key, required this.enteredEmail});
 
   @override
   State<Emailtextfield> createState() => _EmailtextfieldState();
@@ -31,7 +30,7 @@ class _EmailtextfieldState extends State<Emailtextfield> {
           height: 55,
           width: double.infinity,
           child: TextFormField(
-            controller: enteredEmail,
+            controller: widget.enteredEmail,
             validator: (value) {
               if (!value!.contains('@')) return ('the email must contain @');
             },

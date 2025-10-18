@@ -14,46 +14,10 @@
       },
       "oauth_client": [
         {
-          "client_id": "682142070711-at8660uq8tf7fe6vmdegjsiejle2uv6d.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBkrao4U4vdq6-RoYlz6TfSIW_z83_2v5M"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "682142070711-at8660uq8tf7fe6vmdegjsiejle2uv6d.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "682142070711-3pdnf2o05ihevuh1v34qtf11odi6j6sj.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.businessCard"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:682142070711:android:532b55d86cf9e8c010da32",
-        "android_client_info": {
-          "package_name": "com.example.business_card"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "682142070711-3hie2tp5uc4m67aia1ht3vso0np3270a.apps.googleusercontent.com",
+          "client_id": "682142070711-vrl3bcemusgmohqcnnqeog5ps14ftkmj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.business_card",
+            "package_name": "com.example.books",
             "certificate_hash": "bc95f893238dc2eb4a8a63d7cc63395c07e6e5c5"
           }
         },

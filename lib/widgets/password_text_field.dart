@@ -1,12 +1,19 @@
 import 'package:books/colors/colors.dart';
+import 'package:fancy_password_field/fancy_password_field.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-final TextEditingController enteredPassword = TextEditingController();
+import 'package:get/state_manager.dart';
 
 class Passwordtextfield extends StatefulWidget {
-  const Passwordtextfield({super.key});
+  late TextEditingController enteredPassword;
+  late String? Function(String?)? validation;
+
+  Passwordtextfield({
+    super.key,
+    required this.enteredPassword,
+    required this.validation,
+  });
 
   @override
   State<Passwordtextfield> createState() => _PasswordtextfieldState();
@@ -33,11 +40,8 @@ class _PasswordtextfieldState extends State<Passwordtextfield> {
           height: 55,
           width: double.infinity,
           child: TextFormField(
-            controller: enteredPassword,
-            validator: (value) {
-              if (value!.length < 6)
-                return ('password should be more that 5 digits');
-            },
+            controller: widget.enteredPassword,
+            validator: widget.validation,
             obscureText: obscureText,
             decoration: InputDecoration(
               suffixIcon: GestureDetector(

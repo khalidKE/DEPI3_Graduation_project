@@ -2,6 +2,7 @@ import 'package:books/colors/colors.dart';
 import 'package:books/cubits/login_cubit.dart';
 import 'package:books/cubits/login_state.dart';
 import 'package:books/models/user_model.dart';
+import 'package:books/screens/home_screen.dart';
 import 'package:books/screens/signup_screen.dart';
 import 'package:books/widgets/email_text_field.dart';
 import 'package:books/widgets/password_text_field.dart';
@@ -12,7 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 
-UserModel user = UserModel();
+TextEditingController loginPassword = TextEditingController();
+TextEditingController loginEmail = TextEditingController();
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -22,7 +24,7 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKeyLogin = GlobalKey<FormState>();
   bool obscureText = true;
 
   @override
@@ -40,6 +42,7 @@ class _LogInScreenState extends State<LogInScreen> {
               backgroundColor: AppColors.purple,
               colorText: AppColors.white,
             );
+            Get.to(HomeScreen());
           } else if (state is LoginErrorState) {
             Get.snackbar(
               'Error',
@@ -57,7 +60,7 @@ class _LogInScreenState extends State<LogInScreen> {
               padding: const EdgeInsets.only(top: 48, left: 24, right: 24),
               child: SingleChildScrollView(
                 child: Form(
-                  key: _formKey,
+                  key: _formKeyLogin,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -92,22 +95,15 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: screenHeight * 0.05),
-                      Emailtextfield(),
+                      SizedBox(height: screenHeight * 0.08),
+                      Emailtextfield(enteredEmail: loginEmail),
                       SizedBox(height: screenHeight * 0.015),
-                      Passwordtextfield(),
-                      SizedBox(height: screenHeight * 0.005),
-                      InkWell(
-                        onTap: () {},
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: AppColors.purple,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      Passwordtextfield(
+                        enteredPassword: loginPassword,
+                        validation: loginValidation,
                       ),
+                      SizedBox(height: screenHeight * 0.005),
+
                       SizedBox(height: screenHeight * 0.03),
                       BlocBuilder<LoginCubit, LoginState>(
                         builder: (context, state) {
@@ -118,13 +114,14 @@ class _LogInScreenState extends State<LogInScreen> {
                           return Purplebuttun(
                             buttunText: 'Login',
                             onTapFunction: () {
-                              _formKey.currentState!.validate();
+                              _formKeyLogin.currentState!.validate();
                               setState(() {
-                                user.email = enteredEmail.text;
-                                user.password = enteredPassword.text;
+                                UserModel.user.email = loginEmail.text;
+                                UserModel.user.password = loginPassword.text;
                               });
 
-                              cubit.loginWithFirebase(user);
+                              cubit.loginWithFirebase(UserModel.user);
+
                               setState(() {});
                             },
                           );
@@ -143,7 +140,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.off(SignUpScreen());
+                              Get.to(SignUpScreen());
                             },
                             child: Text(
                               'Sign Up',
@@ -156,7 +153,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: screenHeight * 0.02),
+                      SizedBox(height: screenHeight * 0.05),
                       Row(
                         children: [
                           Expanded(
@@ -183,7 +180,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: screenHeight * 0.02),
+                      SizedBox(height: screenHeight * 0.05),
                       Center(
                         child: BlocBuilder<LoginCubit, LoginState>(
                           builder: (context, state) {
@@ -191,7 +188,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             return Whitebuttun(
                               buttunText: 'Sign in with Google',
                               ontapFunction: () {
-                                cubit.signInWithGoogleFirebase(user);
+                                cubit.signInWithGoogleFirebase();
                               },
                               imagepath: 'assets/Google - Original.png',
                             );
@@ -199,13 +196,6 @@ class _LogInScreenState extends State<LogInScreen> {
                         ),
                       ),
                       SizedBox(height: screenHeight * 0.012),
-                      Center(
-                        child: Whitebuttun(
-                          buttunText: 'Sign in with Apple',
-                          ontapFunction: () {},
-                          imagepath: 'assets/path4.png',
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -216,6 +206,10 @@ class _LogInScreenState extends State<LogInScreen> {
       ),
     );
   }
+}
+
+String? loginValidation(value) {
+  if (value!.length < 6) return ('password should be more that 5 digits');
 }
 
 //-------------------------------------------------------------------------------

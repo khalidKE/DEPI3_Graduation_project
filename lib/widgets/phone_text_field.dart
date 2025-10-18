@@ -3,23 +3,23 @@ import 'package:books/colors/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NameTextField extends StatefulWidget {
-  TextEditingController enteredName;
+class PhoneTextField extends StatefulWidget {
+  TextEditingController enteredNumber;
 
-  NameTextField({super.key, required this.enteredName});
+  PhoneTextField({super.key, required this.enteredNumber});
 
   @override
-  State<NameTextField> createState() => _EmailtextfieldState();
+  State<PhoneTextField> createState() => _EmailtextfieldState();
 }
 
-class _EmailtextfieldState extends State<NameTextField> {
+class _EmailtextfieldState extends State<PhoneTextField> {
   @override
   Widget build(BuildContext context) {
     return (Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Name',
+          'Phone Number',
           style: TextStyle(color: AppColors.black, fontWeight: FontWeight.bold),
         ),
         Container(
@@ -34,15 +34,22 @@ class _EmailtextfieldState extends State<NameTextField> {
             validator: (value) {
               if (value!.isEmpty) return ('this field can\'t be empty');
             },
-            controller: widget.enteredName,
-
+            controller: widget.enteredNumber,
+            keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               border: InputBorder.none,
               hint: Padding(
                 padding: const EdgeInsets.only(left: 8.0, top: 8),
-                child: Text(
-                  'Your name',
-                  style: TextStyle(color: AppColors.grey),
+
+                child: Row(
+                  children: [
+                    Icon(Icons.phone_outlined, color: AppColors.purple),
+                    SizedBox(width: 1),
+                    Text(
+                      'Your number',
+                      style: TextStyle(color: AppColors.grey),
+                    ),
+                  ],
                 ),
               ),
             ),
