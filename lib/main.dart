@@ -530,7 +530,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 70,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
-                              print('Error loading vendor image: ${vendor.imageUrl}');
+                              print(
+                                'Error loading vendor image: ${vendor.imageUrl}',
+                              );
                               print('Error: $error');
                               return Center(
                                 child: Text(
@@ -605,16 +607,40 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.grey[200],
                       shape: BoxShape.circle,
                     ),
-                    child: Center(
-                      child: Text(
-                        author.name[0],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                    ),
+                    child: author.imageUrl.isNotEmpty
+                        ? ClipOval(
+                            child: Image.asset(
+                              author.imageUrl,
+                              width: 65,
+                              height: 65,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                print(
+                                  'Error loading author image: ${author.imageUrl}',
+                                );
+                                return Center(
+                                  child: Text(
+                                    author.name[0],
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                        : Center(
+                            child: Text(
+                              author.name[0],
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                          ),
                   ),
                   const SizedBox(height: 8),
                   Text(
