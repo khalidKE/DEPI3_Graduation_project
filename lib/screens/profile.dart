@@ -244,31 +244,7 @@ class Profile extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color(0XFFFAFAFA),
-          currentIndex: 3,
-          selectedItemColor: Colors.deepPurple,
-          unselectedItemColor: Colors.grey,
-          items: [
-            BottomNavigationBarItem(
-              icon: Image.asset('assets/images/Home-Fill.png'),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset('assets/images/Document.png'),
-              label: "Category",
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset('assets/images/Buy.png'),
-              label: "Cart (3)",
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset('assets/images/profile_bottom.png'),
-              label: "Profile",
-            ),
-          ],
-        ),
+       
       ),
     );
   }

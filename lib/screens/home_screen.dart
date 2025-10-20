@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:books/screens/profile.dart';
 void main() {
   runApp(const BookStoreApp());
 }
@@ -289,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: const Color(0xFF5B4DB5),
         unselectedItemColor: Colors.grey,
@@ -298,6 +298,32 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             _currentIndex = index;
           });
+
+          // Navigate to different screens based on index
+          switch (index) {
+            case 0:
+              // Home - already here
+              break;
+            case 1:
+              // Orders
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Orders Screen - Coming Soon')),
+              );
+              break;
+            case 2:
+              // Cart
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Cart Screen - Coming Soon')),
+              );
+              break;
+            case 3:
+              // Profile
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  Profile()),
+              );
+              break;
+          }
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -391,7 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildSectionHeader(String title, VoidCallback onSeeAll) {
     final showSeeAll = title == 'Best Vendors' || title == 'Authors';
-
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -400,7 +426,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           if (showSeeAll)
@@ -1186,102 +1215,97 @@ class _VendorsScreenState extends State<VendorsScreen> {
                   child: Column(
                     children: [
                       Container(
-                        height: 85,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.grey[200]!),
-                        ),
-                        child: Builder(
-                          builder: (context) {
-                            if (vendor.imageUrl.isEmpty) {
-                              return Center(
-                                child: Text(
-                                  vendor.name[0],
-                                  style: TextStyle(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey[600],
-                                  ),
+                      height: 85,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey[200]!),
+                      ),
+                      child: Builder(
+                        builder: (context) {
+                          if (vendor.imageUrl.isEmpty) {
+                            return Center(
+                              child: Text(
+                                vendor.name[0],
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[600],
                                 ),
-                              );
-                            }
-
-                            try {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.asset(
-                                  vendor.imageUrl,
-                                  width: 70,
-                                  height: 70,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    print(
-                                      'Error loading ${vendor.imageUrl}: $error',
-                                    );
-                                    return Center(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            '!',
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red,
-                                            ),
+                              ),
+                            );
+                          }
+                          
+                          try {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                vendor.imageUrl,
+                                width: 70,
+                                height: 70,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  print('Error loading ${vendor.imageUrl}: $error');
+                                  return Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          '!',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red,
                                           ),
-                                          Text(
-                                            vendor.name[0],
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey[600],
-                                            ),
+                                        ),
+                                        Text(
+                                          vendor.name[0],
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[600],
                                           ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          } catch (e) {
+                            print('Exception loading image ${vendor.imageUrl}: $e');
+                            return Center(
+                              child: Text(
+                                '!${vendor.name[0]}',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
                                 ),
-                              );
-                            } catch (e) {
-                              print(
-                                'Exception loading image ${vendor.imageUrl}: $e',
-                              );
-                              return Center(
-                                child: Text(
-                                  '!${vendor.name[0]}',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        ),
+                              ),
+                            );
+                          }
+                        },
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        vendor.name,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      vendor.name,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
                       ),
-                      const SizedBox(height: 4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: _buildSmallStars(vendor.rating),
-                      ),
-                    ],
-                  ),
-                );
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: _buildSmallStars(vendor.rating),
+                    ),
+                  ],
+                 ) );
               },
             ),
           ),
@@ -1350,7 +1374,7 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
 
   List<Author> get filteredAuthors {
     if (selectedCategory == 'All') return AppData.authors;
-
+    
     // Map of display categories to possible role matches
     final roleMap = {
       'Poets': ['poet', 'poetry', 'poem'],
@@ -1360,7 +1384,7 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
     };
 
     final categoryRoles = roleMap[selectedCategory] ?? [];
-
+    
     return AppData.authors.where((author) {
       final authorRole = author.role.toLowerCase();
       return categoryRoles.any((role) => authorRole.contains(role));
@@ -1429,7 +1453,10 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
                 ? Center(
                     child: Text(
                       'No authors found in $selectedCategory',
-                      style: TextStyle(color: Colors.grey[600], fontSize: 16),
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 16,
+                      ),
                     ),
                   )
                 : ListView.builder(
@@ -1442,8 +1469,7 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  AuthorDetailScreen(author: author),
+                              builder: (context) => AuthorDetailScreen(author: author),
                             ),
                           );
                         },
@@ -1471,20 +1497,18 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
                                           width: 60,
                                           height: 60,
                                           fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                                return Center(
-                                                  child: Text(
-                                                    author.name[0],
-                                                    style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.grey[700],
-                                                    ),
-                                                  ),
-                                                );
-                                              },
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Center(
+                                              child: Text(
+                                                author.name[0],
+                                                style: TextStyle(
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey[700],
+                                                ),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       )
                                     : Center(
