@@ -1,3 +1,19 @@
+import 'package:books/helpers/dio_helper.dart';
+import 'package:books/screens/login_screen.dart';
+import 'package:books/screens/phone_number_screen.dart';
+import 'package:books/screens/signup_screen.dart';
+import 'package:books/screens/success_screen.dart';
+import 'package:books/secrets/secrets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart' show GetMaterialApp;
+import 'package:google_sign_in/google_sign_in.dart';
+import 'firebase_options.dart';
+import 'package:books/const/onboarding_data.dart';
+import 'package:books/helper/hive_helper.dart';
+import 'package:books/screens/splash_screen.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:books/notification.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,16 +21,15 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+      
 Future<void> _backgroundHandler(RemoteMessage message) async {
   // Handle background message
 }
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp();
-FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
-  await FirebaseMessaging.instance.requestPermission();
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  DioHelper.initialized();
+  await Hive.initFlutter();
+   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Message data: ${message.data}');
       if (message.notification != null) {
         print('Message also contained a notification: ${message.notification}');
@@ -23,28 +38,33 @@ FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('Message clicked! ${message.messageId}');
     });
-  runApp( DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyWidget(), // Wrap your app
-  ),);
+  
+  await Hive.openBox(HiveHelper.boxName);
+  await HiveHelper.GetShowenboardingState();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    print('Firebase initialized successfully');
+  } catch (e) {
+    print('Error initializing Firebase: $e');
+  }
+  final google = await GoogleSignIn.instance.initialize(
+    clientId: Secrets.clientID,
+  );
+
+  runApp(const MyApp());
 }
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  @override
-  State<MyWidget> createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<MyWidget> {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: NotificationPage(),
+      home: SplashScreen(),
     );
   }
 }
