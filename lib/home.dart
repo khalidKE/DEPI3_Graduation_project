@@ -142,12 +142,12 @@ class AppData {
   static List<Vendor> vendors = [
     Vendor(id: '1', name: 'Wattpad', rating: 4.0, imageUrl: 'assets/v1.png'),
     Vendor(id: '2', name: 'Kuronii', rating: 4.5, imageUrl: 'assets/v2.png'),
-    Vendor(id: '3', name: 'Crane & Co', rating: 4.2, imageUrl: 'assets/v4.png'),
-    Vendor(id: '4', name: 'GoodBuy', rating: 4.3, imageUrl: 'assets/v3.png'),
-    Vendor(id: '5', name: 'Warehouse', rating: 4.1, imageUrl: 'assets/v5.png'),
-    Vendor(id: '6', name: 'Peppa Pig', rating: 4.4, imageUrl: 'assets/v6.png'),
-    Vendor(id: '7', name: 'Jstor', rating: 4.0, imageUrl: 'assets/v7.png'),
-    Vendor(id: '8', name: 'Peloton', rating: 4.2, imageUrl: 'assets/v8.png'),
+    Vendor(id: '3', name: 'Crane & Co', rating: 4.2, imageUrl: 'assets/v3.png'),
+    Vendor(id: '4', name: 'Scribner', rating: 4.8, imageUrl: 'assets/v4.png'),
+    Vendor(id: '5', name: 'Penguin', rating: 4.7, imageUrl: 'assets/v5.png'),
+    Vendor(id: '6', name: 'Harper', rating: 4.4, imageUrl: 'assets/v6.png'),
+    Vendor(id: '7', name: 'Macmillan', rating: 4.1, imageUrl: 'assets/v7.png'),
+    Vendor(id: '8', name: 'Hachette', rating: 4.6, imageUrl: 'assets/v8.png'),
     Vendor(id: '9', name: 'Haymarket', rating: 4.3, imageUrl: 'assets/v9.png'),
   ];
 
@@ -1181,9 +1181,14 @@ class _VendorsScreenState extends State<VendorsScreen> {
               itemCount: AppData.vendors.length,
               itemBuilder: (context, index) {
                 final vendor = AppData.vendors[index];
-                return Column(
-                  children: [
-                    Container(
+                return GestureDetector(
+                  onTap: () {
+                    // TODO: Add navigation to vendor detail screen or other action
+                    print('Tapped on ${vendor.name}');
+                  },
+                  child: Column(
+                    children: [
+                      Container(
                       height: 85,
                       decoration: BoxDecoration(
                         color: Colors.grey[100],
@@ -1240,7 +1245,7 @@ class _VendorsScreenState extends State<VendorsScreen> {
                       children: _buildSmallStars(vendor.rating),
                     ),
                   ],
-                );
+                 ) );
               },
             ),
           ),
@@ -1336,12 +1341,16 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Authors',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
+        title: Expanded(
+          child: Center(
+            child: const Text(
+              'Authors',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+              ),
+            ),
           ),
         ),
         actions: [
