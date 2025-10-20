@@ -90,7 +90,7 @@ class AppData {
       rating: 4.0,
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dignissim sit amet nisl vel eleifend.',
-      imageUrl: '',
+      imageUrl: 'assets/b1.png',
     ),
     Book(
       id: '2',
@@ -99,7 +99,7 @@ class AppData {
       price: 19.99,
       rating: 4.5,
       description: 'A counterintuitive approach to living a good life.',
-      imageUrl: '',
+      imageUrl: 'assets/b2.png',
     ),
     Book(
       id: '3',
@@ -108,7 +108,7 @@ class AppData {
       price: 14.95,
       rating: 4.2,
       description: 'A gripping mystery thriller novel.',
-      imageUrl: '',
+      imageUrl: 'assets/b3.png',
     ),
     Book(
       id: '4',
@@ -140,15 +140,15 @@ class AppData {
   ];
 
   static List<Vendor> vendors = [
-    Vendor(id: '1', name: 'Wattpad', rating: 4.0, imageUrl: ''),
-    Vendor(id: '2', name: 'Kuronii', rating: 4.5, imageUrl: ''),
-    Vendor(id: '3', name: 'Crane & Co', rating: 4.2, imageUrl: ''),
-    Vendor(id: '4', name: 'GoodBuy', rating: 4.3, imageUrl: ''),
-    Vendor(id: '5', name: 'Warehouse', rating: 4.1, imageUrl: ''),
-    Vendor(id: '6', name: 'Peppa Pig', rating: 4.4, imageUrl: ''),
-    Vendor(id: '7', name: 'Jstor', rating: 4.0, imageUrl: ''),
-    Vendor(id: '8', name: 'Peloton', rating: 4.2, imageUrl: ''),
-    Vendor(id: '9', name: 'Haymarket', rating: 4.3, imageUrl: ''),
+    Vendor(id: '1', name: 'Wattpad', rating: 4.0, imageUrl: 'assets/v1.png'),
+    Vendor(id: '2', name: 'Kuronii', rating: 4.5, imageUrl: 'assets/v2.png'),
+    Vendor(id: '3', name: 'Crane & Co', rating: 4.2, imageUrl: 'assets/v4.png'),
+    Vendor(id: '4', name: 'GoodBuy', rating: 4.3, imageUrl: 'assets/v3.png'),
+    Vendor(id: '5', name: 'Warehouse', rating: 4.1, imageUrl: 'assets/v5.png'),
+    Vendor(id: '6', name: 'Peppa Pig', rating: 4.4, imageUrl: 'assets/v6.png'),
+    Vendor(id: '7', name: 'Jstor', rating: 4.0, imageUrl: 'assets/v7.png'),
+    Vendor(id: '8', name: 'Peloton', rating: 4.2, imageUrl: 'assets/v8.png'),
+    Vendor(id: '9', name: 'Haymarket', rating: 4.3, imageUrl: 'assets/v9.png'),
   ];
 
   static List<Author> authors = [
@@ -447,13 +447,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    child: Center(
-                      child: Icon(
-                        Icons.menu_book_rounded,
-                        size: 50,
-                        color: Colors.grey[400],
-                      ),
-                    ),
+                    child: book.imageUrl.isNotEmpty
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              book.imageUrl,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                print('Error loading image: ${book.imageUrl}');
+                                print('Error: $error');
+                                return Icon(
+                                  Icons.broken_image,
+                                  size: 50,
+                                  color: Colors.grey[400],
+                                );
+                              },
+                            ),
+                          )
+                        : Icon(
+                            Icons.menu_book_rounded,
+                            size: 50,
+                            color: Colors.grey[400],
+                          ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -653,11 +670,21 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      Icons.menu_book_rounded,
-                      size: 60,
-                      color: Colors.grey[400],
-                    ),
+                    child: widget.book.imageUrl.isNotEmpty
+                        ? Image.asset(
+                            widget.book.imageUrl,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => Icon(
+                              Icons.menu_book_rounded,
+                              size: 50,
+                              color: Colors.grey[400],
+                            ),
+                          )
+                        : Icon(
+                            Icons.menu_book_rounded,
+                            size: 50,
+                            color: Colors.grey[400],
+                          ),
                   ),
                   const SizedBox(width: 16),
                   // Book Info
