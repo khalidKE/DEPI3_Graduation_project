@@ -390,25 +390,33 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildSectionHeader(String title, VoidCallback onSeeAll) {
+    final showSeeAll = title == 'Best Vendors' || title == 'Authors';
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          TextButton(
-            onPressed: onSeeAll,
-            child: const Text(
-              'See all',
-              style: TextStyle(
-                color: Color(0xFF5B4DB5),
-                fontWeight: FontWeight.w500,
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
+          if (showSeeAll)
+            TextButton(
+              onPressed: onSeeAll,
+              child: const Text(
+                'See all',
+                style: TextStyle(
+                  color: Color(0xFF5B4DB5),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
         ],
       ),
     );
