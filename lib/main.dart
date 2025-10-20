@@ -159,7 +159,7 @@ class AppData {
       bio:
           'American writer who was the editor of several prestigious publications.',
       rating: 4.2,
-      imageUrl: '',
+      imageUrl: 'assets/a1.png',
       books: [],
     ),
     Author(
@@ -168,7 +168,7 @@ class AppData {
       role: 'Writer',
       bio: 'He is a writer and the fiction editor of a renowned magazine.',
       rating: 4.0,
-      imageUrl: '',
+      imageUrl: 'assets/a2.png',
       books: [],
     ),
     Author(
@@ -178,7 +178,7 @@ class AppData {
       bio:
           'He is the professor and Sofia Anesaki Chair at Stanford University.',
       rating: 4.5,
-      imageUrl: '',
+      imageUrl: 'assets/a3.png',
       books: [],
     ),
     Author(
@@ -188,7 +188,7 @@ class AppData {
       bio:
           'Gunty was born and raised in South Bend, Indiana. She graduated from Yale University and received an MFA in Fiction and English from New York University.',
       rating: 4.0,
-      imageUrl: '',
+      imageUrl: 'assets/a4.png',
       books: AppData.books.where((b) => b.author == 'Tess Gunty').toList(),
     ),
     Author(
@@ -197,7 +197,7 @@ class AppData {
       role: 'Novelist',
       bio: 'She is the author of the novel A Good Hard Look.',
       rating: 4.3,
-      imageUrl: '',
+      imageUrl: 'assets/a5.png',
       books: [],
     ),
     Author(
@@ -206,7 +206,7 @@ class AppData {
       role: 'Writer',
       bio: 'Award-winning novelist and essayist.',
       rating: 4.4,
-      imageUrl: '',
+      imageUrl: 'assets/a6.png',
       books: [],
     ),
   ];
@@ -522,16 +522,39 @@ class _HomeScreenState extends State<HomeScreen> {
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.grey[300]!),
                   ),
-                  child: Center(
-                    child: Text(
-                      vendor.name[0],
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[700],
-                      ),
-                    ),
-                  ),
+                  child: vendor.imageUrl.isNotEmpty
+                      ? ClipOval(
+                          child: Image.asset(
+                            vendor.imageUrl,
+                            width: 70,
+                            height: 70,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              print('Error loading vendor image: ${vendor.imageUrl}');
+                              print('Error: $error');
+                              return Center(
+                                child: Text(
+                                  vendor.name[0],
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      : Center(
+                          child: Text(
+                            vendor.name[0],
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[700],
+                            ),
+                          ),
+                        ),
                 ),
                 const SizedBox(height: 8),
                 Text(
