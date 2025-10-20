@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
+
 
 class OrderStatus2 extends StatefulWidget {
   const OrderStatus2({super.key});
