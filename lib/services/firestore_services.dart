@@ -1,3 +1,4 @@
+import 'package:books/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -30,7 +31,44 @@ class FirestoreServices {
       });
       print('User added with custom ID!');
     } catch (e) {
+      print('=========================================');
       print('Error adding user: $e');
+    }
+  }
+
+  static void addUserFromGoogle(Map<String, dynamic> user, String uid) async {
+    db.settings = const Settings(persistenceEnabled: true);
+    try {
+      CollectionReference usersCollection = FirebaseFirestore.instance
+          .collection('users');
+      await usersCollection.doc(uid).set({
+        name: user[name],
+        email: user[email],
+        phone: user[phone],
+        address: user[address],
+        profilePic: user[profilePic],
+      });
+      print('User added with custom ID!');
+    } catch (e) {
+      print('=========================================');
+      print('Error adding user: $e');
+    }
+  }
+
+  static Future getUserData() async {
+    db.settings = const Settings(persistenceEnabled: true);
+    try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+
+      if (currentUser == null) {
+        print('no user signed in');
+        throw Exception('No user is signed in');
+      }
+      final result = await db.collection('users').doc(currentUser.uid).get();
+      UserModel.user.fromJson(result.data()!);
+    } catch (e) {
+      print('=========================================');
+      print('Error getting user data user: $e');
     }
   }
 }

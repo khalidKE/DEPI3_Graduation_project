@@ -1,6 +1,7 @@
 import 'package:books/cubits/login_state.dart';
 import 'package:books/helpers/dio_helper.dart';
 import 'package:books/models/user_model.dart';
+import 'package:books/services/firestore_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -52,6 +53,9 @@ class LoginCubit extends Cubit<LoginState> {
         idToken: googleAuth?.idToken,
       );
       FirebaseAuth.instance.signInWithCredential(credential);
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+
       emit(LoginSuccessState());
     } catch (e) {
       emit(LoginErrorState());
