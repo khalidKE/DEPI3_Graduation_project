@@ -1397,16 +1397,37 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
                             color: Colors.grey[200],
                             shape: BoxShape.circle,
                           ),
-                          child: Center(
-                            child: Text(
-                              author.name[0],
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[700],
-                              ),
-                            ),
-                          ),
+                          child: author.imageUrl.isNotEmpty
+                              ? ClipOval(
+                                  child: Image.asset(
+                                    author.imageUrl,
+                                    width: 60,
+                                    height: 60,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Center(
+                                        child: Text(
+                                          author.name[0],
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[700],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    author.name[0],
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
