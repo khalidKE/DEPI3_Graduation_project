@@ -22,8 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
       if (HiveHelper.showEnboarding == true) {
         HiveHelper.ChangeShowenboardingState();
         Get.off(OnboardingScreen());
-      } else
+      } else {
         Get.off(LogInScreen());
+      }
     });
     super.initState();
   }

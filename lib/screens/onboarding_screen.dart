@@ -161,26 +161,4 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     ));
   }
-
-  void getOnBourding() {
-    count++;
-    if (count == 1) {
-      highlight = 'Your Bookish Soulmate Awaits';
-      description =
-          'Let us be your guide to the perfect read. Discover books tailored to your tastes for a truly rewarding experience.';
-      imagePath = 'assets/Frame (1).png';
-      stagePath = 'assets/Auto Layout Horizontal (1).png';
-      buttunText = 'Get Started';
-    } else if (count == 2) {
-      highlight = 'Start Your Adventure';
-      description =
-          'Ready to embark on a quest for inspiration and knowledge? Your adventure begins now. Let\'s go!';
-      imagePath = 'assets/Frame (2).png';
-      stagePath = 'assets/Auto Layout Horizontal (2).png';
-      buttunText = 'Get Started';
-    } else if (count >= 3) {
-      Get.to(LogInScreen());
-    }
-    setState(() {});
-  }
 }
