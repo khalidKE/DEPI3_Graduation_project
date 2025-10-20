@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 class OrderReceivedScreen extends StatefulWidget {
@@ -10,6 +11,15 @@ class OrderReceivedScreen extends StatefulWidget {
 class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
   int _rating = 4;
   final TextEditingController _feedbackController = TextEditingController();
+
+  late int _orderNumber; // رقم الأوردر العشوائي
+
+  @override
+  void initState() {
+    super.initState();
+    // توليد رقم عشوائي من 7 أرقام
+    _orderNumber = 1000000 + Random().nextInt(9000000);
+  }
 
   @override
   void dispose() {
@@ -65,9 +75,10 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
 
             const SizedBox(height: 8),
 
-            const Text(
-              'Order #2930541',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+            // 🔢 رقم الأوردر العشوائي
+            Text(
+              'Order #$_orderNumber',
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
               textAlign: TextAlign.center,
             ),
 
@@ -105,7 +116,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
 
                   const SizedBox(height: 16),
 
-                  // Star Rating
+                  // ⭐ تقييم النجوم
                   Row(
                     children: List.generate(5, (index) {
                       return GestureDetector(
@@ -151,9 +162,9 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                           color: Colors.grey.withOpacity(0.2),
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(
+                      focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        borderSide: BorderSide(
                           color: Color(0xFF6C47FF),
                           width: 1,
                         ),
