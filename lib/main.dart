@@ -1307,6 +1307,25 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
     'Journalist',
   ];
 
+  List<Author> get filteredAuthors {
+    if (selectedCategory == 'All') return AppData.authors;
+    
+    // Map of display categories to possible role matches
+    final roleMap = {
+      'Poets': ['poet', 'poetry', 'poem'],
+      'Playwrights': ['playwright', 'dramatist', 'play'],
+      'Novelists': ['novelist', 'writer', 'author'],
+      'Journalist': ['journalist', 'reporter', 'correspondent'],
+    };
+
+    final categoryRoles = roleMap[selectedCategory] ?? [];
+    
+    return AppData.authors.where((author) {
+      final authorRole = author.role.toLowerCase();
+      return categoryRoles.any((role) => authorRole.contains(role));
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1317,16 +1336,12 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Expanded(
-          child: Center(
-            child: const Text(
-              'Authors',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
+        title: const Text(
+          'Authors',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
           ),
         ),
         actions: [
@@ -1365,47 +1380,69 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
           ),
           const SizedBox(height: 20),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: AppData.authors.length,
-              itemBuilder: (context, index) {
-                final author = AppData.authors[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            AuthorDetailScreen(author: author),
+            child: filteredAuthors.isEmpty
+                ? Center(
+                    child: Text(
+                      'No authors found in $selectedCategory',
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 16,
                       ),
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.grey[200]!),
                     ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 60,
-                          height: 60,
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: filteredAuthors.length,
+                    itemBuilder: (context, index) {
+                      final author = filteredAuthors[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AuthorDetailScreen(author: author),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 16),
+                          padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.grey[200]!),
                           ),
-                          child: author.imageUrl.isNotEmpty
-                              ? ClipOval(
-                                  child: Image.asset(
-                                    author.imageUrl,
-                                    width: 60,
-                                    height: 60,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Center(
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  shape: BoxShape.circle,
+                                ),
+                                child: author.imageUrl.isNotEmpty
+                                    ? ClipOval(
+                                        child: Image.asset(
+                                          author.imageUrl,
+                                          width: 60,
+                                          height: 60,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Center(
+                                              child: Text(
+                                                author.name[0],
+                                                style: TextStyle(
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey[700],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : Center(
                                         child: Text(
                                           author.name[0],
                                           style: TextStyle(
@@ -1414,57 +1451,52 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
                                             color: Colors.grey[700],
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                )
-                              : Center(
-                                  child: Text(
-                                    author.name[0],
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[700],
+                                      ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      author.name,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
-                                ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                author.name,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      '${author.role} • ${author.rating} ⭐',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.grey[600],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      author.bio,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey[600],
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
                                 ),
                               ),
-                              const SizedBox(height: 4),
-                              Text(
-                                author.bio,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.grey[600],
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 16,
+                                color: Colors.grey,
                               ),
                             ],
                           ),
                         ),
-                        const Icon(
-                          Icons.arrow_forward_ios,
-                          size: 16,
-                          color: Colors.grey,
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
