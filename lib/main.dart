@@ -1,9 +1,60 @@
-import 'package:books/order_recieved_screen.dart';
-import 'package:flutter/material.dart';
-import 'confirm_order_screen.dart';
+  import 'package:books/order_recieved_screen.dart';
+ import 'confirm_order_screen.dart';
 import 'set_location_screen.dart';
+import 'package:books/helpers/dio_helper.dart';
+import 'package:books/screens/login_screen.dart';
+import 'package:books/screens/phone_number_screen.dart';
+import 'package:books/screens/signup_screen.dart';
+import 'package:books/screens/success_screen.dart';
+import 'package:books/secrets/secrets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart' show GetMaterialApp;
+import 'package:google_sign_in/google_sign_in.dart';
+import 'firebase_options.dart';
+import 'package:books/const/onboarding_data.dart';
+import 'package:books/helper/hive_helper.dart';
+import 'package:books/screens/splash_screen.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:books/notification.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+      
+Future<void> _backgroundHandler(RemoteMessage message) async {
+  // Handle background message
+}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.initialized();
+  await Hive.initFlutter();
+   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Message data: ${message.data}');
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('Message clicked! ${message.messageId}');
+    });
+  
+  await Hive.openBox(HiveHelper.boxName);
+  await HiveHelper.GetShowenboardingState();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    print('Firebase initialized successfully');
+  } catch (e) {
+    print('Error initializing Firebase: $e');
+  }
+  final google = await GoogleSignIn.instance.initialize(
+    clientId: Secrets.clientID,
+  );
 
-void main() {
   runApp(const MyApp());
 }
 
@@ -13,116 +64,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Bazar Reading App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6C47FF)),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Bazar Reading App'),
-      routes: {
-        '/confirmOrder': (context) => const ConfirmOrderScreen(),
-        '/setLocation': (context) => const SetLocationScreen(),
-        '/orderReceived': (context) => const OrderReceivedScreen(),
-      },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Welcome to Bazar Reading App',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/confirmOrder');
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF6C47FF),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'Start Order Flow',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      home: SplashScreen(),
     );
   }
 }
