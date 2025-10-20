@@ -1,10 +1,14 @@
 import 'package:books/colors/colors.dart';
 import 'package:books/cubits/login_cubit.dart';
 import 'package:books/cubits/login_state.dart';
+import 'package:books/cubits/signup_cubit.dart';
+import 'package:books/cubits/signup_state.dart';
 import 'package:books/models/user_model.dart';
-import 'package:books/screens/home_screen.dart';
-import 'package:books/screens/signup_screen.dart';
+import 'package:books/screens/login_screen.dart';
+import 'package:books/screens/phone_number_screen.dart';
+import 'package:books/widgets/custom_password_field_with_validate.dart';
 import 'package:books/widgets/email_text_field.dart';
+import 'package:books/widgets/name_text_field.dart';
 import 'package:books/widgets/password_text_field.dart';
 import 'package:books/widgets/rounded_purple_button.dart';
 import 'package:books/widgets/rounded_white_button.dart';
@@ -12,19 +16,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
+import 'package:fancy_password_field/fancy_password_field.dart';
 
-TextEditingController loginPassword = TextEditingController();
-TextEditingController loginEmail = TextEditingController();
+TextEditingController signupPassword = TextEditingController();
+TextEditingController signupEmail = TextEditingController();
+TextEditingController signupName = TextEditingController();
 
-class LogInScreen extends StatefulWidget {
-  const LogInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<SignUpScreen> createState() => _LogInScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
-  final _formKeyLogin = GlobalKey<FormState>();
+class _LogInScreenState extends State<SignUpScreen> {
+  final _formKeySignup = GlobalKey<FormState>();
   bool obscureText = true;
 
   @override
@@ -32,26 +38,25 @@ class _LogInScreenState extends State<LogInScreen> {
     final double screenHeight = MediaQuery.sizeOf(context).height;
     final double screenWidth = MediaQuery.sizeOf(context).width;
     return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: BlocListener<LoginCubit, LoginState>(
+      create: (context) => SignupCubit(),
+      child: BlocListener<SignupCubit, signupState>(
         listener: (context, state) {
-          if (state is LoginSuccessState) {
+          if (state is signupSuccessState) {
             Get.snackbar(
               'Success',
-              'login is done successfully',
+              'signup is done successfully',
               backgroundColor: AppColors.purple,
               colorText: AppColors.white,
             );
-            Get.to(HomeScreen());
-          } else if (state is LoginErrorState) {
+            Get.off(PhoneScreen());
+          } else if (state is signupErrorState) {
             Get.snackbar(
               'Error',
-              'login failed',
+              'signup failed',
               backgroundColor: AppColors.purple,
               colorText: AppColors.white,
             );
           }
-          // TODO: implement listener
         },
         child: Scaffold(
           backgroundColor: AppColors.white,
@@ -60,7 +65,7 @@ class _LogInScreenState extends State<LogInScreen> {
               padding: const EdgeInsets.only(top: 48, left: 24, right: 24),
               child: SingleChildScrollView(
                 child: Form(
-                  key: _formKeyLogin,
+                  key: _formKeySignup,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -77,7 +82,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Welcome Back 👋',
+                                'Sign Up',
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
@@ -85,7 +90,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               ),
                               SizedBox(height: screenHeight * 0.002),
                               Text(
-                                'sign to your account',
+                                'Create account and choose favorite menu',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: AppColors.grey,
@@ -95,44 +100,45 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: screenHeight * 0.08),
-                      Emailtextfield(enteredEmail: loginEmail),
+                      SizedBox(height: screenHeight * 0.05),
+                      NameTextField(enteredName: signupName),
                       SizedBox(height: screenHeight * 0.015),
-                      Passwordtextfield(
-                        enteredPassword: loginPassword,
-                        validation: loginValidation,
+                      Emailtextfield(enteredEmail: signupEmail),
+                      SizedBox(height: screenHeight * 0.015),
+                      customPasswordFieldWithValidate(
+                        enteredPassword: signupPassword,
                       ),
-                      SizedBox(height: screenHeight * 0.005),
 
                       SizedBox(height: screenHeight * 0.03),
-                      BlocBuilder<LoginCubit, LoginState>(
+
+                      BlocBuilder<SignupCubit, signupState>(
                         builder: (context, state) {
-                          final cubit = context.read<LoginCubit>();
+                          final cubit = context.read<SignupCubit>();
                           if (state is LoginLoadingState) {
                             return Center(child: CircularProgressIndicator());
                           }
                           return Purplebuttun(
-                            buttunText: 'Login',
+                            buttunText: 'Sign Up',
                             onTapFunction: () {
-                              _formKeyLogin.currentState!.validate();
+                              _formKeySignup.currentState!.validate();
                               setState(() {
-                                UserModel.user.email = loginEmail.text;
-                                UserModel.user.password = loginPassword.text;
+                                UserModel.user.name = signupName.text;
+                                UserModel.user.email = signupEmail.text;
+                                UserModel.user.password = signupPassword.text;
                               });
-
-                              cubit.loginWithFirebase(UserModel.user);
-
+                              cubit.signupWithFirebase(UserModel.user);
                               setState(() {});
                             },
                           );
                         },
                       ),
-                      SizedBox(height: screenHeight * 0.03),
+
+                      SizedBox(height: screenHeight * 0.015),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Don\'t have an account?',
+                            'Have an account? ',
                             style: TextStyle(
                               color: AppColors.grey,
                               fontSize: 16,
@@ -140,10 +146,10 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.to(SignUpScreen());
+                              Get.off(LogInScreen());
                             },
                             child: Text(
-                              'Sign Up',
+                              'Sign In',
                               style: TextStyle(
                                 color: AppColors.purple,
                                 fontWeight: FontWeight.bold,
@@ -153,49 +159,32 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: screenHeight * 0.05),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: AppColors.lightGray,
-                              ),
-                              height: 2,
-                            ),
-                          ),
-                          Text(
-                            'Or with',
-                            style: TextStyle(color: AppColors.grey),
-                          ),
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: AppColors.lightGray,
-                              ),
-                              height: 2,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: screenHeight * 0.05),
+                      SizedBox(height: screenHeight * 0.08),
                       Center(
-                        child: BlocBuilder<LoginCubit, LoginState>(
-                          builder: (context, state) {
-                            final cubit = context.read<LoginCubit>();
-                            return Whitebuttun(
-                              buttunText: 'Sign in with Google',
-                              ontapFunction: () {
-                                cubit.signInWithGoogleFirebase();
-                              },
-                              imagepath: 'assets/Google - Original.png',
-                            );
-                          },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'By clicking Register, you agree to our  ',
+                              style: TextStyle(
+                                color: AppColors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Text(
+                                'Terms and Data Policy.',
+                                style: TextStyle(
+                                  color: AppColors.purple,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(height: screenHeight * 0.012),
                     ],
                   ),
                 ),
@@ -206,10 +195,6 @@ class _LogInScreenState extends State<LogInScreen> {
       ),
     );
   }
-}
-
-String? loginValidation(value) {
-  if (value!.length < 6) return ('password should be more that 5 digits');
 }
 
 //-------------------------------------------------------------------------------
