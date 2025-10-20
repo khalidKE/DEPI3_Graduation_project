@@ -1,5 +1,8 @@
+import 'package:books/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:books/screens/profile.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 void main() {
   runApp(const BookStoreApp());
 }
@@ -248,7 +251,9 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_outlined, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              Get.to(NotificationPage());
+            },
           ),
         ],
       ),
