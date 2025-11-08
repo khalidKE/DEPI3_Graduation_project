@@ -1,3 +1,4 @@
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +38,7 @@ class HelpCenterScreen extends StatelessWidget {
                           Expanded(
                             child: Center(
                               child: Text(
-                                'Order History',
+                                AppLocalizations.of(context)!.order_history,
                                 style: GoogleFonts.openSans(
                                   fontSize: width * 0.05,
                                   fontWeight: FontWeight.w700,
@@ -51,7 +52,7 @@ class HelpCenterScreen extends StatelessWidget {
                       ),
                       SizedBox(height: height * 0.03),
                       Text(
-                        'Help Center',
+                        AppLocalizations.of(context)!.help_center,
                         style: GoogleFonts.openSans(
                           fontSize: width * 0.055,
                           fontWeight: FontWeight.w700,
@@ -60,14 +61,14 @@ class HelpCenterScreen extends StatelessWidget {
                       ),
                       SizedBox(height: height * 0.01),
                       Text(
-                        'Tell us how we can help 👋',
+                       AppLocalizations.of(context)!.tell_us_how_we_can_help,
                         style: GoogleFonts.roboto(
                           fontSize: width * 0.04,
                           color: const Color(0XFFCABCEF),
                         ),
                       ),
                       Text(
-                        'Chapter are standing by for service & support!',
+                        AppLocalizations.of(context)!.chapter_support_message,
                         style: GoogleFonts.roboto(
                           fontSize: width * 0.04,
                           color: const Color(0XFFCABCEF),
@@ -90,8 +91,8 @@ class HelpCenterScreen extends StatelessWidget {
                     _buildContactCard(
                       width: width,
                       iconPath: 'assets/images/email.svg',
-                      title: 'Email',
-                      subtitle: 'Send to your email',
+                      title: AppLocalizations.of(context)!.email,
+                      subtitle: AppLocalizations.of(context)!.send_to_your_email,
                       onTap: () async {
                         final Uri emailUri = Uri(
                           scheme: 'mailto',
@@ -103,8 +104,8 @@ class HelpCenterScreen extends StatelessWidget {
                     _buildContactCard(
                       width: width,
                       iconPath: 'assets/images/Phone-Fill.svg',
-                      title: 'Phone Number',
-                      subtitle: 'Send to your phone',
+                      title: AppLocalizations.of(context)!.phone_number,
+                      subtitle: '+201234567',
                       onTap: () async {
                         final Uri phoneUri = Uri(
                           scheme: 'tel',

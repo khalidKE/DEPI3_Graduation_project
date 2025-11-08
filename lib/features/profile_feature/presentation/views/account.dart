@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,7 +30,7 @@ class Account extends StatelessWidget {
           toolbarHeight: height * 0.12,
           title: Center(
             child: Text(
-              'My Account',
+              AppLocalizations.of(context)!.my_account,
               style: GoogleFonts.openSans(
                 fontWeight: FontWeight.w700,
                 fontSize: width * 0.05,
@@ -76,7 +77,7 @@ class Account extends StatelessWidget {
                         InkWell(
                           onTap: () => cubit.pickImage(),
                           child: Text(
-                            'Change Picture',
+                            AppLocalizations.of(context)!.change_picture,
                             style: GoogleFonts.roboto(
                               fontSize: width * 0.045,
                               fontWeight: FontWeight.w800,
@@ -92,23 +93,23 @@ class Account extends StatelessWidget {
                 CustomTextfield(
                   controller: name,
                   hintText: 'John',
-                  labelText: 'Name',
+                  labelText: AppLocalizations.of(context)!.name,
                 ),
                 CustomTextfield(
                   controller: email,
                   hintText: 'johndoe@gmail.com',
-                  labelText: 'Email',
+                  labelText: AppLocalizations.of(context)!.email,
                 ),
                 CustomTextfield(
                   controller: phone,
                   hintText: '(+1) 234 567 890',
-                  labelText: 'Phone Number',
+                  labelText: AppLocalizations.of(context)!.phone_number,
                   prefixIcon: Icons.call_outlined,
                 ),
                 CustomTextfield(
                   controller: password,
-                  hintText: 'your password',
-                  labelText: 'Password',
+                  hintText: AppLocalizations.of(context)!.password,
+                  labelText: AppLocalizations.of(context)!.password,
                   obscureText: true,
                   suffixIcon: Icons.visibility_off_outlined,
                 ),
@@ -125,7 +126,7 @@ class Account extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Save Changes',
+                      AppLocalizations.of(context)!.save_changes,
                       style: GoogleFonts.openSans(
                         color: Colors.white,
                         fontWeight: FontWeight.w700,

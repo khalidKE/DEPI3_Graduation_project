@@ -1,3 +1,7 @@
+import 'package:books/features/authentication_feature/presentation/views/signup_screen.dart';
+import 'package:books/features/category_feature/presentation/views/category_screen.dart';
+import 'package:books/features/home_feature/presentation/views/home_screen.dart';
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:books/features/profile_feature/presentation/views/custom/custom_profile.dart';
 import 'package:books/features/profile_feature/presentation/views/account.dart';
@@ -23,7 +27,7 @@ class Profile extends StatelessWidget {
           toolbarHeight: screenHeight * 0.1,
           title: Center(
             child: Text(
-              'Profile',
+              AppLocalizations.of(context)!.profile,
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.w700,
@@ -104,7 +108,7 @@ class Profile extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * 0.03),
                                   Text(
-                                    'Logout',
+                                    AppLocalizations.of(context)!.logout,
                                     style: TextStyle(
                                       color: const Color(0XFF121212),
                                       fontFamily: 'OpenSans',
@@ -114,7 +118,7 @@ class Profile extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * 0.015),
                                   Text(
-                                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                                    AppLocalizations.of(context)!.lorem_ipsum_text,
                                     style: GoogleFonts.roboto(
                                       color: const Color(0XFF121212),
                                       fontWeight: FontWeight.w400,
@@ -126,7 +130,12 @@ class Profile extends StatelessWidget {
                                     width: double.infinity,
                                     height: screenHeight * 0.06,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SignUpScreen()),
+            );
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:
                                             const Color(0XFF54408C),
@@ -136,7 +145,7 @@ class Profile extends StatelessWidget {
                                         ),
                                       ),
                                       child: Text(
-                                        'Logout',
+                                       AppLocalizations.of(context)!.logout,
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'OpenSans',
@@ -160,7 +169,7 @@ class Profile extends StatelessWidget {
                                       ),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        "Cancel",
+                                        AppLocalizations.of(context)!.cancel,
                                         style: TextStyle(
                                           color: const Color(0XFF54408C),
                                           fontSize: screenWidth * 0.04,
@@ -176,7 +185,7 @@ class Profile extends StatelessWidget {
                         );
                       },
                       child: Text(
-                        'Logout',
+                        AppLocalizations.of(context)!.logout,
                         style: GoogleFonts.roboto(
                           color: const Color(0XFFEF5A56),
                           fontWeight: FontWeight.w700,
@@ -188,10 +197,9 @@ class Profile extends StatelessWidget {
                 ),
               ),
 
-              // Options List
               InkWell(
                 child: CustomProfile(
-                    imagePath: 'assets/images/Group.png', title: 'My Account'),
+                    imagePath: 'assets/images/Group.png', title: AppLocalizations.of(context)!.my_account,),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Account()));
@@ -200,7 +208,7 @@ class Profile extends StatelessWidget {
               InkWell(
                 child: CustomProfile(
                     imagePath: 'assets/images/offer.png',
-                    title: 'Offers & Promos'),
+                    title: AppLocalizations.of(context)!.offers_and_promos,),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Offers()));
@@ -209,7 +217,7 @@ class Profile extends StatelessWidget {
               InkWell(
                 child: CustomProfile(
                     imagePath: 'assets/images/fav.png',
-                    title: 'Your Favorites'),
+                    title: AppLocalizations.of(context)!.your_favorites,),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -220,7 +228,7 @@ class Profile extends StatelessWidget {
               InkWell(
                 child: CustomProfile(
                     imagePath: 'assets/images/order.png',
-                    title: 'Order History'),
+                    title: AppLocalizations.of(context)!.order_history,),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -230,7 +238,7 @@ class Profile extends StatelessWidget {
               ),
               InkWell(
                 child: CustomProfile(
-                    imagePath: 'assets/images/help.png', title: 'Help Center'),
+                    imagePath: 'assets/images/help.png', title: AppLocalizations.of(context)!.help_center,),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -239,9 +247,63 @@ class Profile extends StatelessWidget {
                 },
               ),
               SizedBox(height: screenHeight * 0.02),
+
+             
             ],
+            
           ),
+          
         ),
+         bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: const Color(0xFF5B4DB5),
+        unselectedItemColor: Colors.grey,
+        currentIndex: 3,
+        onTap: (index) {
+         
+
+         
+          switch (index) {
+            case 0:
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+              break;
+            case 1:
+              // Orders
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('category Screen - Coming Soon')),
+              );
+              break;
+            case 2:
+              // Cart
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Cart Screen - Coming Soon')),
+              );
+              break;
+            case 3:
+              // Profile
+             
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag_outlined),
+            label: 'Orders',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_outlined),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Profile',
+          ),
+        ],
+      ),
       ),
     );
   }

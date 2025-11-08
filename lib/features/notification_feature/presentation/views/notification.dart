@@ -1,4 +1,5 @@
 import 'package:books/features/notification_feature/presentation/views/promotion.dart';
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -34,7 +35,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   children: [
                     SizedBox(height: height * 0.03),
                     Text(
-                      "Current",
+                      AppLocalizations.of(context)!.current,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: isTablet ? 22 : 18,
@@ -50,7 +51,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     SizedBox(height: height * 0.03),
                     Text(
-                      "October 2024",
+                      AppLocalizations.of(context)!.october_2021,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: isTablet ? 22 : 18,
@@ -87,7 +88,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   children: [
                     SizedBox(height: height * 0.03),
                     Text(
-                      "October 2025",
+                      AppLocalizations.of(context)!.october_2021,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: isTablet ? 22 : 18,
@@ -99,21 +100,21 @@ class _NotificationPageState extends State<NotificationPage> {
                         Get.to(const PromotionPage());
                       },
                       child: newsPromotionRow(
-                          text: 'Promotion', date: 'Oct 24', time: '08.00'),
+                          text: AppLocalizations.of(context)!.promotion, date: 'Oct 24', time: '08.00'),
                     ),
                     SizedBox(height: height * 0.01),
                     RichText(
-                      text: const TextSpan(
-                        style: TextStyle(color: Colors.black, fontSize: 14),
+                      text: TextSpan(
+                        style: const TextStyle(color: Colors.black, fontSize: 14),
                         children: [
-                          TextSpan(text: "Today "),
+                          TextSpan(text: AppLocalizations.of(context)!.october_2021,),
                           TextSpan(
-                            text: "50% discount ",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            text: AppLocalizations.of(context)!.fifty_percent_discount,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           TextSpan(
                             text:
-                                "on all Books in Novel category with online orders worldwide.",
+                                AppLocalizations.of(context)!.novel_discount_description,
                           ),
                         ],
                       ),
@@ -122,25 +123,25 @@ class _NotificationPageState extends State<NotificationPage> {
                     Image.asset("assets/images/Line.png"),
                     SizedBox(height: height * 0.02),
                     newsPromotionRow(
-                        text: 'Promotion', date: 'Oct 08', time: '20.30'),
+                        text: AppLocalizations.of(context)!.promotion, date: 'Oct 08', time: '20.30'),
                     SizedBox(height: height * 0.01),
                     RichText(
                       text: TextSpan(
                         style: TextStyle(color: Colors.black, fontSize: 14),
                         children: [
                           TextSpan(
-                            text: "Buy 2 get 1 free ",
+                            text: AppLocalizations.of(context)!.buy_2_get_1_free,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           TextSpan(
-                            text: "or since books from 08 - 10 October 2025.",
+                            text: AppLocalizations.of(context)!.books_offer_date,
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: height * 0.03),
                     Text(
-                      "September 2025",
+                      AppLocalizations.of(context)!.september_2021,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: isTablet ? 22 : 18,
@@ -148,11 +149,11 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     SizedBox(height: height * 0.02),
                     newsPromotionRow(
-                        text: 'Information', date: 'Sept 16', time: '11.00'),
+                        text: AppLocalizations.of(context)!.information, date: 'Sept 16', time: '11.00'),
                     SizedBox(height: height * 0.01),
-                    const Text(
-                      "There is a new book now available ",
-                      style: TextStyle(fontSize: 14),
+                    Text(
+                      AppLocalizations.of(context)!.new_book_available,
+                      style: const TextStyle(fontSize: 14),
                     ),
                   ],
                 ),
@@ -172,15 +173,15 @@ class _NotificationPageState extends State<NotificationPage> {
         },
         child: const Icon(Icons.arrow_back),
       ),
-      title: const Text(
-        "Notification",
-        style: TextStyle(fontWeight: FontWeight.bold),
+      title: Text(
+        AppLocalizations.of(context)!.notification,
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       titleSpacing: isTablet ? width * 0.25 : 71,
-      bottom: const TabBar(
+      bottom: TabBar(
         tabs: [
-          Tab(text: "Delivery"),
-          Tab(text: "News"),
+          Tab(text: AppLocalizations.of(context)!.delivery,),
+          Tab(text:AppLocalizations.of(context)!.news,),
         ],
       ),
     );

@@ -37,7 +37,7 @@ class CustomContainer extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xdd54408c),
+                  color: Color(0xff54408c),
                 ),
               ),
             ],

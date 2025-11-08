@@ -1,3 +1,4 @@
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
@@ -23,9 +24,9 @@ class _PromotionPageState extends State<PromotionPage> {
           },
           child: const Icon(Icons.arrow_back),
         ),
-        title: const Text(
-          "Promotion",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          AppLocalizations.of(context)!.promotion,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         titleSpacing: isTablet ? width * 0.25 : 71,
       ),
@@ -40,7 +41,7 @@ class _PromotionPageState extends State<PromotionPage> {
             promoContainer(context),
             SizedBox(height: height * 0.03),
             Text(
-              "Today 50% discount on all books in Chapter with online orders",
+              AppLocalizations.of(context)!.today_discount_chapter,
               style: TextStyle(
                 fontSize: isTablet ? 22 : 18,
                 fontWeight: FontWeight.bold,
@@ -48,7 +49,7 @@ class _PromotionPageState extends State<PromotionPage> {
             ),
             SizedBox(height: height * 0.02),
             Text(
-              "Excuse me… Who could ever resist a discount feast? 👀",
+              AppLocalizations.of(context)!.discount_feast_phrase,
               style: TextStyle(
                 fontSize: isTablet ? 18 : 14,
                 color: const Color(0XFF7A7A7A),
@@ -56,7 +57,14 @@ class _PromotionPageState extends State<PromotionPage> {
             ),
             SizedBox(height: height * 0.02),
             Text(
-              "Hear me out. Today, October 24, 2025, Chapter has a 50% discount for any book. What are you waiting for, let's order now before it runs out.",
+                AppLocalizations.of(context)!.chapter_discount_announcement,style: TextStyle(
+                fontSize: isTablet ? 18 : 14,
+                color: const Color(0XFF7A7A7A),
+              ),
+            ),
+            SizedBox(height: height * 0.02),
+            Text(
+              AppLocalizations.of(context)!.chapter_discount_details,
               style: TextStyle(
                 fontSize: isTablet ? 18 : 14,
                 color: const Color(0XFF7A7A7A),
@@ -64,15 +72,7 @@ class _PromotionPageState extends State<PromotionPage> {
             ),
             SizedBox(height: height * 0.02),
             Text(
-              "All books are discounted, just order through the Chapter app to enjoy this discount. From bestsellers to timeless classics, we’ve prepared the best collection for you. Discover, read, and enjoy your next great book with Chapter.",
-              style: TextStyle(
-                fontSize: isTablet ? 18 : 14,
-                color: const Color(0XFF7A7A7A),
-              ),
-            ),
-            SizedBox(height: height * 0.02),
-            Text(
-              "So, what’s your pick? 📖 Don’t miss out—order your next read today 😉",
+              AppLocalizations.of(context)!.whats_your_pick,
               style: TextStyle(
                 fontSize: isTablet ? 18 : 14,
                 color: const Color(0XFF7A7A7A),
@@ -104,7 +104,7 @@ class _PromotionPageState extends State<PromotionPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "50% Discount",
+                  AppLocalizations.of(context)!.fifty_percent_discount,
                   style: TextStyle(
                     fontSize: isTablet ? 24 : 20,
                     fontWeight: FontWeight.bold,
@@ -112,7 +112,7 @@ class _PromotionPageState extends State<PromotionPage> {
                   ),
                 ),
                 Text(
-                  "On All Books",
+                  AppLocalizations.of(context)!.all_books,
                   style: TextStyle(
                     fontSize: isTablet ? 24 : 20,
                     fontWeight: FontWeight.bold,
@@ -121,7 +121,7 @@ class _PromotionPageState extends State<PromotionPage> {
                 ),
                 SizedBox(height: height * 0.008),
                 Text(
-                  "Grab it now!",
+                  AppLocalizations.of(context)!.grab_it_now,
                   style: TextStyle(
                     fontSize: isTablet ? 16 : 14,
                     color: const Color(0XFF54408C),
@@ -141,7 +141,7 @@ class _PromotionPageState extends State<PromotionPage> {
                         // navigate to home page
                       },
                       child: Text(
-                        "Shop Now",
+                        AppLocalizations.of(context)!.shop_now,
                         style: TextStyle(
                           fontSize: isTablet ? 16 : 14,
                           color: Colors.white,

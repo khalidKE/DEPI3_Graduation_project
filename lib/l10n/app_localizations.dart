@@ -307,6 +307,276 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get Started'**
   String get get_Started;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @my_account.
+  ///
+  /// In en, this message translates to:
+  /// **'My Account'**
+  String get my_account;
+
+  /// No description provided for @offers_and_promos.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers & Promos'**
+  String get offers_and_promos;
+
+  /// No description provided for @your_favorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Favorites'**
+  String get your_favorites;
+
+  /// No description provided for @order_history.
+  ///
+  /// In en, this message translates to:
+  /// **'Order History'**
+  String get order_history;
+
+  /// No description provided for @help_center.
+  ///
+  /// In en, this message translates to:
+  /// **'Help Center'**
+  String get help_center;
+
+  /// No description provided for @change_picture.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Picture'**
+  String get change_picture;
+
+  /// No description provided for @save_changes.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get save_changes;
+
+  /// No description provided for @october_2021.
+  ///
+  /// In en, this message translates to:
+  /// **'October 2021'**
+  String get october_2021;
+
+  /// No description provided for @tell_us_how_we_can_help.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us how we can help 👋'**
+  String get tell_us_how_we_can_help;
+
+  /// No description provided for @chapter_support_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Chapter are standing by for service & support!'**
+  String get chapter_support_message;
+
+  /// No description provided for @send_to_your_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Send to your email'**
+  String get send_to_your_email;
+
+  /// No description provided for @lorem_ipsum_text.
+  ///
+  /// In en, this message translates to:
+  /// **'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'**
+  String get lorem_ipsum_text;
+
+  /// No description provided for @you_have_5_coupons_to_use.
+  ///
+  /// In en, this message translates to:
+  /// **'You Have 5 Copons to use'**
+  String get you_have_5_coupons_to_use;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
+
+  /// No description provided for @current.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get current;
+
+  /// No description provided for @september_2021.
+  ///
+  /// In en, this message translates to:
+  /// **'September 2021'**
+  String get september_2021;
+
+  /// No description provided for @buy_2_get_1_free.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy 2 get 1 free'**
+  String get buy_2_get_1_free;
+
+  /// No description provided for @books_offer_date.
+  ///
+  /// In en, this message translates to:
+  /// **'or since books from 08 - 10 October 2021.'**
+  String get books_offer_date;
+
+  /// No description provided for @fifty_percent_discount.
+  ///
+  /// In en, this message translates to:
+  /// **'50% discount'**
+  String get fifty_percent_discount;
+
+  /// No description provided for @novel_discount_description.
+  ///
+  /// In en, this message translates to:
+  /// **'on all Books in Novel category with online orders worldwide.'**
+  String get novel_discount_description;
+
+  /// No description provided for @new_book_available.
+  ///
+  /// In en, this message translates to:
+  /// **'There is a new book now available'**
+  String get new_book_available;
+
+  /// No description provided for @promotion.
+  ///
+  /// In en, this message translates to:
+  /// **'Promotion'**
+  String get promotion;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @information.
+  ///
+  /// In en, this message translates to:
+  /// **'Information'**
+  String get information;
+
+  /// No description provided for @today_discount_chapter.
+  ///
+  /// In en, this message translates to:
+  /// **'Today 50% discount on all books in Chapter with online orders'**
+  String get today_discount_chapter;
+
+  /// No description provided for @discount_feast_phrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Excuse me… Who could ever resist a discount feast? 👀'**
+  String get discount_feast_phrase;
+
+  /// No description provided for @chapter_discount_announcement.
+  ///
+  /// In en, this message translates to:
+  /// **'Hear me out. Today, October 24, 2025, Chapter has a 50% discount for any book. What are you waiting for, let\'s order now before it runs out.'**
+  String get chapter_discount_announcement;
+
+  /// No description provided for @chapter_discount_details.
+  ///
+  /// In en, this message translates to:
+  /// **'All books are discounted, just order through the Chapter app to enjoy this discount. From bestsellers to timeless classics, we’ve prepared the best collection for you. Discover, read, and enjoy your next great book with Chapter.'**
+  String get chapter_discount_details;
+
+  /// No description provided for @whats_your_pick.
+  ///
+  /// In en, this message translates to:
+  /// **'So, what’s your pick? 📖 Don’t miss out—order your next read today 😉'**
+  String get whats_your_pick;
+
+  /// No description provided for @grab_it_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Grab it now!'**
+  String get grab_it_now;
+
+  /// No description provided for @shop_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Now'**
+  String get shop_now;
+
+  /// No description provided for @delivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get delivery;
+
+  /// No description provided for @news.
+  ///
+  /// In en, this message translates to:
+  /// **'News'**
+  String get news;
+
+  /// No description provided for @all_books.
+  ///
+  /// In en, this message translates to:
+  /// **'On All Books'**
+  String get all_books;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @novel.
+  ///
+  /// In en, this message translates to:
+  /// **'Novel'**
+  String get novel;
+
+  /// No description provided for @self_love.
+  ///
+  /// In en, this message translates to:
+  /// **'SelfLove'**
+  String get self_love;
+
+  /// No description provided for @science.
+  ///
+  /// In en, this message translates to:
+  /// **'Science'**
+  String get science;
+
+  /// No description provided for @romantic.
+  ///
+  /// In en, this message translates to:
+  /// **'Romantic'**
+  String get romantic;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @recent_searches.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Searches'**
+  String get recent_searches;
 }
 
 class _AppLocalizationsDelegate

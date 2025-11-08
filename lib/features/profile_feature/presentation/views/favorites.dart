@@ -1,3 +1,4 @@
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:books/features/profile_feature/presentation/views/custom/custom_favorites.dart';
@@ -28,7 +29,7 @@ class Favorites extends StatelessWidget {
         title: Padding(
           padding: EdgeInsets.only(left: width * 0.15),
           child: Text(
-            'Your Favorites',
+            AppLocalizations.of(context)!.your_favorites,
             style: GoogleFonts.openSans(
               fontWeight: FontWeight.w700,
               fontSize: width * 0.05,

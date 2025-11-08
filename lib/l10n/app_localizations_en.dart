@@ -116,4 +116,147 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get get_Started => 'Get Started';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get my_account => 'My Account';
+
+  @override
+  String get offers_and_promos => 'Offers & Promos';
+
+  @override
+  String get your_favorites => 'Your Favorites';
+
+  @override
+  String get order_history => 'Order History';
+
+  @override
+  String get help_center => 'Help Center';
+
+  @override
+  String get change_picture => 'Change Picture';
+
+  @override
+  String get save_changes => 'Save Changes';
+
+  @override
+  String get october_2021 => 'October 2021';
+
+  @override
+  String get tell_us_how_we_can_help => 'Tell us how we can help 👋';
+
+  @override
+  String get chapter_support_message =>
+      'Chapter are standing by for service & support!';
+
+  @override
+  String get send_to_your_email => 'Send to your email';
+
+  @override
+  String get lorem_ipsum_text =>
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
+
+  @override
+  String get you_have_5_coupons_to_use => 'You Have 5 Copons to use';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get current => 'Current';
+
+  @override
+  String get september_2021 => 'September 2021';
+
+  @override
+  String get buy_2_get_1_free => 'Buy 2 get 1 free';
+
+  @override
+  String get books_offer_date => 'or since books from 08 - 10 October 2021.';
+
+  @override
+  String get fifty_percent_discount => '50% discount';
+
+  @override
+  String get novel_discount_description =>
+      'on all Books in Novel category with online orders worldwide.';
+
+  @override
+  String get new_book_available => 'There is a new book now available';
+
+  @override
+  String get promotion => 'Promotion';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get information => 'Information';
+
+  @override
+  String get today_discount_chapter =>
+      'Today 50% discount on all books in Chapter with online orders';
+
+  @override
+  String get discount_feast_phrase =>
+      'Excuse me… Who could ever resist a discount feast? 👀';
+
+  @override
+  String get chapter_discount_announcement =>
+      'Hear me out. Today, October 24, 2025, Chapter has a 50% discount for any book. What are you waiting for, let\'s order now before it runs out.';
+
+  @override
+  String get chapter_discount_details =>
+      'All books are discounted, just order through the Chapter app to enjoy this discount. From bestsellers to timeless classics, we’ve prepared the best collection for you. Discover, read, and enjoy your next great book with Chapter.';
+
+  @override
+  String get whats_your_pick =>
+      'So, what’s your pick? 📖 Don’t miss out—order your next read today 😉';
+
+  @override
+  String get grab_it_now => 'Grab it now!';
+
+  @override
+  String get shop_now => 'Shop Now';
+
+  @override
+  String get delivery => 'Delivery';
+
+  @override
+  String get news => 'News';
+
+  @override
+  String get all_books => 'On All Books';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get novel => 'Novel';
+
+  @override
+  String get self_love => 'SelfLove';
+
+  @override
+  String get science => 'Science';
+
+  @override
+  String get romantic => 'Romantic';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get recent_searches => 'Recent Searches';
 }

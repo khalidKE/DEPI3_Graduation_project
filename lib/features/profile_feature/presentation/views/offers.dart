@@ -1,3 +1,4 @@
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:books/features/profile_feature/presentation/views/custom/custom_copon.dart';
@@ -23,7 +24,7 @@ class Offers extends StatelessWidget {
         ),
         title: Center(
           child: Text(
-            'Offers',
+            AppLocalizations.of(context)!.offers_and_promos,
             style: GoogleFonts.openSans(
               fontWeight: FontWeight.w700,
               fontSize: screenWidth * 0.05,
@@ -40,7 +41,7 @@ class Offers extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'You Have 5 Coupons to use',
+                  AppLocalizations.of(context)!.you_have_5_coupons_to_use,
                   style: GoogleFonts.openSans(
                     fontWeight: FontWeight.w700,
                     fontSize: screenWidth * 0.045,

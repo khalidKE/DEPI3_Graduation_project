@@ -1,3 +1,4 @@
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:books/features/profile_feature/presentation/views/custom/deliveryContainers.dart';
@@ -24,7 +25,7 @@ class OrederHistory extends StatelessWidget {
           toolbarHeight: screenHeight * 0.1,
           title: Center(
             child: Text(
-              'Order History',
+              AppLocalizations.of(context)!.order_history,
               style: GoogleFonts.openSans(
                 fontWeight: FontWeight.w700,
                 fontSize: screenWidth * 0.055,
@@ -41,7 +42,7 @@ class OrederHistory extends StatelessWidget {
               children: [
                 SizedBox(height: screenHeight * 0.02),
                 Text(
-                  "October 2024",
+                 AppLocalizations.of(context)!.october_2021,
                   style: GoogleFonts.openSans(
                     fontWeight: FontWeight.w700,
                     fontSize: screenWidth * 0.045,

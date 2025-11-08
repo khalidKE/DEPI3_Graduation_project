@@ -116,4 +116,145 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get get_Started => 'ابدأ الان';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get my_account => 'حسابي';
+
+  @override
+  String get offers_and_promos => 'العروض والتخفيضات';
+
+  @override
+  String get your_favorites => 'المفضلة لديك';
+
+  @override
+  String get order_history => 'سجل الطلبات';
+
+  @override
+  String get help_center => 'مركز المساعدة';
+
+  @override
+  String get change_picture => 'تغيير الصورة';
+
+  @override
+  String get save_changes => 'حفظ التغييرات';
+
+  @override
+  String get october_2021 => 'أكتوبر 2021';
+
+  @override
+  String get tell_us_how_we_can_help => 'أخبرنا كيف يمكننا مساعدتك 👋';
+
+  @override
+  String get chapter_support_message => 'فريق Chapter جاهز لخدمتك ودعمك!';
+
+  @override
+  String get send_to_your_email => 'أرسل إلى بريدك الإلكتروني';
+
+  @override
+  String get lorem_ipsum_text =>
+      'لوريم إيبسوم هو نص تجريبي في صناعة الطباعة والتنضيد.';
+
+  @override
+  String get you_have_5_coupons_to_use => 'لديك 5 كوبونات للاستخدام';
+
+  @override
+  String get notification => 'الإشعارات';
+
+  @override
+  String get current => 'الحالي';
+
+  @override
+  String get september_2021 => 'سبتمبر 2021';
+
+  @override
+  String get buy_2_get_1_free => 'اشترِ 2 واحصل على 1 مجانًا';
+
+  @override
+  String get books_offer_date => 'العرض ساري من 8 إلى 10 أكتوبر 2021';
+
+  @override
+  String get fifty_percent_discount => 'خصم 50٪';
+
+  @override
+  String get novel_discount_description =>
+      'على جميع كتب الروايات مع الطلبات عبر الإنترنت حول العالم';
+
+  @override
+  String get new_book_available => 'يوجد كتاب جديد متاح الآن';
+
+  @override
+  String get promotion => 'عرض ترويجي';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get information => 'معلومة';
+
+  @override
+  String get today_discount_chapter =>
+      'اليوم خصم 50٪ على جميع كتب Chapter مع الطلبات عبر التطبيق';
+
+  @override
+  String get discount_feast_phrase => 'من يستطيع مقاومة وليمة الخصومات؟ 👀';
+
+  @override
+  String get chapter_discount_announcement =>
+      'اسمعني جيدًا، اليوم 24 أكتوبر 2025، لدى Chapter خصم 50٪ على أي كتاب. ماذا تنتظر؟ اطلب الآن قبل نفاد الكمية.';
+
+  @override
+  String get chapter_discount_details =>
+      'جميع الكتب عليها خصم، فقط اطلب عبر تطبيق Chapter للاستفادة. من الكتب الأكثر مبيعًا إلى الكلاسيكيات الخالدة، جهزنا لك أفضل مجموعة. اكتشف، واقرأ، واستمتع بكتابك القادم.';
+
+  @override
+  String get whats_your_pick =>
+      'ما هو اختيارك؟ 📖 لا تفوت الفرصة—اطلب كتابك القادم اليوم 😉';
+
+  @override
+  String get grab_it_now => 'احصل عليه الآن!';
+
+  @override
+  String get shop_now => 'تسوّق الآن';
+
+  @override
+  String get delivery => 'التوصيل';
+
+  @override
+  String get news => 'الأخبار';
+
+  @override
+  String get all_books => 'على جميع الكتب';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get category => 'الفئة';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get novel => 'رواية';
+
+  @override
+  String get self_love => 'حب الذات';
+
+  @override
+  String get science => 'علم';
+
+  @override
+  String get romantic => 'رومانسي';
+
+  @override
+  String get search => 'بحث';
+
+  @override
+  String get recent_searches => 'عمليات البحث الأخيرة';
 }

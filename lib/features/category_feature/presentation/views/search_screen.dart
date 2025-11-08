@@ -1,5 +1,8 @@
+import 'package:books/l10n/app_localizations.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'category_screen.dart';
+import 'package:books/features/category_feature/presentation/views/category_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -19,7 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
         child: AppBar(
           centerTitle: true,
           title: Text(
-            'Search',
+           AppLocalizations.of(context)!.search,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
@@ -43,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 fillColor: Color(0xFFE8E8E8),
                 prefixIcon: Icon(Icons.search),
                 iconColor: Color(0xFFA6A6A6),
-                hintText: "Search",
+                hintText: AppLocalizations.of(context)!.search,
                 hintStyle: const TextStyle(color: Color(0xFFA6A6A6)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6),
@@ -58,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 Padding(
                   padding: const EdgeInsets.all(5),
                   child: Text(
-                    "Recent Searches",
+                    AppLocalizations.of(context)!.recent_searches,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
