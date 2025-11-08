@@ -1,4 +1,4 @@
-import 'package:books/models/user_model.dart';
+import 'package:books/features/authentication_feature/data/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -20,8 +20,8 @@ class FirestoreServices {
         print('no user signed in');
         throw Exception('No user is signed in');
       }
-      CollectionReference usersCollection = FirebaseFirestore.instance
-          .collection('users');
+      CollectionReference usersCollection =
+          FirebaseFirestore.instance.collection('users');
       await usersCollection.doc(currentUser.uid).set({
         name: user[name],
         email: user[email],
@@ -39,8 +39,8 @@ class FirestoreServices {
   static void addUserFromGoogle(Map<String, dynamic> user, String uid) async {
     db.settings = const Settings(persistenceEnabled: true);
     try {
-      CollectionReference usersCollection = FirebaseFirestore.instance
-          .collection('users');
+      CollectionReference usersCollection =
+          FirebaseFirestore.instance.collection('users');
       await usersCollection.doc(uid).set({
         name: user[name],
         email: user[email],
