@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:books/custom/custom_favorites.dart';
-
+import 'package:books/features/profile_feature/presentation/views/custom/custom_favorites.dart';
 
 class Favorites extends StatelessWidget {
   const Favorites({super.key});
@@ -19,7 +18,7 @@ class Favorites extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            size: width * 0.07,  
+            size: width * 0.07,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -32,7 +31,7 @@ class Favorites extends StatelessWidget {
             'Your Favorites',
             style: GoogleFonts.openSans(
               fontWeight: FontWeight.w700,
-              fontSize: width * 0.05, 
+              fontSize: width * 0.05,
               color: Colors.black,
             ),
           ),
@@ -50,19 +49,16 @@ class Favorites extends StatelessWidget {
                 price: '\$19.99',
                 film: 'In in amet ultrices sit.',
               ),
-             
               CustomFavorites(
                 imagePath: 'assets/images/book2.png',
                 price: '\$27.12',
                 film: 'Bibendum facilisis.',
               ),
-              
               CustomFavorites(
                 imagePath: 'assets/images/book3.png',
                 price: '\$13.52',
                 film: 'Nulla et diam cras.',
               ),
-              
               CustomFavorites(
                 imagePath: 'assets/images/book4.png',
                 price: '\$31.00',

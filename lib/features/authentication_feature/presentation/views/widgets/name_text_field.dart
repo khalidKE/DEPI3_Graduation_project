@@ -1,4 +1,5 @@
 import 'package:books/core/colors/colors.dart';
+import 'package:books/l10n/app_localizations.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _EmailtextfieldState extends State<NameTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Name',
+          AppLocalizations.of(context)!.name,
           style: TextStyle(color: AppColors.black, fontWeight: FontWeight.bold),
         ),
         Container(
@@ -33,7 +34,8 @@ class _EmailtextfieldState extends State<NameTextField> {
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: TextFormField(
             validator: (value) {
-              if (value!.isEmpty) return ('this field can\'t be empty');
+              if (value!.isEmpty)
+                return (AppLocalizations.of(context)!.this_field_cant_be_empty);
             },
             controller: widget.enteredName,
             decoration: InputDecoration(
@@ -41,7 +43,7 @@ class _EmailtextfieldState extends State<NameTextField> {
               hint: Padding(
                 padding: const EdgeInsets.only(left: 8.0, top: 8),
                 child: Text(
-                  'Your name',
+                  AppLocalizations.of(context)!.your_name,
                   style: TextStyle(color: AppColors.grey),
                 ),
               ),

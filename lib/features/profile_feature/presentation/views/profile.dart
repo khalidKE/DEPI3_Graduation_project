@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:books/custom/custom_profile.dart';
+import 'package:books/features/profile_feature/presentation/views/custom/custom_profile.dart';
 import 'package:books/features/profile_feature/presentation/views/account.dart';
 import 'package:books/features/profile_feature/presentation/views/favorites.dart';
 import 'package:books/features/profile_feature/presentation/views/help_center.dart';

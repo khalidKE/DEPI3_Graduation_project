@@ -58,4 +58,62 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get the_email_must_contain => 'the email must contain @ ';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get this_field_cant_be_empty => 'this field can\'t be empty';
+
+  @override
+  String get your_name => 'your name';
+
+  @override
+  String get phone_number => 'Phone Number';
+
+  @override
+  String get your_number => 'your number';
+
+  @override
+  String get signup_is_done_successfully => 'signup is done successfully';
+
+  @override
+  String get signup_failed => 'signup failed';
+
+  @override
+  String get create_account_and_choose_favorite_menu =>
+      'Create account and choose favorite menu';
+
+  @override
+  String get have_an_account => 'Have an account?';
+
+  @override
+  String get sign_In => 'Sign In';
+
+  @override
+  String get by_clicking_Register_you_agree_to_our =>
+      'By clicking Register, you agree to our  ';
+
+  @override
+  String get terms_and_Data_Policy => 'Terms and Data Policy.';
+
+  @override
+  String get please_enter_your_phone_number =>
+      'Please enter your phone number, so we can more easily deliver your order';
+
+  @override
+  String get continuee => 'Continue';
+
+  @override
+  String get phone_number_is_not_correct => 'phone number is not correct';
+
+  @override
+  String get congratulation => 'Congratulation!';
+
+  @override
+  String get your_account_is_complete =>
+      'your account is complete, please enjoy the best menu from us.';
+
+  @override
+  String get get_Started => 'Get Started';
 }

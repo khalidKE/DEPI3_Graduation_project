@@ -12,6 +12,7 @@ import 'package:books/features/authentication_feature/presentation/views/widgets
 import 'package:books/features/authentication_feature/presentation/views/widgets/password_text_field.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_purple_button.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_white_button.dart';
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,16 +44,16 @@ class _LogInScreenState extends State<SignUpScreen> {
         listener: (context, state) {
           if (state is signupSuccessState) {
             Get.snackbar(
-              'Success',
-              'signup is done successfully',
+              AppLocalizations.of(context)!.success,
+              AppLocalizations.of(context)!.signup_is_done_successfully,
               backgroundColor: AppColors.purple,
               colorText: AppColors.white,
             );
             Get.off(PhoneScreen());
           } else if (state is signupErrorState) {
             Get.snackbar(
-              'Error',
-              'signup failed',
+              AppLocalizations.of(context)!.error,
+              AppLocalizations.of(context)!.signup_failed,
               backgroundColor: AppColors.purple,
               colorText: AppColors.white,
             );
@@ -82,7 +83,7 @@ class _LogInScreenState extends State<SignUpScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Sign Up',
+                                AppLocalizations.of(context)!.sign_up,
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
@@ -90,7 +91,8 @@ class _LogInScreenState extends State<SignUpScreen> {
                               ),
                               SizedBox(height: screenHeight * 0.002),
                               Text(
-                                'Create account and choose favorite menu',
+                                AppLocalizations.of(context)!
+                                    .create_account_and_choose_favorite_menu,
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: AppColors.grey,
@@ -116,7 +118,7 @@ class _LogInScreenState extends State<SignUpScreen> {
                             return Center(child: CircularProgressIndicator());
                           }
                           return Purplebuttun(
-                            buttunText: 'Sign Up',
+                            buttunText: AppLocalizations.of(context)!.sign_up,
                             onTapFunction: () {
                               _formKeySignup.currentState!.validate();
                               setState(() {
@@ -135,7 +137,7 @@ class _LogInScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Have an account? ',
+                            AppLocalizations.of(context)!.have_an_account,
                             style: TextStyle(
                               color: AppColors.grey,
                               fontSize: 16,
@@ -146,7 +148,7 @@ class _LogInScreenState extends State<SignUpScreen> {
                               Get.off(LogInScreen());
                             },
                             child: Text(
-                              'Sign In',
+                              AppLocalizations.of(context)!.sign_In,
                               style: TextStyle(
                                 color: AppColors.purple,
                                 fontWeight: FontWeight.bold,
@@ -162,7 +164,8 @@ class _LogInScreenState extends State<SignUpScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'By clicking Register, you agree to our  ',
+                              AppLocalizations.of(context)!
+                                  .by_clicking_Register_you_agree_to_our,
                               style: TextStyle(
                                 color: AppColors.grey,
                                 fontSize: 16,
@@ -171,7 +174,8 @@ class _LogInScreenState extends State<SignUpScreen> {
                             InkWell(
                               onTap: () {},
                               child: Text(
-                                'Terms and Data Policy.',
+                                AppLocalizations.of(context)!
+                                    .terms_and_Data_Policy,
                                 style: TextStyle(
                                   color: AppColors.purple,
                                   fontWeight: FontWeight.bold,

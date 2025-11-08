@@ -1,6 +1,7 @@
 import 'package:books/core/colors/colors.dart';
 import 'package:books/features/authentication_feature/data/user_model.dart';
 import 'package:books/features/home_feature/presentation/views/home_screen.dart';
+import 'package:books/l10n/app_localizations.dart';
 import 'package:books/services/firestore_services.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_purple_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,18 +28,18 @@ class SuccessScreen extends StatelessWidget {
               Image.asset('assets/Group.png'),
               SizedBox(height: screenHeight * 0.04),
               Text(
-                'Congratulation!',
+                AppLocalizations.of(context)!.congratulation,
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: screenHeight * 0.002),
               Text(
-                'your account is complete, please enjoy the best menu from us.',
+                AppLocalizations.of(context)!.your_account_is_complete,
                 style: TextStyle(fontSize: 18, color: AppColors.grey),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: screenHeight * 0.04),
               Purplebuttun(
-                buttunText: 'Get Started',
+                buttunText: AppLocalizations.of(context)!.get_Started,
                 onTapFunction: () {
                   FirestoreServices.addUser(UserModel.user.toJson());
                   Get.to(HomeScreen());

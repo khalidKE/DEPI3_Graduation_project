@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:books/custom/custom_copon.dart';
+import 'package:books/features/profile_feature/presentation/views/custom/custom_copon.dart';
 
 class Offers extends StatelessWidget {
   const Offers({super.key});
@@ -49,7 +49,6 @@ class Offers extends StatelessWidget {
                 ),
               ),
               SizedBox(height: screenHeight * 0.03),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -69,7 +68,6 @@ class Offers extends StatelessWidget {
                 ],
               ),
               SizedBox(height: screenHeight * 0.03),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -89,7 +87,6 @@ class Offers extends StatelessWidget {
                 ],
               ),
               SizedBox(height: screenHeight * 0.03),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

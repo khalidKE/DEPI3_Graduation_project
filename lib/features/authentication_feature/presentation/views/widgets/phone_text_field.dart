@@ -1,4 +1,5 @@
 import 'package:books/core/colors/colors.dart';
+import 'package:books/l10n/app_localizations.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _EmailtextfieldState extends State<PhoneTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Phone Number',
+          AppLocalizations.of(context)!.phone_number,
           style: TextStyle(color: AppColors.black, fontWeight: FontWeight.bold),
         ),
         Container(
@@ -32,7 +33,8 @@ class _EmailtextfieldState extends State<PhoneTextField> {
           width: double.infinity,
           child: TextFormField(
             validator: (value) {
-              if (value!.isEmpty) return ('this field can\'t be empty');
+              if (value!.isEmpty)
+                return (AppLocalizations.of(context)!.this_field_cant_be_empty);
             },
             controller: widget.enteredNumber,
             keyboardType: TextInputType.phone,
@@ -45,7 +47,7 @@ class _EmailtextfieldState extends State<PhoneTextField> {
                     Icon(Icons.phone_outlined, color: AppColors.purple),
                     SizedBox(width: 1),
                     Text(
-                      'Your number',
+                      AppLocalizations.of(context)!.your_number,
                       style: TextStyle(color: AppColors.grey),
                     ),
                   ],

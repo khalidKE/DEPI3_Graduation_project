@@ -11,6 +11,7 @@ class customPasswordFieldWithValidate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,8 +22,9 @@ class customPasswordFieldWithValidate extends StatelessWidget {
         Stack(
           children: [
             Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
               height: 55,
-              width: double.infinity,
+              width: screenWidth,
               margin: EdgeInsets.only(top: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),

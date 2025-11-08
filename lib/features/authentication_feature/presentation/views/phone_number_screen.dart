@@ -8,6 +8,7 @@ import 'package:books/features/authentication_feature/presentation/views/widgets
 import 'package:books/features/authentication_feature/presentation/views/widgets/name_text_field.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/phone_text_field.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_purple_button.dart';
+import 'package:books/l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -49,13 +50,13 @@ class _LogInScreenState extends State<PhoneScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 47.0),
                   child: Text(
-                    'Phone Number',
+                    AppLocalizations.of(context)!.phone_number,
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.002),
                 Text(
-                  'Please enter your phone number, so we can more easily deliver your order',
+                  AppLocalizations.of(context)!.please_enter_your_phone_number,
                   style: TextStyle(fontSize: 16, color: AppColors.grey),
                   textAlign: TextAlign.center,
                 ),
@@ -63,7 +64,7 @@ class _LogInScreenState extends State<PhoneScreen> {
                 PhoneTextField(enteredNumber: phoneNumber),
                 SizedBox(height: screenHeight * 0.05),
                 Purplebuttun(
-                  buttunText: 'Continue',
+                  buttunText: AppLocalizations.of(context)!.continuee,
                   onTapFunction: () {
                     if (phoneNumber.text.length == 11) {
                       setState(() {
@@ -72,8 +73,9 @@ class _LogInScreenState extends State<PhoneScreen> {
                       Get.off(SuccessScreen());
                     } else {
                       Get.snackbar(
-                        'Error',
-                        'phone number is not correct',
+                        AppLocalizations.of(context)!.error,
+                        AppLocalizations.of(context)!
+                            .phone_number_is_not_correct,
                         backgroundColor: AppColors.purple,
                         colorText: AppColors.white,
                       );

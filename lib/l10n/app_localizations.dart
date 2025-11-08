@@ -199,6 +199,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'the email must contain @ '**
   String get the_email_must_contain;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @this_field_cant_be_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'this field can\'t be empty'**
+  String get this_field_cant_be_empty;
+
+  /// No description provided for @your_name.
+  ///
+  /// In en, this message translates to:
+  /// **'your name'**
+  String get your_name;
+
+  /// No description provided for @phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phone_number;
+
+  /// No description provided for @your_number.
+  ///
+  /// In en, this message translates to:
+  /// **'your number'**
+  String get your_number;
+
+  /// No description provided for @signup_is_done_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'signup is done successfully'**
+  String get signup_is_done_successfully;
+
+  /// No description provided for @signup_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'signup failed'**
+  String get signup_failed;
+
+  /// No description provided for @create_account_and_choose_favorite_menu.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account and choose favorite menu'**
+  String get create_account_and_choose_favorite_menu;
+
+  /// No description provided for @have_an_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Have an account?'**
+  String get have_an_account;
+
+  /// No description provided for @sign_In.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get sign_In;
+
+  /// No description provided for @by_clicking_Register_you_agree_to_our.
+  ///
+  /// In en, this message translates to:
+  /// **'By clicking Register, you agree to our  '**
+  String get by_clicking_Register_you_agree_to_our;
+
+  /// No description provided for @terms_and_Data_Policy.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Data Policy.'**
+  String get terms_and_Data_Policy;
+
+  /// No description provided for @please_enter_your_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your phone number, so we can more easily deliver your order'**
+  String get please_enter_your_phone_number;
+
+  /// No description provided for @continuee.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continuee;
+
+  /// No description provided for @phone_number_is_not_correct.
+  ///
+  /// In en, this message translates to:
+  /// **'phone number is not correct'**
+  String get phone_number_is_not_correct;
+
+  /// No description provided for @congratulation.
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulation!'**
+  String get congratulation;
+
+  /// No description provided for @your_account_is_complete.
+  ///
+  /// In en, this message translates to:
+  /// **'your account is complete, please enjoy the best menu from us.'**
+  String get your_account_is_complete;
+
+  /// No description provided for @get_Started.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get get_Started;
 }
 
 class _AppLocalizationsDelegate
