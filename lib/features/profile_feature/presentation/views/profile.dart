@@ -1,5 +1,4 @@
 import 'package:books/features/authentication_feature/presentation/views/signup_screen.dart';
-import 'package:books/features/category_feature/presentation/views/category_screen.dart';
 import 'package:books/features/home_feature/presentation/views/home_screen.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +117,8 @@ class Profile extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * 0.015),
                                   Text(
-                                    AppLocalizations.of(context)!.lorem_ipsum_text,
+                                    AppLocalizations.of(context)!
+                                        .lorem_ipsum_text,
                                     style: GoogleFonts.roboto(
                                       color: const Color(0XFF121212),
                                       fontWeight: FontWeight.w400,
@@ -132,9 +132,11 @@ class Profile extends StatelessWidget {
                                     child: ElevatedButton(
                                       onPressed: () {
                                         Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SignUpScreen()),
-            );
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SignUpScreen()),
+                                        );
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:
@@ -145,7 +147,7 @@ class Profile extends StatelessWidget {
                                         ),
                                       ),
                                       child: Text(
-                                       AppLocalizations.of(context)!.logout,
+                                        AppLocalizations.of(context)!.logout,
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'OpenSans',
@@ -196,10 +198,11 @@ class Profile extends StatelessWidget {
                   ],
                 ),
               ),
-
               InkWell(
                 child: CustomProfile(
-                    imagePath: 'assets/images/Group.png', title: AppLocalizations.of(context)!.my_account,),
+                  imagePath: 'assets/images/Group.png',
+                  title: AppLocalizations.of(context)!.my_account,
+                ),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Account()));
@@ -207,8 +210,9 @@ class Profile extends StatelessWidget {
               ),
               InkWell(
                 child: CustomProfile(
-                    imagePath: 'assets/images/offer.png',
-                    title: AppLocalizations.of(context)!.offers_and_promos,),
+                  imagePath: 'assets/images/offer.png',
+                  title: AppLocalizations.of(context)!.offers_and_promos,
+                ),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Offers()));
@@ -216,8 +220,9 @@ class Profile extends StatelessWidget {
               ),
               InkWell(
                 child: CustomProfile(
-                    imagePath: 'assets/images/fav.png',
-                    title: AppLocalizations.of(context)!.your_favorites,),
+                  imagePath: 'assets/images/fav.png',
+                  title: AppLocalizations.of(context)!.your_favorites,
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -227,8 +232,9 @@ class Profile extends StatelessWidget {
               ),
               InkWell(
                 child: CustomProfile(
-                    imagePath: 'assets/images/order.png',
-                    title: AppLocalizations.of(context)!.order_history,),
+                  imagePath: 'assets/images/order.png',
+                  title: AppLocalizations.of(context)!.order_history,
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -238,7 +244,9 @@ class Profile extends StatelessWidget {
               ),
               InkWell(
                 child: CustomProfile(
-                    imagePath: 'assets/images/help.png', title: AppLocalizations.of(context)!.help_center,),
+                  imagePath: 'assets/images/help.png',
+                  title: AppLocalizations.of(context)!.help_center,
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -247,63 +255,57 @@ class Profile extends StatelessWidget {
                 },
               ),
               SizedBox(height: screenHeight * 0.02),
-
-             
             ],
-            
           ),
-          
         ),
-         bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF5B4DB5),
-        unselectedItemColor: Colors.grey,
-        currentIndex: 3,
-        onTap: (index) {
-         
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: const Color(0xFF5B4DB5),
+          unselectedItemColor: Colors.grey,
+          currentIndex: 3,
+          onTap: (index) {
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+                break;
+              case 1:
+                // Orders
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('category Screen - Coming Soon')),
+                );
+                break;
+              case 2:
+                // Cart
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Cart Screen - Coming Soon')),
+                );
+                break;
+              case 3:
+                // Profile
 
-         
-          switch (index) {
-            case 0:
-               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
-              );
-              break;
-            case 1:
-              // Orders
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('category Screen - Coming Soon')),
-              );
-              break;
-            case 2:
-              // Cart
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Cart Screen - Coming Soon')),
-              );
-              break;
-            case 3:
-              // Profile
-             
-              break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined),
-            label: 'Orders',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-        ],
-      ),
+                break;
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag_outlined),
+              label: 'Orders',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart_outlined),
+              label: 'Cart',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              label: 'Profile',
+            ),
+          ],
+        ),
       ),
     );
   }

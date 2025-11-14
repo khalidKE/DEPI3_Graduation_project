@@ -1,5 +1,4 @@
 import 'package:books/core/colors/colors.dart';
-import 'package:books/features/authentication_feature/presentation/manager/login_cubit.dart';
 import 'package:books/features/authentication_feature/presentation/manager/login_state.dart';
 import 'package:books/features/authentication_feature/presentation/manager/signup_cubit.dart';
 import 'package:books/features/authentication_feature/presentation/manager/signup_state.dart';
@@ -9,15 +8,11 @@ import 'package:books/features/authentication_feature/presentation/views/phone_n
 import 'package:books/features/authentication_feature/presentation/views/widgets/custom_password_field_with_validate.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/email_text_field.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/name_text_field.dart';
-import 'package:books/features/authentication_feature/presentation/views/widgets/password_text_field.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_purple_button.dart';
-import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_white_button.dart';
 import 'package:books/l10n/app_localizations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
-import 'package:fancy_password_field/fancy_password_field.dart';
 
 TextEditingController signupPassword = TextEditingController();
 TextEditingController signupEmail = TextEditingController();

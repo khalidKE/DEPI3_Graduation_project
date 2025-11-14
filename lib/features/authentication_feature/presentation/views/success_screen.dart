@@ -4,10 +4,8 @@ import 'package:books/features/home_feature/presentation/views/home_screen.dart'
 import 'package:books/l10n/app_localizations.dart';
 import 'package:books/services/firestore_services.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_purple_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key});

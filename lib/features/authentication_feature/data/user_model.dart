@@ -10,20 +10,20 @@ class UserModel {
   static UserModel user = UserModel._();
   UserModel._();
   void fromJson(Map<String, dynamic> json) {
-    this.name = json[FirestoreServices.name];
-    this.email = json[FirestoreServices.email];
-    this.phone = json[FirestoreServices.phone];
-    this.address = json[FirestoreServices.address];
-    this.profilepic = json[FirestoreServices.profilePic];
+    name = json[FirestoreServices.name];
+    email = json[FirestoreServices.email];
+    phone = json[FirestoreServices.phone];
+    address = json[FirestoreServices.address];
+    profilepic = json[FirestoreServices.profilePic];
   }
 
   Map<String, dynamic> toJson() {
     return ({
-      FirestoreServices.name: this.name,
-      FirestoreServices.email: this.email,
-      FirestoreServices.phone: this.phone,
-      FirestoreServices.address: this.address,
-      FirestoreServices.profilePic: this.profilepic,
+      FirestoreServices.name: name,
+      FirestoreServices.email: email,
+      FirestoreServices.phone: phone,
+      FirestoreServices.address: address,
+      FirestoreServices.profilePic: profilepic,
     });
   }
 }

@@ -2,7 +2,6 @@ import 'package:books/core/colors/colors.dart';
 import 'package:books/features/onboarding_feature/presentation/manager/onboarding_cubit.dart';
 import 'package:books/features/onboarding_feature/presentation/manager/onboarding_state.dart';
 import 'package:books/features/authentication_feature/presentation/views/login_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';

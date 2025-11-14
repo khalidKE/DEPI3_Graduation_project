@@ -22,5 +22,6 @@ class SignupCubit extends Cubit<signupState> {
       print('========================================');
       print(e.toString());
     }
+    return null;
   }
 }

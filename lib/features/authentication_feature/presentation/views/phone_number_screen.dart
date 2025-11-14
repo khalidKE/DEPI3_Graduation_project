@@ -1,11 +1,6 @@
 import 'package:books/core/colors/colors.dart';
 import 'package:books/features/authentication_feature/data/user_model.dart';
-import 'package:books/features/home_feature/presentation/views/home_screen.dart';
-import 'package:books/features/authentication_feature/presentation/views/login_screen.dart';
 import 'package:books/features/authentication_feature/presentation/views/success_screen.dart';
-import 'package:books/features/authentication_feature/presentation/views/widgets/custom_password_field_with_validate.dart';
-import 'package:books/features/authentication_feature/presentation/views/widgets/email_text_field.dart';
-import 'package:books/features/authentication_feature/presentation/views/widgets/name_text_field.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/phone_text_field.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_purple_button.dart';
 import 'package:books/l10n/app_localizations.dart';

@@ -9,7 +9,6 @@ import 'package:books/features/authentication_feature/presentation/views/widgets
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_purple_button.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/rounded_white_button.dart';
 import 'package:books/l10n/app_localizations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
@@ -212,6 +211,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
 String? loginValidation(value) {
   if (value!.length < 6) return ('password should be more that 5 digits');
+  return null;
 }
 
 //-------------------------------------------------------------------------------

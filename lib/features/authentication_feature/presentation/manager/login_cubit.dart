@@ -28,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
   void signInWithGoogleFirebase() async {
     emit(LoginLoadingState());
     try {
-      final GoogleSignInAccount? googleUser =
+      final GoogleSignInAccount googleUser =
           await GoogleSignIn.instance.authenticate();
 
       final GoogleSignInAuthentication? googleAuth = googleUser?.authentication;

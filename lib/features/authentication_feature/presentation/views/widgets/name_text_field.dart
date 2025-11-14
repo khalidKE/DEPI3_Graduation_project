@@ -34,8 +34,10 @@ class _EmailtextfieldState extends State<NameTextField> {
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: TextFormField(
             validator: (value) {
-              if (value!.isEmpty)
+              if (value!.isEmpty) {
                 return (AppLocalizations.of(context)!.this_field_cant_be_empty);
+                return null;
+              }
             },
             controller: widget.enteredName,
             decoration: InputDecoration(

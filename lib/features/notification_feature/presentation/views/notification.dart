@@ -2,7 +2,6 @@ import 'package:books/features/notification_feature/presentation/views/promotion
 import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -100,21 +99,27 @@ class _NotificationPageState extends State<NotificationPage> {
                         Get.to(const PromotionPage());
                       },
                       child: newsPromotionRow(
-                          text: AppLocalizations.of(context)!.promotion, date: 'Oct 24', time: '08.00'),
+                          text: AppLocalizations.of(context)!.promotion,
+                          date: 'Oct 24',
+                          time: '08.00'),
                     ),
                     SizedBox(height: height * 0.01),
                     RichText(
                       text: TextSpan(
-                        style: const TextStyle(color: Colors.black, fontSize: 14),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 14),
                         children: [
-                          TextSpan(text: AppLocalizations.of(context)!.october_2021,),
                           TextSpan(
-                            text: AppLocalizations.of(context)!.fifty_percent_discount,
+                            text: AppLocalizations.of(context)!.october_2021,
+                          ),
+                          TextSpan(
+                            text: AppLocalizations.of(context)!
+                                .fifty_percent_discount,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           TextSpan(
-                            text:
-                                AppLocalizations.of(context)!.novel_discount_description,
+                            text: AppLocalizations.of(context)!
+                                .novel_discount_description,
                           ),
                         ],
                       ),
@@ -123,18 +128,22 @@ class _NotificationPageState extends State<NotificationPage> {
                     Image.asset("assets/images/Line.png"),
                     SizedBox(height: height * 0.02),
                     newsPromotionRow(
-                        text: AppLocalizations.of(context)!.promotion, date: 'Oct 08', time: '20.30'),
+                        text: AppLocalizations.of(context)!.promotion,
+                        date: 'Oct 08',
+                        time: '20.30'),
                     SizedBox(height: height * 0.01),
                     RichText(
                       text: TextSpan(
                         style: TextStyle(color: Colors.black, fontSize: 14),
                         children: [
                           TextSpan(
-                            text: AppLocalizations.of(context)!.buy_2_get_1_free,
+                            text:
+                                AppLocalizations.of(context)!.buy_2_get_1_free,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           TextSpan(
-                            text: AppLocalizations.of(context)!.books_offer_date,
+                            text:
+                                AppLocalizations.of(context)!.books_offer_date,
                           ),
                         ],
                       ),
@@ -149,7 +158,9 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     SizedBox(height: height * 0.02),
                     newsPromotionRow(
-                        text: AppLocalizations.of(context)!.information, date: 'Sept 16', time: '11.00'),
+                        text: AppLocalizations.of(context)!.information,
+                        date: 'Sept 16',
+                        time: '11.00'),
                     SizedBox(height: height * 0.01),
                     Text(
                       AppLocalizations.of(context)!.new_book_available,
@@ -180,8 +191,12 @@ class _NotificationPageState extends State<NotificationPage> {
       titleSpacing: isTablet ? width * 0.25 : 71,
       bottom: TabBar(
         tabs: [
-          Tab(text: AppLocalizations.of(context)!.delivery,),
-          Tab(text:AppLocalizations.of(context)!.news,),
+          Tab(
+            text: AppLocalizations.of(context)!.delivery,
+          ),
+          Tab(
+            text: AppLocalizations.of(context)!.news,
+          ),
         ],
       ),
     );

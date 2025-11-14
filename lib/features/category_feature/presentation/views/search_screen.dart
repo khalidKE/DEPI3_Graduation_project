@@ -1,8 +1,6 @@
 import 'package:books/l10n/app_localizations.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'category_screen.dart';
-import 'package:books/features/category_feature/presentation/views/category_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -22,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
         child: AppBar(
           centerTitle: true,
           title: Text(
-           AppLocalizations.of(context)!.search,
+            AppLocalizations.of(context)!.search,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(

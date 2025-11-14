@@ -33,8 +33,10 @@ class _EmailtextfieldState extends State<PhoneTextField> {
           width: double.infinity,
           child: TextFormField(
             validator: (value) {
-              if (value!.isEmpty)
+              if (value!.isEmpty) {
                 return (AppLocalizations.of(context)!.this_field_cant_be_empty);
+                return null;
+              }
             },
             controller: widget.enteredNumber,
             keyboardType: TextInputType.phone,

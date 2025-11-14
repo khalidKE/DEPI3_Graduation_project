@@ -9,7 +9,7 @@ void main() {
 }
 
 class BookStoreApp extends StatelessWidget {
-  const BookStoreApp({Key? key}) : super(key: key);
+  const BookStoreApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +218,7 @@ class AppData {
 
 // Home Screen
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -716,7 +716,7 @@ class _HomeScreenState extends State<HomeScreen> {
 // Book Detail Screen
 class BookDetailScreen extends StatefulWidget {
   final Book book;
-  const BookDetailScreen({Key? key, required this.book}) : super(key: key);
+  const BookDetailScreen({super.key, required this.book});
 
   @override
   State<BookDetailScreen> createState() => _BookDetailScreenState();
@@ -1083,7 +1083,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   Widget _buildRelatedBook(String title, String author, String price) {
-    return Container(
+    return SizedBox(
       width: 120,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1128,7 +1128,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
 // Vendors Screen
 class VendorsScreen extends StatefulWidget {
-  const VendorsScreen({Key? key}) : super(key: key);
+  const VendorsScreen({super.key});
 
   @override
   State<VendorsScreen> createState() => _VendorsScreenState();
@@ -1364,7 +1364,7 @@ class _VendorsScreenState extends State<VendorsScreen> {
 
 // Authors Screen
 class AuthorsScreen extends StatefulWidget {
-  const AuthorsScreen({Key? key}) : super(key: key);
+  const AuthorsScreen({super.key});
 
   @override
   State<AuthorsScreen> createState() => _AuthorsScreenState();
@@ -1614,7 +1614,7 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
 class AuthorDetailScreen extends StatelessWidget {
   final Author author;
 
-  const AuthorDetailScreen({Key? key, required this.author}) : super(key: key);
+  const AuthorDetailScreen({super.key, required this.author});
 
   @override
   Widget build(BuildContext context) {

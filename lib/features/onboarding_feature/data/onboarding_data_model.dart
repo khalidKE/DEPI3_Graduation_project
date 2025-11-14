@@ -6,10 +6,10 @@ class OnboardingData {
   late String buttunText;
   OnboardingData();
   OnboardingData.getData(Map<String, dynamic> data) {
-    this.highlight = data['highlight'];
-    this.description = data['description'];
-    this.imagePath = data['imagePath'];
-    this.stagePath = data['stagePath'];
-    this.buttunText = data['buttunText'];
+    highlight = data['highlight'];
+    description = data['description'];
+    imagePath = data['imagePath'];
+    stagePath = data['stagePath'];
+    buttunText = data['buttunText'];
   }
 }

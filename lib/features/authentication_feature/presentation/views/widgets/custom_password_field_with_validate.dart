@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:books/core/colors/colors.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:fancy_password_field/fancy_password_field.dart';
