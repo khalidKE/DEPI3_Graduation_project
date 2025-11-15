@@ -55,7 +55,6 @@ class _LogInScreenState extends State<LogInScreen> {
           }
         },
         child: Scaffold(
-          backgroundColor: AppColors.white,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -110,7 +109,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                         .sign_to_your_account,
                                     style: TextStyle(
                                       fontSize: Responsive.responsiveFontSize(context, 18),
-                                      color: AppColors.grey,
+                                      color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
                                     ),
                                   ),
                                 ],
@@ -149,7 +148,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 Text(
                                   AppLocalizations.of(context)!.dont_have_account,
                                   style: TextStyle(
-                                    color: AppColors.grey,
+                                    color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
                                     fontSize: Responsive.responsiveFontSize(context, 16),
                                   ),
                                 ),
@@ -175,7 +174,9 @@ class _LogInScreenState extends State<LogInScreen> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
-                                      color: AppColors.lightGray,
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.grey[800]!
+                                          : AppColors.lightGray,
                                     ),
                                     height: 2,
                                   ),
@@ -184,14 +185,18 @@ class _LogInScreenState extends State<LogInScreen> {
                                   padding: const EdgeInsets.symmetric(horizontal: 8),
                                   child: Text(
                                     AppLocalizations.of(context)!.or_with,
-                                    style: TextStyle(color: AppColors.grey),
+                                    style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
+                                    ),
                                   ),
                                 ),
                                 Expanded(
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
-                                      color: AppColors.lightGray,
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.grey[800]!
+                                          : AppColors.lightGray,
                                     ),
                                     height: 2,
                                   ),

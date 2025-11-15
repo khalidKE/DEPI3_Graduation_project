@@ -34,9 +34,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
       ),
@@ -85,7 +83,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                       style: TextStyle(
                         fontSize: Responsive.responsiveFontSize(context, 24),
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -174,43 +172,46 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                           // Feedback Text Field
                           TextFormField(
                             controller: _feedbackController,
+                            style: TextStyle(
+                              color: Theme.of(context).textTheme.bodyLarge?.color,
+                              fontSize: Responsive.responsiveFontSize(context, 14),
+                            ),
                             decoration: InputDecoration(
                               hintText: AppLocalizations.of(context)!.write_something_for_us,
                               hintStyle: TextStyle(
-                                color: Colors.grey,
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[500]!
+                                    : Colors.grey[600]!,
                                 fontSize: Responsive.responsiveFontSize(context, 14),
                               ),
+                              filled: true,
+                              fillColor: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[900]!
+                                  : Colors.grey[50]!,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: Responsive.responsiveSpacing(context, 16),
+                                vertical: Responsive.responsiveSpacing(context, 16),
+                              ),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  Responsive.responsiveBorderRadius(context, 8),
-                                ),
+                                borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide(
-                                  color: Colors.grey.withValues(alpha: 0.2),
+                                  color: Theme.of(context).brightness == Brightness.dark
+                                      ? Colors.grey[700]!
+                                      : Colors.grey[300]!,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  Responsive.responsiveBorderRadius(context, 8),
-                                ),
+                                borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide(
-                                  color: Colors.grey.withValues(alpha: 0.2),
+                                  color: Theme.of(context).brightness == Brightness.dark
+                                      ? Colors.grey[700]!
+                                      : Colors.grey[300]!,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  Responsive.responsiveBorderRadius(context, 8),
-                                ),
-                                borderSide: const BorderSide(
-                                  color: Color(0xFF6C47FF),
-                                  width: 1,
-                                ),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(color: Color(0xFF6C47FF), width: 2),
                               ),
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: Responsive.responsiveSpacing(context, 12),
-                                vertical: Responsive.responsiveSpacing(context, 12),
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
                             ),
                             maxLines: 3,
                           ),

@@ -61,7 +61,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           }
         },
         child: Scaffold(
-          backgroundColor: AppColors.white,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -116,7 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         .create_account_and_choose_favorite_menu,
                                     style: TextStyle(
                                       fontSize: Responsive.responsiveFontSize(context, 18),
-                                      color: AppColors.grey,
+                                      color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
                                     ),
                                   ),
                                 ],
@@ -157,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Text(
                                   AppLocalizations.of(context)!.have_an_account,
                                   style: TextStyle(
-                                    color: AppColors.grey,
+                                    color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
                                     fontSize: Responsive.responsiveFontSize(context, 16),
                                   ),
                                 ),
@@ -185,7 +184,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     AppLocalizations.of(context)!
                                         .by_clicking_Register_you_agree_to_our,
                                     style: TextStyle(
-                                      color: AppColors.grey,
+                                      color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
                                       fontSize: Responsive.responsiveFontSize(context, 16),
                                     ),
                                     textAlign: TextAlign.center,

@@ -156,6 +156,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     '\$85.00',
                     style: TextStyle(
                       fontSize: Responsive.responsiveFontSize(context, 14),
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                     ),
                   ),
                 ],
@@ -177,6 +178,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     '\$2.00',
                     style: TextStyle(
                       fontSize: Responsive.responsiveFontSize(context, 14),
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                     ),
                   ),
                 ],
@@ -198,6 +200,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     '\$4.25',
                     style: TextStyle(
                       fontSize: Responsive.responsiveFontSize(context, 14),
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                     ),
                   ),
                 ],
@@ -237,6 +240,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: Responsive.responsiveFontSize(context, 16),
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -246,6 +250,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: Responsive.responsiveFontSize(context, 16),
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
                     ),
                   ),
                 ],
@@ -305,14 +310,11 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
             size: Responsive.responsiveIconSize(context, 24),
           ),
           onPressed: () => Navigator.pop(context),
@@ -320,7 +322,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
         title: Text(
           AppLocalizations.of(context)!.order_details,
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
             fontWeight: FontWeight.bold,
             fontSize: Responsive.responsiveFontSize(context, 18),
           ),
@@ -347,7 +349,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     Container(
                       padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 16)),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(
                           Responsive.responsiveBorderRadius(context, 12),
                         ),
@@ -386,7 +388,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: Responsive.responsiveFontSize(context, 16),
-                                    color: Colors.black,
+                                    color: Theme.of(context).textTheme.bodyLarge?.color,
                                   ),
                                 ),
                                 SizedBox(height: Responsive.responsiveSpacing(context, 4)),
@@ -433,7 +435,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     Container(
                       padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 16)),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(
                           Responsive.responsiveBorderRadius(context, 12),
                         ),
@@ -454,7 +456,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: Responsive.responsiveFontSize(context, 16),
-                              color: Colors.black,
+                              color: Theme.of(context).textTheme.bodyLarge?.color,
                             ),
                           ),
                           SizedBox(height: Responsive.responsiveSpacing(context, 12)),
@@ -474,7 +476,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                               Text(
                                 '\$87.10',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Theme.of(context).textTheme.bodyMedium?.color,
                                   fontSize: Responsive.responsiveFontSize(context, 14),
                                 ),
                               ),
@@ -497,7 +499,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                               Text(
                                 '\$2',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: Theme.of(context).textTheme.bodyMedium?.color,
                                   fontSize: Responsive.responsiveFontSize(context, 14),
                                 ),
                               ),
@@ -522,7 +524,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                 '\$89.10',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                  color: Theme.of(context).textTheme.bodyLarge?.color,
                                   fontSize: Responsive.responsiveFontSize(context, 16),
                                 ),
                               ),
@@ -569,7 +571,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                       child: Container(
                         padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 16)),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(
                             Responsive.responsiveBorderRadius(context, 12),
                           ),
@@ -608,7 +610,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: Responsive.responsiveFontSize(context, 16),
-                                      color: Colors.black,
+                                      color: Theme.of(context).textTheme.bodyLarge?.color,
                                     ),
                                   ),
                                   Text(

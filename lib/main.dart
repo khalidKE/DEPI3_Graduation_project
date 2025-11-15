@@ -1,5 +1,6 @@
 import 'package:books/core/widgets/error_boundary.dart';
 import 'package:books/core/services/language_service.dart';
+import 'package:books/core/services/theme_service.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:books/secrets/secrets.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -63,6 +64,13 @@ Future<void> main() async {
     debugPrint('Error initializing language service: $e');
   }
   
+  // Initialize theme service
+  try {
+    await ThemeService.initialize();
+  } catch (e) {
+    debugPrint('Error initializing theme service: $e');
+  }
+  
   // Initialize Google Sign-In
   try {
     await GoogleSignIn.instance.initialize(
@@ -121,15 +129,23 @@ void _initializeLocaleHandling() {
   });
   
   // Build GetMaterialApp once and cache it
-  _cachedGetMaterialApp = GetMaterialApp(
-    key: const ValueKey('stable_get_material_app'),
-    navigatorKey: _appNavigatorKey,
-    debugShowCheckedModeBanner: false,
-    localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,
-    // Don't provide locale - GetMaterialApp will use Get.locale automatically
-    // This ensures GetMaterialApp never rebuilds when locale changes
-    home: const _LocaleAwareWrapper(child: SplashScreen()),
+  _cachedGetMaterialApp = ValueListenableBuilder<ThemeMode>(
+    valueListenable: ThemeService.themeNotifier,
+    builder: (context, themeMode, _) {
+      return GetMaterialApp(
+        key: const ValueKey('stable_get_material_app'),
+        navigatorKey: _appNavigatorKey,
+        debugShowCheckedModeBanner: false,
+        theme: _buildLightTheme(),
+        darkTheme: _buildDarkTheme(),
+        themeMode: themeMode,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        // Don't provide locale - GetMaterialApp will use Get.locale automatically
+        // This ensures GetMaterialApp never rebuilds when locale changes
+        home: const _LocaleAwareWrapper(child: SplashScreen()),
+      );
+    },
   );
 }
 
@@ -203,4 +219,98 @@ class _LocaleAwareWrapper extends StatelessWidget {
       },
     );
   }
+}
+
+/// Build light theme
+ThemeData _buildLightTheme() {
+  return ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.light,
+    primaryColor: const Color(0xFF6C47FF),
+    colorScheme: ColorScheme.light(
+      primary: const Color(0xFF6C47FF),
+      secondary: const Color(0xFF6C47FF),
+      surface: Colors.white,
+      background: Colors.white,
+      error: Colors.red,
+    ),
+    scaffoldBackgroundColor: Colors.white,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+      elevation: 0,
+      iconTheme: IconThemeData(color: Colors.black),
+    ),
+    iconTheme: const IconThemeData(color: Colors.black),
+    cardColor: Colors.white,
+    dividerColor: Colors.grey[300],
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Colors.black),
+      bodyMedium: TextStyle(color: Colors.black),
+      bodySmall: TextStyle(color: Colors.black),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: Colors.grey[300]!),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: Colors.grey[300]!),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: Color(0xFF6C47FF)),
+      ),
+    ),
+  );
+}
+
+/// Build dark theme
+ThemeData _buildDarkTheme() {
+  return ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    primaryColor: const Color(0xFF6C47FF),
+    colorScheme: ColorScheme.dark(
+      primary: const Color(0xFF6C47FF),
+      secondary: const Color(0xFF6C47FF),
+      surface: const Color(0xFF121212),
+      background: const Color(0xFF121212),
+      error: Colors.red,
+    ),
+    scaffoldBackgroundColor: const Color(0xFF121212),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color(0xFF1E1E1E),
+      foregroundColor: Colors.white,
+      elevation: 0,
+      iconTheme: IconThemeData(color: Colors.white),
+    ),
+    iconTheme: const IconThemeData(color: Colors.white),
+    cardColor: const Color(0xFF1E1E1E),
+    dividerColor: Colors.grey[700],
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Colors.white),
+      bodyMedium: TextStyle(color: Colors.white),
+      bodySmall: TextStyle(color: Colors.white),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: const Color(0xFF1E1E1E),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: Colors.grey[700]!),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: Colors.grey[700]!),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: Color(0xFF6C47FF)),
+      ),
+    ),
+  );
 }

@@ -25,9 +25,7 @@ class Profile extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
           toolbarHeight: Responsive.responsiveSpacing(context, 60, tabletSpacing: 70, desktopSpacing: 80),
           title: Center(
             child: Text(

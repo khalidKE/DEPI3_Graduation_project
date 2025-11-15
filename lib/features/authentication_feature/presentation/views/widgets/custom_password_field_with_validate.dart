@@ -13,85 +13,89 @@ class CustomPasswordFieldWithValidate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.sizeOf(context).width;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.black;
+    final hintColor = isDark ? Colors.grey[500]! : AppColors.grey;
+    final borderColor = isDark ? Colors.grey[700]! : Colors.grey[300]!;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           AppLocalizations.of(context)!.password,
-          style: TextStyle(color: AppColors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: textColor,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              height: 55,
-              width: screenWidth,
-              margin: EdgeInsets.only(top: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.lightGray,
-              ),
-            ),
-            FancyPasswordField(
-              controller: enteredPassword,
-              validationRules: {
-                UppercaseValidationRule(),
-                LowercaseValidationRule(),
-                MinCharactersValidationRule(6),
-              },
-              validationRuleBuilder: (rules, value) {
-                if (value.isEmpty) {
-                  return const SizedBox.shrink();
-                }
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: rules
-                      .map(
-                        (rule) => Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                rule.validate(value)
-                                    ? Icons.check
-                                    : Icons.close,
-                                color: rule.validate(value)
-                                    ? Colors.green
-                                    : Colors.red,
-                                size: 16,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                rule.name,
-                                style: TextStyle(
-                                  color: rule.validate(value)
-                                      ? Colors.green
-                                      : Colors.red,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
+        const SizedBox(height: 8),
+        FancyPasswordField(
+          controller: enteredPassword,
+          style: TextStyle(color: textColor),
+          validationRules: {
+            UppercaseValidationRule(),
+            LowercaseValidationRule(),
+            MinCharactersValidationRule(6),
+          },
+          validationRuleBuilder: (rules, value) {
+            if (value.isEmpty) {
+              return const SizedBox.shrink();
+            }
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: rules
+                  .map(
+                    (rule) => Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            rule.validate(value)
+                                ? Icons.check
+                                : Icons.close,
+                            color: rule.validate(value)
+                                ? Colors.green
+                                : Colors.red,
+                            size: 16,
                           ),
-                        ),
-                      )
-                      .toList(),
-                );
-              },
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hint: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 8),
-                  child: Text(
-                    AppLocalizations.of(context)!.your_password,
-                    style: TextStyle(color: AppColors.grey),
-                  ),
-                ),
-              ),
+                          const SizedBox(width: 8),
+                          Text(
+                            rule.name,
+                            style: TextStyle(
+                              color: rule.validate(value)
+                                  ? Colors.green
+                                  : Colors.red,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+          decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.your_password,
+            hintStyle: TextStyle(color: hintColor),
+            filled: true,
+            fillColor: isDark ? Colors.grey[900]! : Colors.grey[50]!,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: borderColor),
             ),
-          ],
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: borderColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Color(0xFF6C47FF), width: 2),
+            ),
+          ),
         ),
       ],
     );

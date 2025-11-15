@@ -51,18 +51,16 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           AppLocalizations.of(context)!.location,
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
             fontWeight: FontWeight.bold,
             fontSize: Responsive.responsiveFontSize(context, 18),
           ),
@@ -85,136 +83,178 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                     SizedBox(height: Responsive.responsiveSpacing(context, 20)),
 
                     // Name Field
-                    TextFormField(
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.name,
-                        hintText: AppLocalizations.of(context)!.name,
-                        labelStyle: TextStyle(
-                          fontSize: Responsive.responsiveFontSize(context, 14),
-                        ),
-                        hintStyle: TextStyle(
-                          fontSize: Responsive.responsiveFontSize(context, 14),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF6C47FF),
-                            width: 2,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.name,
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Responsive.responsiveFontSize(context, 14),
                           ),
                         ),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: Responsive.responsiveSpacing(context, 16),
-                          vertical: Responsive.responsiveSpacing(context, 16),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: _nameController,
+                          style: TextStyle(
+                            fontSize: Responsive.responsiveFontSize(context, 16),
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: AppLocalizations.of(context)!.name,
+                            hintStyle: TextStyle(
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[500]!
+                                  : Colors.grey[600]!,
+                              fontSize: Responsive.responsiveFontSize(context, 14),
+                            ),
+                            filled: true,
+                            fillColor: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey[900]!
+                                : Colors.grey[50]!,
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(color: Color(0xFF6C47FF), width: 2),
+                            ),
+                          ),
                         ),
-                      ),
-                      style: TextStyle(
-                        fontSize: Responsive.responsiveFontSize(context, 16),
-                      ),
+                      ],
                     ),
 
                     SizedBox(height: Responsive.responsiveSpacing(context, 16)),
 
                     // Governorate Field
-                    TextFormField(
-                      controller: _governorateController,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.governorate,
-                        hintText: AppLocalizations.of(context)!.governorate,
-                        labelStyle: TextStyle(
-                          fontSize: Responsive.responsiveFontSize(context, 14),
-                        ),
-                        hintStyle: TextStyle(
-                          fontSize: Responsive.responsiveFontSize(context, 14),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF6C47FF),
-                            width: 2,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.governorate,
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Responsive.responsiveFontSize(context, 14),
                           ),
                         ),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: Responsive.responsiveSpacing(context, 16),
-                          vertical: Responsive.responsiveSpacing(context, 16),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: _governorateController,
+                          style: TextStyle(
+                            fontSize: Responsive.responsiveFontSize(context, 16),
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: AppLocalizations.of(context)!.governorate,
+                            hintStyle: TextStyle(
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[500]!
+                                  : Colors.grey[600]!,
+                              fontSize: Responsive.responsiveFontSize(context, 14),
+                            ),
+                            filled: true,
+                            fillColor: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey[900]!
+                                : Colors.grey[50]!,
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(color: Color(0xFF6C47FF), width: 2),
+                            ),
+                          ),
                         ),
-                      ),
-                      style: TextStyle(
-                        fontSize: Responsive.responsiveFontSize(context, 16),
-                      ),
+                      ],
                     ),
 
                     SizedBox(height: Responsive.responsiveSpacing(context, 16)),
 
                     // City Field
-                    TextFormField(
-                      controller: _cityController,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.city,
-                        hintText: AppLocalizations.of(context)!.city,
-                        labelStyle: TextStyle(
-                          fontSize: Responsive.responsiveFontSize(context, 14),
-                        ),
-                        hintStyle: TextStyle(
-                          fontSize: Responsive.responsiveFontSize(context, 14),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            Responsive.responsiveBorderRadius(context, 12),
-                          ),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF6C47FF),
-                            width: 2,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.city,
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Responsive.responsiveFontSize(context, 14),
                           ),
                         ),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: Responsive.responsiveSpacing(context, 16),
-                          vertical: Responsive.responsiveSpacing(context, 16),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: _cityController,
+                          style: TextStyle(
+                            fontSize: Responsive.responsiveFontSize(context, 16),
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: AppLocalizations.of(context)!.city,
+                            hintStyle: TextStyle(
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[500]!
+                                  : Colors.grey[600]!,
+                              fontSize: Responsive.responsiveFontSize(context, 14),
+                            ),
+                            filled: true,
+                            fillColor: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey[900]!
+                                : Colors.grey[50]!,
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey[700]!
+                                    : Colors.grey[300]!,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(color: Color(0xFF6C47FF), width: 2),
+                            ),
+                          ),
                         ),
-                      ),
-                      style: TextStyle(
-                        fontSize: Responsive.responsiveFontSize(context, 16),
-                      ),
+                      ],
                     ),
 
                     SizedBox(height: Responsive.responsiveSpacing(context, 40)),

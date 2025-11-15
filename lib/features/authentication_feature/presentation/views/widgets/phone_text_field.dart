@@ -17,49 +17,57 @@ class PhoneTextField extends StatefulWidget {
 class _PhoneTextFieldState extends State<PhoneTextField> {
   @override
   Widget build(BuildContext context) {
-    return (Column(
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.black;
+    final hintColor = isDark ? Colors.grey[500]! : AppColors.grey;
+    final borderColor = isDark ? Colors.grey[700]! : Colors.grey[300]!;
+    
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           AppLocalizations.of(context)!.phone_number,
-          style: TextStyle(color: AppColors.black, fontWeight: FontWeight.bold),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: AppColors.lightGray,
+          style: TextStyle(
+            color: textColor,
+            fontWeight: FontWeight.bold,
           ),
-          height: 55,
-          width: double.infinity,
-          child: TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return AppLocalizations.of(context)!.this_field_cant_be_empty;
-              }
-              return null;
-            },
-            controller: widget.enteredNumber,
-            keyboardType: TextInputType.phone,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hint: Padding(
-                padding: const EdgeInsets.only(left: 8.0, top: 8),
-                child: Row(
-                  children: [
-                    Icon(Icons.phone_outlined, color: AppColors.purple),
-                    SizedBox(width: 1),
-                    Text(
-                      AppLocalizations.of(context)!.your_number,
-                      style: TextStyle(color: AppColors.grey),
-                    ),
-                  ],
-                ),
-              ),
+        ),
+        const SizedBox(height: 8),
+        TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return AppLocalizations.of(context)!.this_field_cant_be_empty;
+            }
+            return null;
+          },
+          controller: widget.enteredNumber,
+          keyboardType: TextInputType.phone,
+          style: TextStyle(color: textColor),
+          decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.your_number,
+            hintStyle: TextStyle(color: hintColor),
+            prefixIcon: Icon(
+              Icons.phone_outlined,
+              color: AppColors.purple,
+            ),
+            filled: true,
+            fillColor: isDark ? Colors.grey[900]! : Colors.grey[50]!,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: borderColor),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: borderColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Color(0xFF6C47FF), width: 2),
             ),
           ),
         ),
       ],
-    ));
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:books/features/notification_feature/presentation/views/notification.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:books/core/widgets/language_toggle.dart';
+import 'package:books/core/widgets/theme_toggle.dart';
 import 'package:books/core/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:books/features/profile_feature/presentation/views/profile.dart';
@@ -213,32 +214,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
           AppLocalizations.of(context)!.home,
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
             fontWeight: FontWeight.w600,
             fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.search,
-            color: Colors.black,
-            size: Responsive.responsiveIconSize(context, 24),
-          ),
-          onPressed: () {},
-        ),
+        leading: const ThemeToggleButton(),
         actions: [
           // Language toggle button
           const LanguageToggleButton(),
           IconButton(
             icon: Icon(
               Icons.notifications_outlined,
-              color: Colors.black,
               size: Responsive.responsiveIconSize(context, 24),
             ),
             onPressed: () {
@@ -761,15 +753,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.book_details),
         centerTitle: true,
-        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.black),
+            icon: const Icon(Icons.more_vert),
             onPressed: () {},
           ),
         ],
@@ -1203,30 +1194,22 @@ class _VendorsScreenState extends State<VendorsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           AppLocalizations.of(context)!.vendors,
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
             fontWeight: FontWeight.w600,
             fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.black,
-              size: Responsive.responsiveIconSize(context, 24),
-            ),
-            onPressed: () {},
-          ),
+          const ThemeToggleButton(),
         ],
       ),
       body: Column(
@@ -1465,30 +1448,22 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           AppLocalizations.of(context)!.authors,
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
             fontWeight: FontWeight.w600,
             fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.black,
-              size: Responsive.responsiveIconSize(context, 24),
-            ),
-            onPressed: () {},
-          ),
+          const ThemeToggleButton(),
         ],
       ),
       body: Column(

@@ -39,16 +39,46 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           children: [
             TextField(
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+              ),
               decoration: InputDecoration(
-                filled: true,
-                fillColor: Color(0xFFE8E8E8),
-                prefixIcon: Icon(Icons.search),
-                iconColor: Color(0xFFA6A6A6),
                 hintText: AppLocalizations.of(context)!.search,
-                hintStyle: const TextStyle(color: Color(0xFFA6A6A6)),
+                hintStyle: TextStyle(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey[500]!
+                      : Colors.grey[600]!,
+                ),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey[400]!
+                      : const Color(0xFF54408C),
+                ),
+                filled: true,
+                fillColor: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[900]!
+                    : Colors.grey[50]!,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6),
-                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey[700]!
+                        : Colors.grey[300]!,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey[700]!
+                        : Colors.grey[300]!,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Color(0xFF6C47FF), width: 2),
                 ),
               ),
             ),
