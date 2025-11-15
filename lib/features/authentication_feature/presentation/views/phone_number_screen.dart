@@ -8,20 +8,25 @@ import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-TextEditingController phoneNumber = TextEditingController();
-
 class PhoneScreen extends StatefulWidget {
   const PhoneScreen({super.key});
 
   @override
-  State<PhoneScreen> createState() => _LogInScreenState();
+  State<PhoneScreen> createState() => _PhoneScreenState();
 }
 
-class _LogInScreenState extends State<PhoneScreen> {
+class _PhoneScreenState extends State<PhoneScreen> {
+  final TextEditingController _phoneNumberController = TextEditingController();
+
+  @override
+  void dispose() {
+    _phoneNumberController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.sizeOf(context).height;
-    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -56,16 +61,14 @@ class _LogInScreenState extends State<PhoneScreen> {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: screenHeight * 0.05),
-                PhoneTextField(enteredNumber: phoneNumber),
+                PhoneTextField(enteredNumber: _phoneNumberController),
                 SizedBox(height: screenHeight * 0.05),
                 Purplebuttun(
                   buttunText: AppLocalizations.of(context)!.continuee,
                   onTapFunction: () {
-                    if (phoneNumber.text.length == 11) {
-                      setState(() {
-                        UserModel.user.phone = phoneNumber.text;
-                      });
-                      Get.off(SuccessScreen());
+                    if (_phoneNumberController.text.length == 11) {
+                      UserModel.user.phone = _phoneNumberController.text;
+                      Get.off(() => const SuccessScreen());
                     } else {
                       Get.snackbar(
                         AppLocalizations.of(context)!.error,
@@ -75,8 +78,6 @@ class _LogInScreenState extends State<PhoneScreen> {
                         colorText: AppColors.white,
                       );
                     }
-                    print('=====================================');
-                    print(UserModel.user.phone);
                   },
                 ),
               ],

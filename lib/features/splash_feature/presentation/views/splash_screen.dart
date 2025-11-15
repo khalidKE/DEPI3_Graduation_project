@@ -18,15 +18,15 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 3), () {
-      if (HiveHelper.showEnboarding == true) {
-        HiveHelper.ChangeShowenboardingState();
-        Get.off(OnboardingScreen());
+    super.initState();
+    Timer(const Duration(seconds: 3), () {
+      if (HiveHelper.showOnboarding) {
+        HiveHelper.changeShowOnboardingState();
+        Get.off(() => const OnboardingScreen());
       } else {
-        Get.off(LogInScreen());
+        Get.off(() => const LogInScreen());
       }
     });
-    super.initState();
   }
 
   // This widget is the root of your application.

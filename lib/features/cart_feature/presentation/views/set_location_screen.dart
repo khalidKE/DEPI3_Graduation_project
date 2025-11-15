@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:books/l10n/app_localizations.dart';
 
 class SetLocationScreen extends StatefulWidget {
   const SetLocationScreen({super.key});
@@ -19,8 +20,8 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
         _governorateController.text.trim().isEmpty ||
         _cityController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill in all fields'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.please_fill_all_fields),
           backgroundColor: Colors.red,
         ),
       );

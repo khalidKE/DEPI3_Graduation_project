@@ -257,4 +257,131 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get recent_searches => 'عمليات البحث الأخيرة';
+
+  @override
+  String get skip => 'تخطي';
+
+  @override
+  String get sign_in => 'تسجيل الدخول';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get book_details => 'تفاصيل الكتاب';
+
+  @override
+  String get orders_screen_coming_soon => 'شاشة الطلبات - قريباً';
+
+  @override
+  String get cart_screen_coming_soon => 'شاشة السلة - قريباً';
+
+  @override
+  String get category_screen_coming_soon => 'شاشة الفئات - قريباً';
+
+  @override
+  String get product_subtotal => 'المجموع الفرعي للمنتج';
+
+  @override
+  String get shipping => 'الشحن';
+
+  @override
+  String get tax => 'الضريبة';
+
+  @override
+  String get discount => 'الخصم';
+
+  @override
+  String get close => 'إغلاق';
+
+  @override
+  String get please_set_address => 'يرجى تعيين عنوانك قبل المتابعة';
+
+  @override
+  String get please_fill_all_fields => 'يرجى ملء جميع الحقول';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get select_language => 'اختر اللغة';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get ok => 'موافق';
+
+  @override
+  String get dismiss => 'إلغاء';
+
+  @override
+  String get error_user_not_found =>
+      'لم يتم العثور على مستخدم بهذا البريد الإلكتروني. يرجى التحقق من بريدك والمحاولة مرة أخرى.';
+
+  @override
+  String get error_wrong_password =>
+      'كلمة مرور غير صحيحة. يرجى التحقق من كلمة المرور والمحاولة مرة أخرى.';
+
+  @override
+  String get error_email_already_in_use =>
+      'يوجد حساب بالفعل بهذا البريد الإلكتروني. يرجى تسجيل الدخول بدلاً من ذلك.';
+
+  @override
+  String get error_weak_password =>
+      'كلمة المرور ضعيفة جداً. يرجى استخدام كلمة مرور أقوى تحتوي على 6 أحرف على الأقل.';
+
+  @override
+  String get error_invalid_email =>
+      'عنوان بريد إلكتروني غير صالح. يرجى التحقق من تنسيق البريد والمحاولة مرة أخرى.';
+
+  @override
+  String get error_user_disabled =>
+      'تم تعطيل هذا الحساب. يرجى الاتصال بالدعم للحصول على المساعدة.';
+
+  @override
+  String get error_too_many_requests =>
+      'طلبات كثيرة جداً. يرجى الانتظار قليلاً والمحاولة مرة أخرى لاحقاً.';
+
+  @override
+  String get error_operation_not_allowed =>
+      'هذه العملية غير مسموحة. يرجى الاتصال بالدعم إذا كنت بحاجة إلى مساعدة.';
+
+  @override
+  String get error_network_failed =>
+      'خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
+
+  @override
+  String get error_timeout =>
+      'انتهت مهلة الطلب. يرجى التحقق من اتصالك والمحاولة مرة أخرى.';
+
+  @override
+  String get error_generic => 'حدث خطأ. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get error_unexpected => 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get loading => 'جاري التحميل...';
+
+  @override
+  String get empty_state_no_books => 'لا توجد كتب متاحة حالياً';
+
+  @override
+  String get empty_state_no_orders => 'لا توجد طلبات حتى الآن';
+
+  @override
+  String get empty_state_no_favorites => 'لا توجد عناصر مفضلة';
+
+  @override
+  String get try_again => 'حاول مرة أخرى';
+
+  @override
+  String get order_details => 'تفاصيل الطلب';
+
+  @override
+  String get price => 'السعر';
 }

@@ -34,7 +34,9 @@ class _EmailtextfieldState extends State<Emailtextfield> {
           child: TextFormField(
             controller: widget.enteredEmail,
             validator: (value) {
-              if (!value!.contains('@')) return ('the email must contain @');
+              if (!value!.contains('@')) {
+                return AppLocalizations.of(context)!.the_email_must_contain;
+              }
               return null;
             },
             keyboardType: TextInputType.emailAddress,

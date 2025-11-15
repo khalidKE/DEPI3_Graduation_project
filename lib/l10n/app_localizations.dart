@@ -577,6 +577,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent Searches'**
   String get recent_searches;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @sign_in.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get sign_in;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @book_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Details'**
+  String get book_details;
+
+  /// No description provided for @orders_screen_coming_soon.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders Screen - Coming Soon'**
+  String get orders_screen_coming_soon;
+
+  /// No description provided for @cart_screen_coming_soon.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart Screen - Coming Soon'**
+  String get cart_screen_coming_soon;
+
+  /// No description provided for @category_screen_coming_soon.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Screen - Coming Soon'**
+  String get category_screen_coming_soon;
+
+  /// No description provided for @product_subtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Subtotal'**
+  String get product_subtotal;
+
+  /// No description provided for @shipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping'**
+  String get shipping;
+
+  /// No description provided for @tax.
+  ///
+  /// In en, this message translates to:
+  /// **'Tax'**
+  String get tax;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @please_set_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Please set your address before proceeding'**
+  String get please_set_address;
+
+  /// No description provided for @please_fill_all_fields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill in all fields'**
+  String get please_fill_all_fields;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @select_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get select_language;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @dismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get dismiss;
+
+  /// No description provided for @error_user_not_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No user found with this email address. Please check your email and try again.'**
+  String get error_user_not_found;
+
+  /// No description provided for @error_wrong_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect password. Please check your password and try again.'**
+  String get error_wrong_password;
+
+  /// No description provided for @error_email_already_in_use.
+  ///
+  /// In en, this message translates to:
+  /// **'An account already exists with this email address. Please sign in instead.'**
+  String get error_email_already_in_use;
+
+  /// No description provided for @error_weak_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too weak. Please use a stronger password with at least 6 characters.'**
+  String get error_weak_password;
+
+  /// No description provided for @error_invalid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email address. Please check your email format and try again.'**
+  String get error_invalid_email;
+
+  /// No description provided for @error_user_disabled.
+  ///
+  /// In en, this message translates to:
+  /// **'This account has been disabled. Please contact support for assistance.'**
+  String get error_user_disabled;
+
+  /// No description provided for @error_too_many_requests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests. Please wait a moment and try again later.'**
+  String get error_too_many_requests;
+
+  /// No description provided for @error_operation_not_allowed.
+  ///
+  /// In en, this message translates to:
+  /// **'This operation is not allowed. Please contact support if you need assistance.'**
+  String get error_operation_not_allowed;
+
+  /// No description provided for @error_network_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Please check your internet connection and try again.'**
+  String get error_network_failed;
+
+  /// No description provided for @error_timeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Request timed out. Please check your connection and try again.'**
+  String get error_timeout;
+
+  /// No description provided for @error_generic.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred. Please try again.'**
+  String get error_generic;
+
+  /// No description provided for @error_unexpected.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred. Please try again.'**
+  String get error_unexpected;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @empty_state_no_books.
+  ///
+  /// In en, this message translates to:
+  /// **'No books available at the moment'**
+  String get empty_state_no_books;
+
+  /// No description provided for @empty_state_no_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders yet'**
+  String get empty_state_no_orders;
+
+  /// No description provided for @empty_state_no_favorites.
+  ///
+  /// In en, this message translates to:
+  /// **'No favorites yet'**
+  String get empty_state_no_favorites;
+
+  /// No description provided for @try_again.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get try_again;
+
+  /// No description provided for @order_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get order_details;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
 }
 
 class _AppLocalizationsDelegate

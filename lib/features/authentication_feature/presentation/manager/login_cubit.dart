@@ -1,10 +1,8 @@
 import 'package:books/features/authentication_feature/presentation/manager/login_state.dart';
 import 'package:books/features/authentication_feature/data/user_model.dart';
-import 'package:books/services/firestore_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/route_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -13,37 +11,42 @@ class LoginCubit extends Cubit<LoginState> {
   void loginWithFirebase(UserModel user) async {
     emit(LoginLoadingState());
     try {
-      final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: user.email,
         password: user.password,
       );
-      print(response);
 
       emit(LoginSuccessState());
     } catch (e) {
-      emit(LoginErrorState());
+      emit(LoginErrorState(e));
     }
   }
 
   void signInWithGoogleFirebase() async {
     emit(LoginLoadingState());
     try {
-      final GoogleSignInAccount googleUser =
-          await GoogleSignIn.instance.authenticate();
+      // Use the singleton instance that was initialized in main.dart
+      final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+      
+      // Sign in with Google - authenticate() returns GoogleSignInAccount (non-nullable)
+      final GoogleSignInAccount googleUser = await googleSignIn.authenticate();
 
-      final GoogleSignInAuthentication? googleAuth = googleUser?.authentication;
+      // Get authentication details - authentication is a getter, not a Future
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+      
+      // Create Firebase credential
+      // For Firebase Auth with google_sign_in 7.2.0, we only need idToken
       final credential = GoogleAuthProvider.credential(
-        idToken: googleAuth?.idToken,
+        idToken: googleAuth.idToken,
       );
-      FirebaseAuth.instance.signInWithCredential(credential);
-      final UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
+      
+      // Sign in to Firebase with Google credential
+      await FirebaseAuth.instance.signInWithCredential(credential);
 
       emit(LoginSuccessState());
     } catch (e) {
-      emit(LoginErrorState());
-      print('===========================error========================');
-      print(e.toString());
+      emit(LoginErrorState(e));
+      debugPrint('Error signing in with Google: $e');
     }
   }
 }

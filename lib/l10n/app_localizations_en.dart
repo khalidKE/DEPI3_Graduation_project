@@ -259,4 +259,132 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recent_searches => 'Recent Searches';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get sign_in => 'Sign In';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get book_details => 'Book Details';
+
+  @override
+  String get orders_screen_coming_soon => 'Orders Screen - Coming Soon';
+
+  @override
+  String get cart_screen_coming_soon => 'Cart Screen - Coming Soon';
+
+  @override
+  String get category_screen_coming_soon => 'Category Screen - Coming Soon';
+
+  @override
+  String get product_subtotal => 'Product Subtotal';
+
+  @override
+  String get shipping => 'Shipping';
+
+  @override
+  String get tax => 'Tax';
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get please_set_address => 'Please set your address before proceeding';
+
+  @override
+  String get please_fill_all_fields => 'Please fill in all fields';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get select_language => 'Select Language';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get dismiss => 'Dismiss';
+
+  @override
+  String get error_user_not_found =>
+      'No user found with this email address. Please check your email and try again.';
+
+  @override
+  String get error_wrong_password =>
+      'Incorrect password. Please check your password and try again.';
+
+  @override
+  String get error_email_already_in_use =>
+      'An account already exists with this email address. Please sign in instead.';
+
+  @override
+  String get error_weak_password =>
+      'Password is too weak. Please use a stronger password with at least 6 characters.';
+
+  @override
+  String get error_invalid_email =>
+      'Invalid email address. Please check your email format and try again.';
+
+  @override
+  String get error_user_disabled =>
+      'This account has been disabled. Please contact support for assistance.';
+
+  @override
+  String get error_too_many_requests =>
+      'Too many requests. Please wait a moment and try again later.';
+
+  @override
+  String get error_operation_not_allowed =>
+      'This operation is not allowed. Please contact support if you need assistance.';
+
+  @override
+  String get error_network_failed =>
+      'Network error. Please check your internet connection and try again.';
+
+  @override
+  String get error_timeout =>
+      'Request timed out. Please check your connection and try again.';
+
+  @override
+  String get error_generic => 'An error occurred. Please try again.';
+
+  @override
+  String get error_unexpected =>
+      'An unexpected error occurred. Please try again.';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get empty_state_no_books => 'No books available at the moment';
+
+  @override
+  String get empty_state_no_orders => 'No orders yet';
+
+  @override
+  String get empty_state_no_favorites => 'No favorites yet';
+
+  @override
+  String get try_again => 'Try Again';
+
+  @override
+  String get order_details => 'Order Details';
+
+  @override
+  String get price => 'Price';
 }

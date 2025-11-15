@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:books/l10n/app_localizations.dart';
 
 class ConfirmOrderScreen extends StatefulWidget {
   const ConfirmOrderScreen({super.key});
@@ -118,31 +119,40 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   ),
                 ),
               ),
-              const Text(
-                'Order Details',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.order_details,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [Text('Product Subtotal'), Text('\$85.00')],
+                children: [
+                  Text(AppLocalizations.of(context)!.product_subtotal),
+                  const Text('\$85.00'),
+                ],
               ),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [Text('Shipping'), Text('\$2.00')],
+                children: [
+                  Text(AppLocalizations.of(context)!.shipping),
+                  const Text('\$2.00'),
+                ],
               ),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [Text('Tax (5%)'), Text('\$4.25')],
+                children: [
+                  Text('${AppLocalizations.of(context)!.tax} (5%)'),
+                  const Text('\$4.25'),
+                ],
               ),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Discount'),
-                  Text('-\$2.15', style: TextStyle(color: Colors.green)),
+                children: [
+                  Text(AppLocalizations.of(context)!.discount),
+                  const Text('-\$2.15', style: TextStyle(color: Colors.green)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -174,7 +184,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text('Close'),
+                  child: Text(AppLocalizations.of(context)!.close),
                 ),
               ),
             ],
@@ -189,8 +199,8 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
       Navigator.pushNamed(context, '/orderReceived');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please set your address before proceeding'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.please_set_address),
           backgroundColor: Colors.red,
         ),
       );
@@ -274,7 +284,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                         const SizedBox(height: 4),
                         Text(
                           _addressData['fullAddress'] ??
-                              'Please set your address',
+                              AppLocalizations.of(context)!.please_set_address,
                           style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 14,
@@ -348,9 +358,9 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('Shipping', style: TextStyle(color: Colors.grey)),
-                      Text('\$2', style: TextStyle(color: Colors.black)),
+                    children: [
+                      Text(AppLocalizations.of(context)!.shipping, style: const TextStyle(color: Colors.grey)),
+                      const Text('\$2', style: TextStyle(color: Colors.black)),
                     ],
                   ),
                   const SizedBox(height: 8),

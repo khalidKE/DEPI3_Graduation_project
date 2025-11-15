@@ -3,9 +3,13 @@ import 'package:books/l10n/app_localizations.dart';
 import 'package:fancy_password_field/fancy_password_field.dart';
 import 'package:flutter/material.dart';
 
-class customPasswordFieldWithValidate extends StatelessWidget {
-  late TextEditingController enteredPassword;
-  customPasswordFieldWithValidate({super.key, required this.enteredPassword});
+class CustomPasswordFieldWithValidate extends StatelessWidget {
+  final TextEditingController enteredPassword;
+  
+  const CustomPasswordFieldWithValidate({
+    super.key,
+    required this.enteredPassword,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,40 +44,40 @@ class customPasswordFieldWithValidate extends StatelessWidget {
                 if (value.isEmpty) {
                   return const SizedBox.shrink();
                 }
-                return Expanded(
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: rules
-                        .map(
-                          (rule) => rule.validate(value)
-                              ? Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.check,
-                                      color: Colors.green,
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Text(
-                                      rule.name,
-                                      style: const TextStyle(
-                                        color: Colors.green,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : Row(
-                                  children: [
-                                    const Icon(Icons.close, color: Colors.red),
-                                    const SizedBox(width: 12),
-                                    Text(
-                                      rule.name,
-                                      style: const TextStyle(color: Colors.red),
-                                    ),
-                                  ],
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: rules
+                      .map(
+                        (rule) => Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                rule.validate(value)
+                                    ? Icons.check
+                                    : Icons.close,
+                                color: rule.validate(value)
+                                    ? Colors.green
+                                    : Colors.red,
+                                size: 16,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                rule.name,
+                                style: TextStyle(
+                                  color: rule.validate(value)
+                                      ? Colors.green
+                                      : Colors.red,
+                                  fontSize: 12,
                                 ),
-                        )
-                        .toList(),
-                  ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
                 );
               },
               decoration: InputDecoration(

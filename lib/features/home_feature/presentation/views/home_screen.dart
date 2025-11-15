@@ -1,30 +1,8 @@
 import 'package:books/features/notification_feature/presentation/views/notification.dart';
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:books/features/profile_feature/presentation/views/profile.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
-
-void main() {
-  runApp(const BookStoreApp());
-}
-
-class BookStoreApp extends StatelessWidget {
-  const BookStoreApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Book Store',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'SF Pro',
-      ),
-      home: const HomeScreen(),
-    );
-  }
-}
 
 // Models
 class Book {
@@ -233,18 +211,15 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Expanded(
-          child: Center(
-            child: const Text(
-              'Home',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
+        title: Text(
+          AppLocalizations.of(context)!.home,
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
           ),
         ),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.search, color: Colors.black),
           onPressed: () {},
@@ -313,13 +288,13 @@ class _HomeScreenState extends State<HomeScreen> {
             case 1:
               // Orders
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Orders Screen - Coming Soon')),
+                SnackBar(content: Text(AppLocalizations.of(context)!.orders_screen_coming_soon)),
               );
               break;
             case 2:
               // Cart
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Cart Screen - Coming Soon')),
+                SnackBar(content: Text(AppLocalizations.of(context)!.cart_screen_coming_soon)),
               );
               break;
             case 3:
@@ -331,8 +306,8 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
           }
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        items: [
+          BottomNavigationBarItem(icon: const Icon(Icons.home), label: AppLocalizations.of(context)!.home),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag_outlined),
             label: 'Orders',
@@ -500,8 +475,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: double.infinity,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
-                                print('Error loading image: ${book.imageUrl}');
-                                print('Error: $error');
                                 return Icon(
                                   Icons.broken_image,
                                   size: 50,
@@ -574,10 +547,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 70,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
-                              print(
-                                'Error loading vendor image: ${vendor.imageUrl}',
-                              );
-                              print('Error: $error');
                               return Center(
                                 child: Text(
                                   vendor.name[0],
@@ -659,9 +628,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 65,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
-                                print(
-                                  'Error loading author image: ${author.imageUrl}',
-                                );
                                 return Center(
                                   child: Text(
                                     author.name[0],
@@ -729,7 +695,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Book Details'),
+        title: Text(AppLocalizations.of(context)!.book_details),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -1154,18 +1120,15 @@ class _VendorsScreenState extends State<VendorsScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Expanded(
-          child: Center(
-            child: const Text(
-              'Vendors',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
+        title: const Text(
+          'Vendors',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
           ),
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Colors.black),
@@ -1216,7 +1179,6 @@ class _VendorsScreenState extends State<VendorsScreen> {
                 return GestureDetector(
                     onTap: () {
                       // TODO: Add navigation to vendor detail screen or other action
-                      print('Tapped on ${vendor.name}');
                     },
                     child: Column(
                       children: [
@@ -1280,8 +1242,6 @@ class _VendorsScreenState extends State<VendorsScreen> {
                                   ),
                                 );
                               } catch (e) {
-                                print(
-                                    'Exception loading image ${vendor.imageUrl}: $e');
                                 return Center(
                                   child: Text(
                                     '!${vendor.name[0]}',
@@ -1409,18 +1369,15 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Expanded(
-          child: Center(
-            child: const Text(
-              'Authors',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
+        title: const Text(
+          'Authors',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
           ),
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Colors.black),

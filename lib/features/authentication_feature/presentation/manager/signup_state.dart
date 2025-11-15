@@ -1,9 +1,13 @@
-sealed class signupState {}
+sealed class SignupState {}
 
-final class signupInitialState extends signupState {}
+final class SignupInitialState extends SignupState {}
 
-final class signupLoadingState extends signupState {}
+final class SignupLoadingState extends SignupState {}
 
-final class signupSuccessState extends signupState {}
+final class SignupSuccessState extends SignupState {}
 
-final class signupErrorState extends signupState {}
+final class SignupErrorState extends SignupState {
+  final dynamic error;
+  
+  SignupErrorState([this.error]);
+}

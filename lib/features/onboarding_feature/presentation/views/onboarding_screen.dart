@@ -2,6 +2,7 @@ import 'package:books/core/colors/colors.dart';
 import 'package:books/features/onboarding_feature/presentation/manager/onboarding_cubit.dart';
 import 'package:books/features/onboarding_feature/presentation/manager/onboarding_state.dart';
 import 'package:books/features/authentication_feature/presentation/views/login_screen.dart';
+import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Get.to(LogInScreen());
                           },
                           child: Text(
-                            'Skip',
+                            AppLocalizations.of(context)!.skip,
                             style: TextStyle(
                               color: AppColors.purple,
                               fontWeight: FontWeight.bold,
@@ -140,7 +141,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Get.to(LogInScreen());
                           },
                           child: Text(
-                            'Sign in',
+                            AppLocalizations.of(context)!.sign_in,
                             style: TextStyle(
                               color: AppColors.purple,
                               fontWeight: FontWeight.bold,

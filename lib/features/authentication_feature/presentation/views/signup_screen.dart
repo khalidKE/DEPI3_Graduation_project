@@ -14,38 +14,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 
-TextEditingController signupPassword = TextEditingController();
-TextEditingController signupEmail = TextEditingController();
-TextEditingController signupName = TextEditingController();
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _LogInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LogInScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKeySignup = GlobalKey<FormState>();
-  bool obscureText = true;
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  bool _obscureText = true;
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _emailController.dispose();
+    _nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.sizeOf(context).height;
-    final double screenWidth = MediaQuery.sizeOf(context).width;
     return BlocProvider(
       create: (context) => SignupCubit(),
-      child: BlocListener<SignupCubit, signupState>(
+      child: BlocListener<SignupCubit, SignupState>(
         listener: (context, state) {
-          if (state is signupSuccessState) {
+          if (state is SignupSuccessState) {
             Get.snackbar(
               AppLocalizations.of(context)!.success,
               AppLocalizations.of(context)!.signup_is_done_successfully,
               backgroundColor: AppColors.purple,
               colorText: AppColors.white,
             );
-            Get.off(PhoneScreen());
-          } else if (state is signupErrorState) {
+            Get.off(() => const PhoneScreen());
+          } else if (state is SignupErrorState) {
             Get.snackbar(
               AppLocalizations.of(context)!.error,
               AppLocalizations.of(context)!.signup_failed,
@@ -98,31 +105,29 @@ class _LogInScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       SizedBox(height: screenHeight * 0.05),
-                      NameTextField(enteredName: signupName),
+                      NameTextField(enteredName: _nameController),
                       SizedBox(height: screenHeight * 0.015),
-                      Emailtextfield(enteredEmail: signupEmail),
+                      Emailtextfield(enteredEmail: _emailController),
                       SizedBox(height: screenHeight * 0.015),
-                      customPasswordFieldWithValidate(
-                        enteredPassword: signupPassword,
+                      CustomPasswordFieldWithValidate(
+                        enteredPassword: _passwordController,
                       ),
                       SizedBox(height: screenHeight * 0.03),
-                      BlocBuilder<SignupCubit, signupState>(
+                      BlocBuilder<SignupCubit, SignupState>(
                         builder: (context, state) {
                           final cubit = context.read<SignupCubit>();
-                          if (state is LoginLoadingState) {
-                            return Center(child: CircularProgressIndicator());
+                          if (state is SignupLoadingState) {
+                            return const Center(child: CircularProgressIndicator());
                           }
                           return Purplebuttun(
                             buttunText: AppLocalizations.of(context)!.sign_up,
                             onTapFunction: () {
-                              _formKeySignup.currentState!.validate();
-                              setState(() {
-                                UserModel.user.name = signupName.text;
-                                UserModel.user.email = signupEmail.text;
-                                UserModel.user.password = signupPassword.text;
-                              });
-                              cubit.signupWithFirebase(UserModel.user);
-                              setState(() {});
+                              if (_formKeySignup.currentState!.validate()) {
+                                UserModel.user.name = _nameController.text;
+                                UserModel.user.email = _emailController.text;
+                                UserModel.user.password = _passwordController.text;
+                                cubit.signupWithFirebase(UserModel.user);
+                              }
                             },
                           );
                         },
@@ -140,7 +145,7 @@ class _LogInScreenState extends State<SignUpScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.off(LogInScreen());
+                              Get.off(() => const LogInScreen());
                             },
                             child: Text(
                               AppLocalizations.of(context)!.sign_In,

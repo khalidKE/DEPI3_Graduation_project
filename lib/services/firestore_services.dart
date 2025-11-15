@@ -1,6 +1,7 @@
 import 'package:books/features/authentication_feature/data/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class FirestoreServices {
   static const String users = 'Users';
@@ -17,7 +18,7 @@ class FirestoreServices {
       User? currentUser = FirebaseAuth.instance.currentUser;
 
       if (currentUser == null) {
-        print('no user signed in');
+        debugPrint('no user signed in');
         throw Exception('No user is signed in');
       }
       CollectionReference usersCollection =
@@ -29,10 +30,10 @@ class FirestoreServices {
         address: user[address],
         profilePic: user[profilePic],
       });
-      print('User added with custom ID!');
+      debugPrint('User added with custom ID!');
     } catch (e) {
-      print('=========================================');
-      print('Error adding user: $e');
+      debugPrint('Error adding user: $e');
+      rethrow;
     }
   }
 
@@ -48,27 +49,29 @@ class FirestoreServices {
         address: user[address],
         profilePic: user[profilePic],
       });
-      print('User added with custom ID!');
+      debugPrint('User added with custom ID!');
     } catch (e) {
-      print('=========================================');
-      print('Error adding user: $e');
+      debugPrint('Error adding user from Google: $e');
+      rethrow;
     }
   }
 
-  static Future getUserData() async {
+  static Future<void> getUserData() async {
     db.settings = const Settings(persistenceEnabled: true);
     try {
       User? currentUser = FirebaseAuth.instance.currentUser;
 
       if (currentUser == null) {
-        print('no user signed in');
+        debugPrint('no user signed in');
         throw Exception('No user is signed in');
       }
       final result = await db.collection('users').doc(currentUser.uid).get();
-      UserModel.user.fromJson(result.data()!);
+      if (result.data() != null) {
+        UserModel.user.fromJson(result.data()!);
+      }
     } catch (e) {
-      print('=========================================');
-      print('Error getting user data user: $e');
+      debugPrint('Error getting user data: $e');
+      rethrow;
     }
   }
 }

@@ -290,8 +290,8 @@ class Profile extends StatelessWidget {
                 break;
             }
           },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          items: [
+            BottomNavigationBarItem(icon: const Icon(Icons.home), label: AppLocalizations.of(context)!.home),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag_outlined),
               label: 'Orders',
