@@ -114,16 +114,18 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
       ),
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: Responsive.responsivePadding(context),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: Container(
-                  width: 40,
+                  width: Responsive.responsiveSpacing(context, 40),
                   height: 4,
-                  margin: const EdgeInsets.only(bottom: 12),
+                  margin: EdgeInsets.only(
+                    bottom: Responsive.responsiveSpacing(context, 12),
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(2),
@@ -132,57 +134,123 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
               ),
               Text(
                 AppLocalizations.of(context)!.order_details,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: Responsive.responsiveFontSize(context, 18),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: Responsive.responsiveSpacing(context, 16)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(AppLocalizations.of(context)!.product_subtotal),
-                  const Text('\$85.00'),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(AppLocalizations.of(context)!.shipping),
-                  const Text('\$2.00'),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('${AppLocalizations.of(context)!.tax} (5%)'),
-                  const Text('\$4.25'),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(AppLocalizations.of(context)!.discount),
-                  const Text('-\$2.15', style: TextStyle(color: Colors.green)),
-                ],
-              ),
-              const SizedBox(height: 12),
-              const Divider(),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                  Flexible(
+                    child: Text(
+                      AppLocalizations.of(context)!.product_subtotal,
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 14),
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                   Text(
-                    'Total Payment',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    '\$85.00',
+                    style: TextStyle(
+                      fontSize: Responsive.responsiveFontSize(context, 14),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      AppLocalizations.of(context)!.shipping,
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 14),
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    '\$2.00',
+                    style: TextStyle(
+                      fontSize: Responsive.responsiveFontSize(context, 14),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      '${AppLocalizations.of(context)!.tax} (5%)',
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 14),
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    '\$4.25',
+                    style: TextStyle(
+                      fontSize: Responsive.responsiveFontSize(context, 14),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      AppLocalizations.of(context)!.discount,
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 14),
+                        color: Colors.green,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    '-\$2.15',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontSize: Responsive.responsiveFontSize(context, 14),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: Responsive.responsiveSpacing(context, 12)),
+              const Divider(),
+              SizedBox(height: Responsive.responsiveSpacing(context, 12)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      'Total Payment',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: Responsive.responsiveFontSize(context, 16),
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   Text(
                     '\$89.10',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Responsive.responsiveFontSize(context, 16),
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: Responsive.responsiveSpacing(context, 20)),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -190,12 +258,21 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF6C47FF),
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    padding: EdgeInsets.symmetric(
+                      vertical: Responsive.responsiveSpacing(context, 12),
+                    ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(
+                        Responsive.responsiveBorderRadius(context, 8),
+                      ),
                     ),
                   ),
-                  child: Text(AppLocalizations.of(context)!.close),
+                  child: Text(
+                    AppLocalizations.of(context)!.close,
+                    style: TextStyle(
+                      fontSize: Responsive.responsiveFontSize(context, 16),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -268,10 +345,12 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   children: [
                     // Address Card
                     Container(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 16)),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(
+                          Responsive.responsiveBorderRadius(context, 12),
+                        ),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withValues(alpha: 0.1),
@@ -284,40 +363,42 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                       child: Row(
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(8),
+                            padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 8)),
                             decoration: BoxDecoration(
                               color: const Color(0xFF6C47FF).withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(
+                                Responsive.responsiveBorderRadius(context, 8),
+                              ),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.location_on,
-                              color: Color(0xFF6C47FF),
-                              size: 20,
+                              color: const Color(0xFF6C47FF),
+                              size: Responsive.responsiveIconSize(context, 20),
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          SizedBox(width: Responsive.responsiveSpacing(context, 12)),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   _addressData['name'] ?? 'No Address Set',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                    fontSize: Responsive.responsiveFontSize(context, 16),
                                     color: Colors.black,
                                   ),
                                 ),
-                                const SizedBox(height: 4),
+                                SizedBox(height: Responsive.responsiveSpacing(context, 4)),
                                 Text(
                                   _addressData['fullAddress'] ??
                                       AppLocalizations.of(context)!.please_set_address,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.grey,
-                                    fontSize: 14,
+                                    fontSize: Responsive.responsiveFontSize(context, 14),
                                   ),
                                 ),
-                                const SizedBox(height: 8),
+                                SizedBox(height: Responsive.responsiveSpacing(context, 8)),
                                 TextButton(
                                   onPressed: _updateAddress,
                                   style: TextButton.styleFrom(
@@ -325,11 +406,11 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                     minimumSize: Size.zero,
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'Change',
                                     style: TextStyle(
-                                      color: Color(0xFF6C47FF),
-                                      fontSize: 14,
+                                      color: const Color(0xFF6C47FF),
+                                      fontSize: Responsive.responsiveFontSize(context, 14),
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -337,23 +418,25 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                               ],
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.grey,
-                            size: 16,
+                            size: Responsive.responsiveIconSize(context, 16),
                           ),
                         ],
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    SizedBox(height: Responsive.responsiveSpacing(context, 20)),
 
                     // Summary Box
                     Container(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 16)),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(
+                          Responsive.responsiveBorderRadius(context, 12),
+                        ),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withValues(alpha: 0.1),
@@ -366,39 +449,73 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Summary',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: Responsive.responsiveFontSize(context, 16),
                               color: Colors.black,
                             ),
                           ),
-                          const SizedBox(height: 12),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('Price', style: TextStyle(color: Colors.grey)),
-                              Text('\$87.10', style: TextStyle(color: Colors.black)),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: Responsive.responsiveSpacing(context, 12)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(AppLocalizations.of(context)!.shipping, style: const TextStyle(color: Colors.grey)),
-                              const Text('\$2', style: TextStyle(color: Colors.black)),
+                              Flexible(
+                                child: Text(
+                                  'Price',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: Responsive.responsiveFontSize(context, 14),
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Text(
+                                '\$87.10',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: Responsive.responsiveFontSize(context, 14),
+                                ),
+                              ),
                             ],
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: Responsive.responsiveSpacing(context, 8)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  AppLocalizations.of(context)!.shipping,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: Responsive.responsiveFontSize(context, 14),
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
                               Text(
-                                'Total Payment',
+                                '\$2',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.black,
+                                  fontSize: Responsive.responsiveFontSize(context, 14),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  'Total Payment',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    fontSize: Responsive.responsiveFontSize(context, 16),
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               Text(
@@ -406,33 +523,36 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
+                                  fontSize: Responsive.responsiveFontSize(context, 16),
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: Responsive.responsiveSpacing(context, 8)),
 
                           // See details button
                           InkWell(
                             onTap: _showOrderDetails,
-                            borderRadius: BorderRadius.circular(6),
+                            borderRadius: BorderRadius.circular(
+                              Responsive.responsiveBorderRadius(context, 6),
+                            ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
+                              children: [
                                 Text(
                                   'See details',
                                   style: TextStyle(
-                                    color: Color(0xFF6C47FF),
-                                    fontSize: 14,
+                                    color: const Color(0xFF6C47FF),
+                                    fontSize: Responsive.responsiveFontSize(context, 14),
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                SizedBox(width: 4),
+                                SizedBox(width: Responsive.responsiveSpacing(context, 4)),
                                 Icon(
                                   Icons.chevron_right,
-                                  color: Color(0xFF6C47FF),
-                                  size: 18,
+                                  color: const Color(0xFF6C47FF),
+                                  size: Responsive.responsiveIconSize(context, 18),
                                 ),
                               ],
                             ),
@@ -441,16 +561,18 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    SizedBox(height: Responsive.responsiveSpacing(context, 20)),
 
                     // Date & Time
                     GestureDetector(
                       onTap: _selectDateTime,
                       child: Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 16)),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withValues(alpha: 0.1),
@@ -463,27 +585,29 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                         child: Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 8)),
                               decoration: BoxDecoration(
                                 color: const Color(0xFF6C47FF).withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(
+                                  Responsive.responsiveBorderRadius(context, 8),
+                                ),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.calendar_month,
-                                color: Color(0xFF6C47FF),
-                                size: 20,
+                                color: const Color(0xFF6C47FF),
+                                size: Responsive.responsiveIconSize(context, 20),
                               ),
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: Responsive.responsiveSpacing(context, 12)),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     'Date & time',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 16,
+                                      fontSize: Responsive.responsiveFontSize(context, 16),
                                       color: Colors.black,
                                     ),
                                   ),
@@ -493,7 +617,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                       color: _selectedDateTime != null
                                           ? const Color(0xFF6C47FF)
                                           : Colors.grey,
-                                      fontSize: 14,
+                                      fontSize: Responsive.responsiveFontSize(context, 14),
                                       fontWeight: _selectedDateTime != null
                                           ? FontWeight.w500
                                           : FontWeight.normal,
@@ -502,10 +626,10 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                 ],
                               ),
                             ),
-                            const Icon(
+                            Icon(
                               Icons.arrow_forward_ios,
                               color: Colors.grey,
-                              size: 16,
+                              size: Responsive.responsiveIconSize(context, 16),
                             ),
                           ],
                         ),

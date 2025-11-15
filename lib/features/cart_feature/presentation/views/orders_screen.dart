@@ -168,7 +168,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
       return Center(
         child: Text(
           AppLocalizations.of(context)!.no_orders_in_category,
-          style: const TextStyle(fontSize: 16, color: Colors.grey),
+          style: TextStyle(
+            fontSize: Responsive.responsiveFontSize(context, 16),
+            color: Colors.grey,
+          ),
         ),
       );
     }
@@ -179,9 +182,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
       itemBuilder: (context, index) {
         final order = orders[index];
         return Card(
-          margin: const EdgeInsets.only(bottom: 16),
+          margin: EdgeInsets.only(
+            bottom: Responsive.responsiveSpacing(context, 16),
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(
+              Responsive.responsiveSpacing(context, 12),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -191,18 +198,22 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   children: [
                     Text(
                       '${AppLocalizations.of(context)!.order} ${order['id']}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: Responsive.responsiveFontSize(context, 16),
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 4),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Responsive.responsiveSpacing(context, 12),
+                        vertical: Responsive.responsiveSpacing(context, 4),
+                      ),
                       decoration: BoxDecoration(
                         color:
                             _getStatusColor(order['status']).withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(
+                          Responsive.responsiveBorderRadius(context, 12),
+                        ),
                         border: Border.all(
                             color: _getStatusColor(order['status'])
                                 .withValues(alpha: 0.3)),
@@ -211,31 +222,38 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         order['status'],
                         style: TextStyle(
                           color: _getStatusColor(order['status']),
-                          fontSize: 12,
+                          fontSize: Responsive.responsiveFontSize(context, 12),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: Responsive.responsiveSpacing(context, 8)),
                 Text(
                   '${AppLocalizations.of(context)!.date}: ${order['date']}',
-                  style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: Responsive.responsiveFontSize(context, 14),
+                  ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: Responsive.responsiveSpacing(context, 12)),
                 // Order items
                 ...order['items']
                     .map<Widget>((item) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          padding: EdgeInsets.symmetric(
+                            vertical: Responsive.responsiveSpacing(context, 4),
+                          ),
                           child: Row(
                             children: [
                               // Book cover
                               Container(
-                                width: 50,
-                                height: 70,
+                                width: Responsive.responsiveImageSize(context, 50),
+                                height: Responsive.responsiveImageSize(context, 70),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
+                                  borderRadius: BorderRadius.circular(
+                                    Responsive.responsiveBorderRadius(context, 4),
+                                  ),
                                   color: Colors.grey[200],
                                 ),
                                 child: item['imageUrl'] != null &&
@@ -245,8 +263,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                         fit: BoxFit.cover,
                                         errorBuilder:
                                             (context, error, stackTrace) =>
-                                                const Icon(Icons.book,
-                                                    size: 24,
+                                                Icon(Icons.book,
+                                                    size: Responsive.responsiveIconSize(context, 24),
                                                     color: Colors.grey),
                                       )
                                     : item['imageUrl'] != null
@@ -255,14 +273,15 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                             fit: BoxFit.cover,
                                             errorBuilder:
                                                 (context, error, stackTrace) =>
-                                                    const Icon(Icons.book,
-                                                        size: 24,
+                                                    Icon(Icons.book,
+                                                        size: Responsive.responsiveIconSize(context, 24),
                                                         color: Colors.grey),
                                           )
-                                        : const Icon(Icons.book,
-                                            size: 24, color: Colors.grey),
+                                        : Icon(Icons.book,
+                                            size: Responsive.responsiveIconSize(context, 24),
+                                            color: Colors.grey),
                               ),
-                              const SizedBox(width: 12),
+                              SizedBox(width: Responsive.responsiveSpacing(context, 12)),
                               // Book details
                               Expanded(
                                 child: Column(
@@ -270,43 +289,56 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                   children: [
                                     Text(
                                       item['title'],
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w500),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: Responsive.responsiveFontSize(context, 14),
+                                      ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    const SizedBox(height: 2),
+                                    SizedBox(height: Responsive.responsiveSpacing(context, 2)),
                                     Text(
                                       '${AppLocalizations.of(context)!.qty}: ${item['quantity']}',
                                       style: TextStyle(
-                                          color: Colors.grey[600],
-                                          fontSize: 12),
+                                        color: Colors.grey[600],
+                                        fontSize: Responsive.responsiveFontSize(context, 12),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                              Text(
-                                '\$${(item['price'] * item['quantity']).toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                              Flexible(
+                                child: Text(
+                                  '\$${(item['price'] * item['quantity']).toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: Responsive.responsiveFontSize(context, 14),
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.end,
+                                ),
                               ),
                             ],
                           ),
                         ))
                     .toList(),
-                const Divider(height: 24),
+                Divider(height: Responsive.responsiveSpacing(context, 24)),
                 // Order total and action
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '${AppLocalizations.of(context)!.total}: \$${order['total'].toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    Flexible(
+                      child: Text(
+                        '${AppLocalizations.of(context)!.total}: \$${order['total'].toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 16),
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         if (order['status'] == 'Delivered')
                           TextButton(
@@ -315,26 +347,36 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             },
                             child: Text(
                               AppLocalizations.of(context)!.rate_order,
-                              style: const TextStyle(color: Color(0xFF6C47FF)),
+                              style: TextStyle(
+                                color: const Color(0xFF6C47FF),
+                                fontSize: Responsive.responsiveFontSize(context, 14),
+                              ),
                             ),
                           ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: Responsive.responsiveSpacing(context, 8)),
                         TextButton(
                           onPressed: () {
                             // View order details
                           },
                           style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Responsive.responsiveSpacing(context, 16),
+                              vertical: Responsive.responsiveSpacing(context, 8),
+                            ),
                             backgroundColor:
                                 const Color(0xFF6C47FF).withValues(alpha: 0.1),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(
+                                Responsive.responsiveBorderRadius(context, 20),
+                              ),
                             ),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.view_details,
-                            style: const TextStyle(color: Color(0xFF6C47FF)),
+                            style: TextStyle(
+                              color: const Color(0xFF6C47FF),
+                              fontSize: Responsive.responsiveFontSize(context, 14),
+                            ),
                           ),
                         ),
                       ],

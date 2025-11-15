@@ -120,17 +120,23 @@ class _CartScreenState extends State<CartScreen> {
                       itemBuilder: (context, index) {
                         final item = _cartItems[index];
                         return Card(
-                          margin: const EdgeInsets.only(bottom: 16),
+                          margin: EdgeInsets.only(
+                            bottom: Responsive.responsiveSpacing(context, 16),
+                          ),
                           child: Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding: EdgeInsets.all(
+                              Responsive.responsiveSpacing(context, 12),
+                            ),
                             child: Row(
                               children: [
                                 // Book cover
                                 Container(
-                                  width: 80,
-                                  height: 100,
+                                  width: Responsive.responsiveImageSize(context, 80),
+                                  height: Responsive.responsiveImageSize(context, 100),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(
+                                      Responsive.responsiveBorderRadius(context, 8),
+                                    ),
                                     color: Colors.grey[200],
                                   ),
                                   child: item['imageUrl'] != null &&
@@ -140,8 +146,8 @@ class _CartScreenState extends State<CartScreen> {
                                           fit: BoxFit.cover,
                                           errorBuilder:
                                               (context, error, stackTrace) =>
-                                                  const Icon(Icons.book,
-                                                      size: 40,
+                                                  Icon(Icons.book,
+                                                      size: Responsive.responsiveIconSize(context, 40),
                                                       color: Colors.grey),
                                         )
                                       : item['imageUrl'] != null
@@ -150,14 +156,15 @@ class _CartScreenState extends State<CartScreen> {
                                               fit: BoxFit.cover,
                                               errorBuilder: (context, error,
                                                       stackTrace) =>
-                                                  const Icon(Icons.book,
-                                                      size: 40,
+                                                  Icon(Icons.book,
+                                                      size: Responsive.responsiveIconSize(context, 40),
                                                       color: Colors.grey),
                                             )
-                                          : const Icon(Icons.book,
-                                              size: 40, color: Colors.grey),
+                                          : Icon(Icons.book,
+                                              size: Responsive.responsiveIconSize(context, 40),
+                                              color: Colors.grey),
                                 ),
-                                const SizedBox(width: 16),
+                                SizedBox(width: Responsive.responsiveSpacing(context, 16)),
                                 // Book details
                                 Expanded(
                                   child: Column(
@@ -166,28 +173,28 @@ class _CartScreenState extends State<CartScreen> {
                                     children: [
                                       Text(
                                         item['title'],
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                                          fontSize: Responsive.responsiveFontSize(context, 16),
                                         ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      const SizedBox(height: 4),
+                                      SizedBox(height: Responsive.responsiveSpacing(context, 4)),
                                       Text(
                                         item['author'],
                                         style: TextStyle(
                                           color: Colors.grey[600],
-                                          fontSize: 14,
+                                          fontSize: Responsive.responsiveFontSize(context, 14),
                                         ),
                                       ),
-                                      const SizedBox(height: 8),
+                                      SizedBox(height: Responsive.responsiveSpacing(context, 8)),
                                       Text(
                                         '\$${item['price'].toStringAsFixed(2)}',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: Color(0xFF6C47FF),
-                                          fontSize: 16,
+                                          color: const Color(0xFF6C47FF),
+                                          fontSize: Responsive.responsiveFontSize(context, 16),
                                         ),
                                       ),
                                     ],
@@ -197,8 +204,8 @@ class _CartScreenState extends State<CartScreen> {
                                 Column(
                                   children: [
                                     IconButton(
-                                      icon: const Icon(Icons.add_circle_outline,
-                                          size: 20),
+                                      icon: Icon(Icons.add_circle_outline,
+                                          size: Responsive.responsiveIconSize(context, 20)),
                                       onPressed: () => _updateQuantity(
                                         index,
                                         item['quantity'] + 1,
@@ -206,12 +213,14 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                     Text(
                                       '${item['quantity']}',
-                                      style: const TextStyle(fontSize: 16),
+                                      style: TextStyle(
+                                        fontSize: Responsive.responsiveFontSize(context, 16),
+                                      ),
                                     ),
                                     IconButton(
-                                      icon: const Icon(
+                                      icon: Icon(
                                           Icons.remove_circle_outline,
-                                          size: 20),
+                                          size: Responsive.responsiveIconSize(context, 20)),
                                       onPressed: () => _updateQuantity(
                                         index,
                                         item['quantity'] - 1,

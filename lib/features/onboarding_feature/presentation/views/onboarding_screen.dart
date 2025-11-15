@@ -119,7 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                 style: TextStyle(
                                                   color: AppColors.purple,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
+                                                  fontSize: Responsive.responsiveFontSize(context, 15),
                                                 ),
                                               ),
                                             ),

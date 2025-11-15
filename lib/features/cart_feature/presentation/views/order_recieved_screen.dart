@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:books/features/home_feature/presentation/views/home_screen.dart';
+import 'package:books/core/utils/responsive.dart';
 
 class OrderReceivedScreen extends StatefulWidget {
   const OrderReceivedScreen({super.key});
@@ -38,189 +39,223 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
         elevation: 0,
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const Spacer(),
-
-            // Gift Box Image from assets
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: const Color(0xFF6C47FF).withValues(alpha: 0.08),
-                borderRadius: BorderRadius.circular(60),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final maxWidth = Responsive.maxContentWidth(context);
+          return Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: maxWidth ?? double.infinity,
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(40),
-                child: Image.asset(
-                  'lib/image/img1.jpg',
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+              child: SingleChildScrollView(
+                padding: Responsive.responsivePadding(context),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: Responsive.responsiveSpacing(context, 20)),
 
-            const SizedBox(height: 24),
-
-            // Order Confirmation Text
-            const Text(
-              'You Received The Order!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: 8),
-
-            // 🔢 رقم الأوردر العشوائي
-            Text(
-              'Order #$_orderNumber',
-              style: const TextStyle(fontSize: 16, color: Colors.grey),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: 32),
-
-            // Feedback Card
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: const Color(0xFF6C47FF).withValues(alpha: 0.05),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: const Color(0xFF6C47FF).withValues(alpha: 0.1),
-                  width: 1,
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Tell us your feedback ✨',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF6C47FF),
-                    ),
-                  ),
-
-                  const SizedBox(height: 8),
-
-                 
-
-                  const SizedBox(height: 16),
-
-                  // ⭐ Star Rating - Click to select
-                  Row(
-                    children: List.generate(5, (index) {
-                      final isSelected = index < _rating;
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _rating = index + 1;
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            child: Icon(
-                              Icons.star,
-                              color: isSelected
-                                  ? Colors.amber
-                                  : Colors.grey.withValues(alpha: 0.3),
-                              size: 32,
-                            ),
-                          ),
+                    // Gift Box Image from assets
+                    Container(
+                      padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 20)),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF6C47FF).withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(
+                          Responsive.responsiveBorderRadius(context, 60),
                         ),
-                      );
-                    }),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '$_rating out of 5 stars',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[600],
-                      fontWeight: FontWeight.w500,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          Responsive.responsiveBorderRadius(context, 40),
+                        ),
+                        child: Image.asset(
+                          'lib/image/img1.jpg',
+                          width: Responsive.responsiveImageSize(context, 80),
+                          height: Responsive.responsiveImageSize(context, 80),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 16),
+                    SizedBox(height: Responsive.responsiveSpacing(context, 24)),
 
-                  // Feedback Text Field
-                  TextFormField(
-                    controller: _feedbackController,
-                    decoration: InputDecoration(
-                      hintText: 'Write something for us!',
-                      hintStyle: const TextStyle(
+                    // Order Confirmation Text
+                    Text(
+                      'You Received The Order!',
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 24),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+
+                    SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+
+                    // 🔢 رقم الأوردر العشوائي
+                    Text(
+                      'Order #$_orderNumber',
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 16),
                         color: Colors.grey,
-                        fontSize: 14,
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.grey.withValues(alpha: 0.2),
+                      textAlign: TextAlign.center,
+                    ),
+
+                    SizedBox(height: Responsive.responsiveSpacing(context, 32)),
+
+                    // Feedback Card
+                    Container(
+                      padding: EdgeInsets.all(Responsive.responsiveSpacing(context, 20)),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF6C47FF).withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(
+                          Responsive.responsiveBorderRadius(context, 16),
                         ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.grey.withValues(alpha: 0.2),
-                        ),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        borderSide: BorderSide(
-                          color: Color(0xFF6C47FF),
+                        border: Border.all(
+                          color: const Color(0xFF6C47FF).withValues(alpha: 0.1),
                           width: 1,
                         ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 12,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Tell us your feedback ✨',
+                            style: TextStyle(
+                              fontSize: Responsive.responsiveFontSize(context, 18),
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF6C47FF),
+                            ),
+                          ),
+
+                          SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+
+                          // ⭐ Star Rating - Click to select
+                          Row(
+                            children: List.generate(5, (index) {
+                              final isSelected = index < _rating;
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _rating = index + 1;
+                                  });
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    right: Responsive.responsiveSpacing(context, 8),
+                                  ),
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    child: Icon(
+                                      Icons.star,
+                                      color: isSelected
+                                          ? Colors.amber
+                                          : Colors.grey.withValues(alpha: 0.3),
+                                      size: Responsive.responsiveIconSize(context, 32),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                          ),
+                          SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+                          Text(
+                            '$_rating out of 5 stars',
+                            style: TextStyle(
+                              fontSize: Responsive.responsiveFontSize(context, 14),
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+
+                          SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+
+                          // Feedback Text Field
+                          TextFormField(
+                            controller: _feedbackController,
+                            decoration: InputDecoration(
+                              hintText: 'Write something for us!',
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: Responsive.responsiveFontSize(context, 14),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  Responsive.responsiveBorderRadius(context, 8),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.grey.withValues(alpha: 0.2),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  Responsive.responsiveBorderRadius(context, 8),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.grey.withValues(alpha: 0.2),
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  Responsive.responsiveBorderRadius(context, 8),
+                                ),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF6C47FF),
+                                  width: 1,
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: Responsive.responsiveSpacing(context, 12),
+                                vertical: Responsive.responsiveSpacing(context, 12),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                            ),
+                            maxLines: 3,
+                          ),
+                        ],
                       ),
-                      filled: true,
-                      fillColor: Colors.white,
                     ),
-                    maxLines: 3,
-                  ),
-                ],
+
+                    SizedBox(height: Responsive.responsiveSpacing(context, 32)),
+
+                    // Done Button
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Navigate to home and clear all previous routes
+                          Get.offAll(() => const HomeScreen());
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF6C47FF),
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                            vertical: Responsive.responsiveSpacing(context, 16),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              Responsive.responsiveBorderRadius(context, 12),
+                            ),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          'Done',
+                          style: TextStyle(
+                            fontSize: Responsive.responsiveFontSize(context, 16),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: Responsive.responsiveSpacing(context, 20)),
+                  ],
+                ),
               ),
             ),
-
-            const Spacer(),
-
-            // Done Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigate to home and clear all previous routes
-                  Get.offAll(() => const HomeScreen());
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6C47FF),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 0,
-                ),
-                child: const Text(
-                  'Done',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:books/l10n/app_localizations.dart';
+import 'package:books/core/utils/responsive.dart';
 
 class SetLocationScreen extends StatefulWidget {
   const SetLocationScreen({super.key});
@@ -58,136 +59,200 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'Location',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
+            fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final maxWidth = Responsive.maxContentWidth(context);
+          return Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: maxWidth ?? double.infinity,
+              ),
+              child: SingleChildScrollView(
+                padding: Responsive.responsivePadding(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: Responsive.responsiveSpacing(context, 20)),
 
-            // Name Field
-            TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: 'Name',
-                hintText: 'Name',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(
-                    color: Color(0xFF6C47FF),
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
+                    // Name Field
+                    TextFormField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Name',
+                        hintText: 'Name',
+                        labelStyle: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 14),
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 14),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF6C47FF),
+                            width: 2,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: Responsive.responsiveSpacing(context, 16),
+                          vertical: Responsive.responsiveSpacing(context, 16),
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 16),
+                      ),
+                    ),
+
+                    SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+
+                    // Governorate Field
+                    TextFormField(
+                      controller: _governorateController,
+                      decoration: InputDecoration(
+                        labelText: 'Governorate',
+                        hintText: 'Governorate',
+                        labelStyle: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 14),
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 14),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF6C47FF),
+                            width: 2,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: Responsive.responsiveSpacing(context, 16),
+                          vertical: Responsive.responsiveSpacing(context, 16),
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 16),
+                      ),
+                    ),
+
+                    SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+
+                    // City Field
+                    TextFormField(
+                      controller: _cityController,
+                      decoration: InputDecoration(
+                        labelText: 'City',
+                        hintText: 'City',
+                        labelStyle: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 14),
+                        ),
+                        hintStyle: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 14),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF6C47FF),
+                            width: 2,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: Responsive.responsiveSpacing(context, 16),
+                          vertical: Responsive.responsiveSpacing(context, 16),
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: Responsive.responsiveFontSize(context, 16),
+                      ),
+                    ),
+
+                    SizedBox(height: Responsive.responsiveSpacing(context, 40)),
+
+                    // Confirmation Button
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _confirmLocation,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF6C47FF),
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                            vertical: Responsive.responsiveSpacing(context, 16),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              Responsive.responsiveBorderRadius(context, 12),
+                            ),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          'Confirmation',
+                          style: TextStyle(
+                            fontSize: Responsive.responsiveFontSize(context, 16),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: Responsive.responsiveSpacing(context, 20)),
+                  ],
                 ),
               ),
             ),
-
-            const SizedBox(height: 16),
-
-            // Governorate Field
-            TextFormField(
-              controller: _governorateController,
-              decoration: InputDecoration(
-                labelText: 'Governorate',
-                hintText: 'Governorate',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(
-                    color: Color(0xFF6C47FF),
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // City Field
-            TextFormField(
-              controller: _cityController,
-              decoration: InputDecoration(
-                labelText: 'City',
-                hintText: 'City',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(
-                    color: Color(0xFF6C47FF),
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 40),
-
-            // Confirmation Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _confirmLocation,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6C47FF),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 0,
-                ),
-                child: const Text(
-                  'Confirmation',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
