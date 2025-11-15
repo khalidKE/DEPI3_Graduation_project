@@ -68,7 +68,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
         ),
         centerTitle: true,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +163,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
               ),
             ),
 
-            const Spacer(),
+            const SizedBox(height: 40),
 
             // Confirmation Button
             SizedBox(
@@ -185,6 +185,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:books/features/home_feature/presentation/views/home_screen.dart';
 
 class OrderReceivedScreen extends StatefulWidget {
   const OrderReceivedScreen({super.key});
@@ -109,16 +111,14 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
 
                   const SizedBox(height: 8),
 
-                  const Text(
-                    'Lorem ipsum dolor sit amet consectetur. Dignissim magna vitae.',
-                    style: TextStyle(fontSize: 14, color: Color(0xFF6C47FF)),
-                  ),
+                 
 
                   const SizedBox(height: 16),
 
-                  // ⭐ تقييم النجوم
+                  // ⭐ Star Rating - Click to select
                   Row(
                     children: List.generate(5, (index) {
+                      final isSelected = index < _rating;
                       return GestureDetector(
                         onTap: () {
                           setState(() {
@@ -127,16 +127,28 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8.0),
-                          child: Icon(
-                            Icons.star,
-                            color: index < _rating
-                                ? Colors.amber
-                                : Colors.grey.withValues(alpha: 0.3),
-                            size: 24,
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            child: Icon(
+                              Icons.star,
+                              color: isSelected
+                                  ? Colors.amber
+                                  : Colors.grey.withValues(alpha: 0.3),
+                              size: 32,
+                            ),
                           ),
                         ),
                       );
                     }),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '$_rating out of 5 stars',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
 
                   const SizedBox(height: 16),
@@ -189,8 +201,8 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigate back to home (pop until first route)
-                  Navigator.popUntil(context, (route) => route.isFirst);
+                  // Navigate to home and clear all previous routes
+                  Get.offAll(() => const HomeScreen());
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF6C47FF),

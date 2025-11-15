@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:books/core/widgets/language_toggle.dart';
 import 'package:books/core/utils/responsive.dart';
+import 'package:books/features/cart_feature/presentation/views/set_location_screen.dart';
+import 'package:books/features/cart_feature/presentation/views/order_recieved_screen.dart';
 
 class ConfirmOrderScreen extends StatefulWidget {
   const ConfirmOrderScreen({super.key});
@@ -22,9 +24,16 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
   DateTime? _selectedDateTime;
 
   Future<void> _updateAddress() async {
-    final result = await Navigator.pushNamed(context, '/setLocation');
+    if (!mounted) return;
+    
+    final result = await Navigator.push<Map<String, String>>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SetLocationScreen(),
+      ),
+    );
 
-    if (result != null && result is Map<String, String>) {
+    if (result != null && mounted) {
       setState(() {
         _addressData = result;
         _addressData['name'] = '${result['name']} - ${result['city']}';
@@ -197,8 +206,15 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
   }
 
   void _proceedToOrder() {
+    if (!mounted) return;
+    
     if (_addressData['name'] != null && _addressData['name']!.isNotEmpty) {
-      Navigator.pushNamed(context, '/orderReceived');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const OrderReceivedScreen(),
+        ),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
