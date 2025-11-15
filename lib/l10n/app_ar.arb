@@ -41,7 +41,6 @@
   "order_history": "سجل الطلبات",
   "help_center": "مركز المساعدة",
   "change_picture": "تغيير الصورة",
-  "phone_number": "رقم الهاتف",
   "save_changes": "حفظ التغييرات",
   "october_2021": "أكتوبر 2021",
   "tell_us_how_we_can_help": "أخبرنا كيف يمكننا مساعدتك 👋",
@@ -78,5 +77,8 @@
   "science": "علم",
   "romantic": "رومانسي",
   "search": "بحث",
-  "recent_searches": "عمليات البحث الأخيرة"
+  "recent_searches": "عمليات البحث الأخيرة",
+  "home": "الرئيسية",
+  "cart":"عربة التسوق"
+
 }

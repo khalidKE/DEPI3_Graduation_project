@@ -257,4 +257,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get recent_searches => 'عمليات البحث الأخيرة';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get cart => 'عربة التسوق';
 }

@@ -259,4 +259,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recent_searches => 'Recent Searches';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get cart => 'Cart';
 }

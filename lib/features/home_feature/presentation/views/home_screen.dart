@@ -1,4 +1,8 @@
+import 'package:books/features/cart_feature/presentation/views/confirm_order_screen.dart';
+import 'package:books/features/category_feature/presentation/views/category_screen.dart';
 import 'package:books/features/notification_feature/presentation/views/notification.dart';
+import 'package:books/l10n/app_localizations.dart';
+import 'package:books/main.dart';
 import 'package:flutter/material.dart';
 import 'package:books/features/profile_feature/presentation/views/profile.dart';
 import 'package:get/get.dart';
@@ -235,8 +239,8 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         title: Expanded(
           child: Center(
-            child: const Text(
-              'Home',
+            child: Text(
+              AppLocalizations.of(context)!.home,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
@@ -256,6 +260,26 @@ class _HomeScreenState extends State<HomeScreen> {
               Get.to(NotificationPage());
             },
           ),
+          PopupMenuButton<String>(
+      icon: const Icon(Icons.language, color: Colors.black),
+      onSelected: (value) {
+        if (value == 'ar') {
+          Get.updateLocale(const Locale('ar'));
+        } else if (value == 'en') {
+           Get.updateLocale(const Locale('en'));
+        }
+      },
+      itemBuilder: (context) => [
+        const PopupMenuItem(
+          value: 'ar',
+          child: Text('Arabic 🇪🇬'),
+        ),
+        const PopupMenuItem(
+          value: 'en',
+          child: Text('English 🇺🇸'),
+        ),
+        ],
+      ),
         ],
       ),
       body: SingleChildScrollView(
@@ -295,58 +319,67 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF5B4DB5),
-        unselectedItemColor: Colors.grey,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+    bottomNavigationBar: BottomNavigationBar(
+  type: BottomNavigationBarType.fixed,
+  selectedItemColor: const Color(0xFF5B4DB5),
+  unselectedItemColor: Colors.grey,
+  currentIndex: _currentIndex,
+  onTap: (index) {
+    setState(() {
+      _currentIndex = index;
+    });
 
-          // Navigate to different screens based on index
-          switch (index) {
-            case 0:
-              // Home - already here
-              break;
-            case 1:
-              // Orders
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Orders Screen - Coming Soon')),
-              );
-              break;
-            case 2:
-              // Cart
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Cart Screen - Coming Soon')),
-              );
-              break;
-            case 3:
-              // Profile
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Profile()),
-              );
-              break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined),
-            label: 'Orders',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-        ],
-      ),
+    switch (index) {
+      case 0:
+        // Home
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()), 
+        );
+        break;
+      case 1:
+      // category
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CategoryScreen()), 
+        );
+        break;
+      case 2:
+        // Cart
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ConfirmOrderScreen()),
+        );
+        break;
+      case 3:
+        // Profile
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Profile()),
+        );
+        break;
+    }
+  },
+  items: [
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.home), 
+      label: AppLocalizations.of(context)!.home, // تم الترجمة
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.article_rounded), 
+      label: AppLocalizations.of(context)!.category,
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.shopping_cart_outlined), 
+      label: AppLocalizations.of(context)!.cart,
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.person_outline), 
+      label: AppLocalizations.of(context)!.profile,
+    ),
+  ],
+),
+
     );
   }
 

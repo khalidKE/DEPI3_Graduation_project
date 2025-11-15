@@ -1,3 +1,6 @@
+import 'package:books/features/cart_feature/presentation/views/confirm_order_screen.dart';
+import 'package:books/features/home_feature/presentation/views/home_screen.dart';
+import 'package:books/features/profile_feature/presentation/views/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'search_screen.dart';
@@ -11,6 +14,7 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   int selectedCategoryIndex = 0;
+  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +122,66 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ],
         ),
       ),
+     bottomNavigationBar: BottomNavigationBar(
+  type: BottomNavigationBarType.fixed,
+  selectedItemColor: const Color(0xFF5B4DB5),
+  unselectedItemColor: Colors.grey,
+  currentIndex: _currentIndex,
+  onTap: (index) {
+    setState(() {
+      _currentIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        // Home
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()), 
+        );
+        break;
+      case 1:
+      // category
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CategoryScreen()), 
+        );
+        break;
+      case 2:
+        // Cart
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ConfirmOrderScreen()),
+        );
+        break;
+      case 3:
+        // Profile
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Profile()),
+        );
+        break;
+    }
+  },
+  items: [
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.home), 
+      label: AppLocalizations.of(context)!.home, // تم الترجمة
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.article_rounded), 
+      label: AppLocalizations.of(context)!.category,
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.shopping_cart_outlined), 
+      label: AppLocalizations.of(context)!.cart,
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.person_outline), 
+      label: AppLocalizations.of(context)!.profile,
+    ),
+  ],
+),
     );
   }
 
