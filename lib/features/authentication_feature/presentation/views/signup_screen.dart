@@ -1,5 +1,6 @@
 import 'package:books/core/colors/colors.dart';
-import 'package:books/features/authentication_feature/presentation/manager/login_state.dart';
+import 'package:books/core/utils/responsive.dart';
+import 'package:books/core/widgets/language_toggle.dart';
 import 'package:books/features/authentication_feature/presentation/manager/signup_cubit.dart';
 import 'package:books/features/authentication_feature/presentation/manager/signup_state.dart';
 import 'package:books/features/authentication_feature/data/user_model.dart';
@@ -27,7 +28,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -39,7 +39,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.sizeOf(context).height;
     return BlocProvider(
       create: (context) => SignupCubit(),
       child: BlocListener<SignupCubit, SignupState>(
@@ -63,133 +62,157 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
         child: Scaffold(
           backgroundColor: AppColors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            actions: const [
+              LanguageToggleButton(),
+            ],
+          ),
           body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 48, left: 24, right: 24),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: _formKeySignup,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Icon(Icons.arrow_back, size: 24),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final maxWidth = Responsive.maxContentWidth(context);
+                return Center(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: maxWidth ?? 600,
+                    ),
+                    child: SingleChildScrollView(
+                      padding: Responsive.responsivePadding(context).copyWith(
+                        top: Responsive.responsiveSpacing(context, 20),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(top: 40),
-                        child: Form(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!.sign_up,
-                                style: TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: screenHeight * 0.002),
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .create_account_and_choose_favorite_menu,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: AppColors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: screenHeight * 0.05),
-                      NameTextField(enteredName: _nameController),
-                      SizedBox(height: screenHeight * 0.015),
-                      Emailtextfield(enteredEmail: _emailController),
-                      SizedBox(height: screenHeight * 0.015),
-                      CustomPasswordFieldWithValidate(
-                        enteredPassword: _passwordController,
-                      ),
-                      SizedBox(height: screenHeight * 0.03),
-                      BlocBuilder<SignupCubit, SignupState>(
-                        builder: (context, state) {
-                          final cubit = context.read<SignupCubit>();
-                          if (state is SignupLoadingState) {
-                            return const Center(child: CircularProgressIndicator());
-                          }
-                          return Purplebuttun(
-                            buttunText: AppLocalizations.of(context)!.sign_up,
-                            onTapFunction: () {
-                              if (_formKeySignup.currentState!.validate()) {
-                                UserModel.user.name = _nameController.text;
-                                UserModel.user.email = _emailController.text;
-                                UserModel.user.password = _passwordController.text;
-                                cubit.signupWithFirebase(UserModel.user);
-                              }
-                            },
-                          );
-                        },
-                      ),
-                      SizedBox(height: screenHeight * 0.015),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.have_an_account,
-                            style: TextStyle(
-                              color: AppColors.grey,
-                              fontSize: 16,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.off(() => const LogInScreen());
-                            },
-                            child: Text(
-                              AppLocalizations.of(context)!.sign_In,
-                              style: TextStyle(
-                                color: AppColors.purple,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: screenHeight * 0.08),
-                      Center(
+                      child: Form(
+                        key: _formKeySignup,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              AppLocalizations.of(context)!
-                                  .by_clicking_Register_you_agree_to_our,
-                              style: TextStyle(
-                                color: AppColors.grey,
-                                fontSize: 16,
-                              ),
-                            ),
                             InkWell(
-                              onTap: () {},
-                              child: Text(
-                                AppLocalizations.of(context)!
-                                    .terms_and_Data_Policy,
-                                style: TextStyle(
-                                  color: AppColors.purple,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: Responsive.responsiveIconSize(context, 24),
                               ),
                             ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                top: Responsive.responsiveSpacing(context, 40),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context)!.sign_up,
+                                    style: TextStyle(
+                                      fontSize: Responsive.responsiveFontSize(context, 28),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: Responsive.responsiveSpacing(context, 2)),
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .create_account_and_choose_favorite_menu,
+                                    style: TextStyle(
+                                      fontSize: Responsive.responsiveFontSize(context, 18),
+                                      color: AppColors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: Responsive.responsiveSpacing(context, 30)),
+                            NameTextField(enteredName: _nameController),
+                            SizedBox(height: Responsive.responsiveSpacing(context, 15)),
+                            EmailTextField(enteredEmail: _emailController),
+                            SizedBox(height: Responsive.responsiveSpacing(context, 15)),
+                            CustomPasswordFieldWithValidate(
+                              enteredPassword: _passwordController,
+                            ),
+                            SizedBox(height: Responsive.responsiveSpacing(context, 30)),
+                            BlocBuilder<SignupCubit, SignupState>(
+                              builder: (context, state) {
+                                final cubit = context.read<SignupCubit>();
+                                if (state is SignupLoadingState) {
+                                  return const Center(child: CircularProgressIndicator());
+                                }
+                                return PurpleButton(
+                                  buttonText: AppLocalizations.of(context)!.sign_up,
+                                  onTapFunction: () {
+                                    if (_formKeySignup.currentState!.validate()) {
+                                      UserModel.user.name = _nameController.text;
+                                      UserModel.user.email = _emailController.text;
+                                      UserModel.user.password = _passwordController.text;
+                                      cubit.signupWithFirebase(UserModel.user);
+                                    }
+                                  },
+                                );
+                              },
+                            ),
+                            SizedBox(height: Responsive.responsiveSpacing(context, 15)),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.have_an_account,
+                                  style: TextStyle(
+                                    color: AppColors.grey,
+                                    fontSize: Responsive.responsiveFontSize(context, 16),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.off(() => const LogInScreen());
+                                  },
+                                  child: Text(
+                                    AppLocalizations.of(context)!.sign_In,
+                                    style: TextStyle(
+                                      color: AppColors.purple,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: Responsive.responsiveFontSize(context, 17),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: Responsive.responsiveSpacing(context, 40)),
+                            Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .by_clicking_Register_you_agree_to_our,
+                                    style: TextStyle(
+                                      color: AppColors.grey,
+                                      fontSize: Responsive.responsiveFontSize(context, 16),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .terms_and_Data_Policy,
+                                      style: TextStyle(
+                                        color: AppColors.purple,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: Responsive.responsiveFontSize(context, 16),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: Responsive.responsiveSpacing(context, 20)),
                           ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ),

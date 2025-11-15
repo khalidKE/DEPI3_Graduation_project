@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:books/l10n/app_localizations.dart';
+import 'package:books/core/widgets/language_toggle.dart';
+import 'package:books/core/utils/responsive.dart';
 
 class ConfirmOrderScreen extends StatefulWidget {
   const ConfirmOrderScreen({super.key});
@@ -53,7 +55,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
       },
     );
 
-    if (selectedDate == null) return;
+    if (selectedDate == null || !mounted) return;
 
     final TimeOfDay? selectedTime = await showTimePicker(
       context: context,
@@ -215,28 +217,37 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: Responsive.responsiveIconSize(context, 24),
+          ),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Confirm Order',
+        title: Text(
+          AppLocalizations.of(context)!.order_details,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
+            fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Colors.black),
-            onPressed: () {},
-          ),
+        actions: const [
+          LanguageToggleButton(),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final maxWidth = Responsive.maxContentWidth(context);
+          return Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: maxWidth ?? double.infinity,
+              ),
+              child: SingleChildScrollView(
+                padding: Responsive.responsivePadding(context),
+                child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Address Card
@@ -247,7 +258,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Colors.grey.withValues(alpha: 0.1),
                     spreadRadius: 1,
                     blurRadius: 4,
                     offset: const Offset(0, 2),
@@ -259,7 +270,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF6C47FF).withOpacity(0.1),
+                      color: const Color(0xFF6C47FF).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Icon(
@@ -329,7 +340,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Colors.grey.withValues(alpha: 0.1),
                     spreadRadius: 1,
                     blurRadius: 4,
                     offset: const Offset(0, 2),
@@ -426,7 +437,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
+                      color: Colors.grey.withValues(alpha: 0.1),
                       spreadRadius: 1,
                       blurRadius: 4,
                       offset: const Offset(0, 2),
@@ -438,7 +449,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF6C47FF).withOpacity(0.1),
+                        color: const Color(0xFF6C47FF).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Icon(
@@ -487,27 +498,36 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
 
             const Spacer(),
 
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _proceedToOrder,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6C47FF),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _proceedToOrder,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF6C47FF),
+                        foregroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(
+                          vertical: Responsive.responsiveSpacing(context, 16),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            Responsive.responsiveBorderRadius(context, 12),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        AppLocalizations.of(context)!.proceed_to_checkout,
+                        style: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 16),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-                  elevation: 0,
-                ),
-                child: const Text(
-                  'Order',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
+                ],
               ),
             ),
-          ],
-        ),
+           ) );
+        },
       ),
     );
   }

@@ -1,18 +1,20 @@
 import 'package:books/core/colors/colors.dart';
 import 'package:books/l10n/app_localizations.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Emailtextfield extends StatefulWidget {
-  TextEditingController enteredEmail;
-  Emailtextfield({super.key, required this.enteredEmail});
+class EmailTextField extends StatefulWidget {
+  final TextEditingController enteredEmail;
+  
+  const EmailTextField({
+    super.key,
+    required this.enteredEmail,
+  });
 
   @override
-  State<Emailtextfield> createState() => _EmailtextfieldState();
+  State<EmailTextField> createState() => _EmailTextFieldState();
 }
 
-class _EmailtextfieldState extends State<Emailtextfield> {
+class _EmailTextFieldState extends State<EmailTextField> {
   @override
   Widget build(BuildContext context) {
     return (Column(

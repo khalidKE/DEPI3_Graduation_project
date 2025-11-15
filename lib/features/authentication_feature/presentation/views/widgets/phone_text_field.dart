@@ -1,19 +1,20 @@
 import 'package:books/core/colors/colors.dart';
 import 'package:books/l10n/app_localizations.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PhoneTextField extends StatefulWidget {
-  TextEditingController enteredNumber;
+  final TextEditingController enteredNumber;
 
-  PhoneTextField({super.key, required this.enteredNumber});
+  const PhoneTextField({
+    super.key,
+    required this.enteredNumber,
+  });
 
   @override
-  State<PhoneTextField> createState() => _EmailtextfieldState();
+  State<PhoneTextField> createState() => _PhoneTextFieldState();
 }
 
-class _EmailtextfieldState extends State<PhoneTextField> {
+class _PhoneTextFieldState extends State<PhoneTextField> {
   @override
   Widget build(BuildContext context) {
     return (Column(
@@ -33,10 +34,10 @@ class _EmailtextfieldState extends State<PhoneTextField> {
           width: double.infinity,
           child: TextFormField(
             validator: (value) {
-              if (value!.isEmpty) {
-                return (AppLocalizations.of(context)!.this_field_cant_be_empty);
-                return null;
+              if (value == null || value.isEmpty) {
+                return AppLocalizations.of(context)!.this_field_cant_be_empty;
               }
+              return null;
             },
             controller: widget.enteredNumber,
             keyboardType: TextInputType.phone,

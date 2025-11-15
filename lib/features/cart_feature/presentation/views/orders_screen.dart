@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:books/l10n/app_localizations.dart';
+import 'package:books/core/widgets/language_toggle.dart';
+import 'package:books/core/utils/responsive.dart';
 import 'package:books/core/widgets/error_boundary.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -59,8 +61,16 @@ class _OrdersScreenState extends State<OrdersScreen> {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context)!.my_orders),
+            title: Text(
+              AppLocalizations.of(context)!.my_orders,
+              style: TextStyle(
+                fontSize: Responsive.responsiveFontSize(context, 20),
+              ),
+            ),
             centerTitle: true,
+            actions: const [
+              LanguageToggleButton(),
+            ],
             bottom: TabBar(
               isScrollable: true,
               labelColor: const Color(0xFF6C47FF),
@@ -74,42 +84,59 @@ class _OrdersScreenState extends State<OrdersScreen> {
               ],
             ),
           ),
-          body: _orders.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.shopping_bag_outlined,
-                          size: 64, color: Colors.grey),
-                      const SizedBox(height: 16),
-                      Text(
-                        AppLocalizations.of(context)!.no_orders_yet,
-                        style:
-                            const TextStyle(fontSize: 18, color: Colors.grey),
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Navigate to home or products screen
-                          Get.back();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF6C47FF),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.start_shopping,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              final maxWidth = Responsive.maxContentWidth(context);
+              return Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: maxWidth ?? double.infinity,
                   ),
-                )
-              : TabBarView(
+                  child: _orders.isEmpty
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.shopping_bag_outlined,
+                                size: Responsive.responsiveIconSize(context, 64),
+                                color: Colors.grey,
+                              ),
+                              SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+                              Text(
+                                AppLocalizations.of(context)!.no_orders_yet,
+                                style: TextStyle(
+                                  fontSize: Responsive.responsiveFontSize(context, 18),
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+                              ElevatedButton(
+                                onPressed: () {
+                                  // Navigate to home or products screen
+                                  Get.back();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF6C47FF),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: Responsive.responsiveSpacing(context, 24),
+                                    vertical: Responsive.responsiveSpacing(context, 12),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      Responsive.responsiveBorderRadius(context, 8),
+                                    ),
+                                  ),
+                                ),
+                                child: Text(
+                                  AppLocalizations.of(context)!.start_shopping,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : TabBarView(
                   children: [
                     // All orders
                     _buildOrderList(_orders),
@@ -122,11 +149,15 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         .where((order) => order['status'] == 'Shipped')
                         .toList()),
                     // Delivered
-                    _buildOrderList(_orders
-                        .where((order) => order['status'] == 'Delivered')
-                        .toList()),
-                  ],
+                          _buildOrderList(_orders
+                              .where((order) => order['status'] == 'Delivered')
+                              .toList()),
+                        ],
+                      ),
                 ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -143,7 +174,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
     }
 
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: Responsive.responsivePadding(context),
       itemCount: orders.length,
       itemBuilder: (context, index) {
         final order = orders[index];
@@ -170,11 +201,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
                         color:
-                            _getStatusColor(order['status']).withOpacity(0.1),
+                            _getStatusColor(order['status']).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                             color: _getStatusColor(order['status'])
-                                .withOpacity(0.3)),
+                                .withValues(alpha: 0.3)),
                       ),
                       child: Text(
                         order['status'],
@@ -296,7 +327,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             backgroundColor:
-                                const Color(0xFF6C47FF).withOpacity(0.1),
+                                const Color(0xFF6C47FF).withValues(alpha: 0.1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),

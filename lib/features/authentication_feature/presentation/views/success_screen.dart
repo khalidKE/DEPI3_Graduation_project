@@ -1,4 +1,6 @@
 import 'package:books/core/colors/colors.dart';
+import 'package:books/core/utils/responsive.dart';
+import 'package:books/core/widgets/language_toggle.dart';
 import 'package:books/features/authentication_feature/data/user_model.dart';
 import 'package:books/features/home_feature/presentation/views/home_screen.dart';
 import 'package:books/l10n/app_localizations.dart';
@@ -12,40 +14,68 @@ class SuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.sizeOf(context).height;
-    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: AppColors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: const [
+          LanguageToggleButton(),
+        ],
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 48, left: 24, right: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/Group.png'),
-              SizedBox(height: screenHeight * 0.04),
-              Text(
-                AppLocalizations.of(context)!.congratulation,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final maxWidth = Responsive.maxContentWidth(context);
+            return Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: maxWidth ?? 600,
+                ),
+                child: Padding(
+                  padding: Responsive.responsivePadding(context),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/Group.png',
+                        width: Responsive.responsiveImageSize(context, 200),
+                        height: Responsive.responsiveImageSize(context, 200),
+                        fit: BoxFit.contain,
+                      ),
+                      SizedBox(height: Responsive.responsiveSpacing(context, 30)),
+                      Text(
+                        AppLocalizations.of(context)!.congratulation,
+                        style: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 28),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+                      Text(
+                        AppLocalizations.of(context)!.your_account_is_complete,
+                        style: TextStyle(
+                          fontSize: Responsive.responsiveFontSize(context, 18),
+                          color: AppColors.grey,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: Responsive.responsiveSpacing(context, 40)),
+                      PurpleButton(
+                        buttonText: AppLocalizations.of(context)!.get_Started,
+                        onTapFunction: () {
+                          FirestoreServices.addUser(UserModel.user.toJson());
+                          Get.to(() => const HomeScreen());
+                          //get data from json
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              SizedBox(height: screenHeight * 0.002),
-              Text(
-                AppLocalizations.of(context)!.your_account_is_complete,
-                style: TextStyle(fontSize: 18, color: AppColors.grey),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: screenHeight * 0.04),
-              Purplebuttun(
-                buttunText: AppLocalizations.of(context)!.get_Started,
-                onTapFunction: () {
-                  FirestoreServices.addUser(UserModel.user.toJson());
-                  Get.to(HomeScreen());
-                  //get data from json
-                },
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

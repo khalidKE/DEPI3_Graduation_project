@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:books/core/colors/colors.dart';
+import 'package:books/core/utils/responsive.dart';
 import 'package:books/features/onboarding_feature/data/hive_helper.dart';
 import 'package:books/features/authentication_feature/presentation/views/login_screen.dart';
 import 'package:books/features/onboarding_feature/presentation/views/onboarding_screen.dart';
@@ -29,16 +30,39 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return (Scaffold(
+    final screenWidth = Responsive.screenWidth(context);
+    
+    // Get the current text direction from the context, defaulting to LTR
+    final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    
+    return Directionality(
+      textDirection: textDirection,
+      child: Scaffold(
       backgroundColor: AppColors.purple,
       body: Stack(
         children: [
-          Positioned(top: 495, child: SvgPicture.asset('assets/Vector.svg')),
+          // Responsive positioned SVG
+          Positioned(
+            top: Responsive.heightPercent(context, 60),
+            left: 0,
+            right: 0,
+            child: Center(
+              child: SvgPicture.asset(
+                'assets/Vector.svg',
+                width: screenWidth,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Center(
-            child: Image.asset('assets/Property 1=Small, Property 2=White.png'),
+            child: Image.asset(
+              'assets/Property 1=Small, Property 2=White.png',
+              width: Responsive.responsiveImageSize(context, 200),
+              height: Responsive.responsiveImageSize(context, 200),
+              fit: BoxFit.contain,
+            ),
           ),
         ],
       ),

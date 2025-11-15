@@ -62,7 +62,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,7 +84,8 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -808,31 +811,292 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Price'**
   String get price;
-  // In app_localizations.dart, add these getters:
 
-// Cart Screen
-String get my_cart;
-String get cart_empty;
-String get item_removed;
-String get proceed_to_checkout;
-String get total;
+  /// No description provided for @my_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'My Cart'**
+  String get my_cart;
 
-// Orders Screen
-String get my_orders;
-String get processing;
-String get shipped;
-String get delivered;
-String get no_orders_yet;
-String get start_shopping;
-String get no_orders_in_category;
-String get order;
-String get date;
-String get qty;
-String get rate_order;
-String get view_details;
+  /// No description provided for @cart_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get cart_empty;
+
+  /// No description provided for @item_removed.
+  ///
+  /// In en, this message translates to:
+  /// **'Item removed from cart'**
+  String get item_removed;
+
+  /// No description provided for @proceed_to_checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed to Checkout'**
+  String get proceed_to_checkout;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @my_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'My Orders'**
+  String get my_orders;
+
+  /// No description provided for @processing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing'**
+  String get processing;
+
+  /// No description provided for @shipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipped'**
+  String get shipped;
+
+  /// No description provided for @delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get delivered;
+
+  /// No description provided for @no_orders_yet.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders yet'**
+  String get no_orders_yet;
+
+  /// No description provided for @start_shopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Shopping'**
+  String get start_shopping;
+
+  /// No description provided for @no_orders_in_category.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders in this category'**
+  String get no_orders_in_category;
+
+  /// No description provided for @order.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get order;
+
+  /// No description provided for @orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get orders;
+
+  /// No description provided for @cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart'**
+  String get cart;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @qty.
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
+  String get qty;
+
+  /// No description provided for @rate_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Order'**
+  String get rate_order;
+
+  /// No description provided for @view_details.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get view_details;
+
+  /// No description provided for @special_offer.
+  ///
+  /// In en, this message translates to:
+  /// **'Special Offer'**
+  String get special_offer;
+
+  /// No description provided for @discover_25_percent.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover 25%'**
+  String get discover_25_percent;
+
+  /// No description provided for @order_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Now'**
+  String get order_now;
+
+  /// No description provided for @top_of_week.
+  ///
+  /// In en, this message translates to:
+  /// **'Top of Week'**
+  String get top_of_week;
+
+  /// No description provided for @best_vendors.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Vendors'**
+  String get best_vendors;
+
+  /// No description provided for @authors.
+  ///
+  /// In en, this message translates to:
+  /// **'Authors'**
+  String get authors;
+
+  /// No description provided for @see_all.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get see_all;
+
+  /// No description provided for @vendors.
+  ///
+  /// In en, this message translates to:
+  /// **'Vendors'**
+  String get vendors;
+
+  /// No description provided for @our_vendors.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Vendors'**
+  String get our_vendors;
+
+  /// No description provided for @check_top_authors.
+  ///
+  /// In en, this message translates to:
+  /// **'Check top authors'**
+  String get check_top_authors;
+
+  /// No description provided for @onboarding_title_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Now reading books will be easier'**
+  String get onboarding_title_1;
+
+  /// No description provided for @onboarding_desc_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover new worlds, join a vibrant reading community. Start your reading adventure effortlessly with us.'**
+  String get onboarding_desc_1;
+
+  /// No description provided for @onboarding_title_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Bookish Soulmate Awaits'**
+  String get onboarding_title_2;
+
+  /// No description provided for @onboarding_desc_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Let us be your guide to the perfect read. Discover books tailored to your tastes for a truly rewarding experience.'**
+  String get onboarding_desc_2;
+
+  /// No description provided for @onboarding_title_3.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Your Adventure'**
+  String get onboarding_title_3;
+
+  /// No description provided for @onboarding_desc_3.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to embark on a quest for inspiration and knowledge? Your adventure begins now. Let\'s go!'**
+  String get onboarding_desc_3;
+
+  /// No description provided for @get_started.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get get_started;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get reviews;
+
+  /// No description provided for @related.
+  ///
+  /// In en, this message translates to:
+  /// **'Related'**
+  String get related;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @publisher.
+  ///
+  /// In en, this message translates to:
+  /// **'Publisher'**
+  String get publisher;
+
+  /// No description provided for @publication_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Publication Date'**
+  String get publication_date;
+
+  /// No description provided for @pages.
+  ///
+  /// In en, this message translates to:
+  /// **'Pages'**
+  String get pages;
+
+  /// No description provided for @add_to_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Cart'**
+  String get add_to_cart;
+
+  /// No description provided for @products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get products;
+
+  /// No description provided for @no_authors_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No authors found in {category}'**
+  String no_authors_found(String category);
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -841,25 +1105,25 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'en': return AppLocalizationsEn();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

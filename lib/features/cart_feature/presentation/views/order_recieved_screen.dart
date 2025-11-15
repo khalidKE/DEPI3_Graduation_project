@@ -46,7 +46,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: const Color(0xFF6C47FF).withOpacity(0.08),
+                color: const Color(0xFF6C47FF).withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(60),
               ),
               child: ClipRRect(
@@ -88,10 +88,10 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: const Color(0xFF6C47FF).withOpacity(0.05),
+                color: const Color(0xFF6C47FF).withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: const Color(0xFF6C47FF).withOpacity(0.1),
+                  color: const Color(0xFF6C47FF).withValues(alpha: 0.1),
                   width: 1,
                 ),
               ),
@@ -131,7 +131,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                             Icons.star,
                             color: index < _rating
                                 ? Colors.amber
-                                : Colors.grey.withOpacity(0.3),
+                                : Colors.grey.withValues(alpha: 0.3),
                             size: 24,
                           ),
                         ),
@@ -153,13 +153,13 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(
-                          color: Colors.grey.withOpacity(0.2),
+                          color: Colors.grey.withValues(alpha: 0.2),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(
-                          color: Colors.grey.withOpacity(0.2),
+                          color: Colors.grey.withValues(alpha: 0.2),
                         ),
                       ),
                       focusedBorder: const OutlineInputBorder(

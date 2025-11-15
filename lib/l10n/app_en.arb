@@ -135,9 +135,47 @@
   "start_shopping": "Start Shopping",
   "no_orders_in_category": "No orders in this category",
   "order": "Order",
+  "orders": "Orders",
+  "cart": "Cart",
   "date": "Date",
   "qty": "Qty",
   "rate_order": "Rate Order",
-  "view_details": "View Details"
+  "view_details": "View",
+  "special_offer": "Special Offer",
+  "discover_25_percent": "Discover 25%",
+  "order_now": "Order Now",
+  "top_of_week": "Top of Week",
+  "best_vendors": "Best Vendors",
+  "authors": "Authors",
+  "see_all": "See all",
+  "vendors": "Vendors",
+  "our_vendors": "Our Vendors",
+  "check_top_authors": "Check top authors",
+  "onboarding_title_1": "Now reading books will be easier",
+  "onboarding_desc_1": "Discover new worlds, join a vibrant reading community. Start your reading adventure effortlessly with us.",
+  "onboarding_title_2": "Your Bookish Soulmate Awaits",
+  "onboarding_desc_2": "Let us be your guide to the perfect read. Discover books tailored to your tastes for a truly rewarding experience.",
+  "onboarding_title_3": "Start Your Adventure",
+  "onboarding_desc_3": "Ready to embark on a quest for inspiration and knowledge? Your adventure begins now. Let's go!",
+  "get_started": "Get Started",
+  "about": "About",
+  "reviews": "Reviews",
+  "related": "Related",
+  "description": "Description",
+  "details": "Details",
+  "publisher": "Publisher",
+  "publication_date": "Publication Date",
+  "pages": "Pages",
+  "language": "Language",
+  "add_to_cart": "Add to Cart",
+  "products": "Products",
+  "no_authors_found": "No authors found in {category}",
+  "@no_authors_found": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  }
 
-}
+   }

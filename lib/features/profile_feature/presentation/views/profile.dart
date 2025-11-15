@@ -1,6 +1,10 @@
 import 'package:books/features/authentication_feature/presentation/views/signup_screen.dart';
 import 'package:books/features/home_feature/presentation/views/home_screen.dart';
 import 'package:books/l10n/app_localizations.dart';
+import 'package:books/core/widgets/language_toggle.dart';
+import 'package:books/core/utils/responsive.dart';
+import 'package:books/features/cart_feature/presentation/views/cart_screen.dart';
+import 'package:books/features/cart_feature/presentation/views/orders_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:books/features/profile_feature/presentation/views/custom/custom_profile.dart';
 import 'package:books/features/profile_feature/presentation/views/account.dart';
@@ -9,6 +13,7 @@ import 'package:books/features/profile_feature/presentation/views/help_center.da
 import 'package:books/features/profile_feature/presentation/views/offers.dart';
 import 'package:books/features/profile_feature/presentation/views/order_history.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -23,17 +28,20 @@ class Profile extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          toolbarHeight: screenHeight * 0.1,
+          toolbarHeight: Responsive.responsiveSpacing(context, 60, tabletSpacing: 70, desktopSpacing: 80),
           title: Center(
             child: Text(
               AppLocalizations.of(context)!.profile,
               style: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.w700,
-                fontSize: screenWidth * 0.06,
+                fontSize: Responsive.responsiveFontSize(context, 20),
               ),
             ),
           ),
+          actions: [
+            const LanguageToggleButton(),
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -273,16 +281,11 @@ class Profile extends StatelessWidget {
                 break;
               case 1:
                 // Orders
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('category Screen - Coming Soon')),
-                );
+                Get.to(() => const OrdersScreen());
                 break;
               case 2:
                 // Cart
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Cart Screen - Coming Soon')),
-                );
+                Get.to(() => const CartScreen());
                 break;
               case 3:
                 // Profile
@@ -291,18 +294,21 @@ class Profile extends StatelessWidget {
             }
           },
           items: [
-            BottomNavigationBarItem(icon: const Icon(Icons.home), label: AppLocalizations.of(context)!.home),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag_outlined),
-              label: 'Orders',
+              icon: const Icon(Icons.home),
+              label: AppLocalizations.of(context)!.home,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_outlined),
-              label: 'Cart',
+              icon: const Icon(Icons.shopping_bag_outlined),
+              label: AppLocalizations.of(context)!.order,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              label: 'Profile',
+              icon: const Icon(Icons.shopping_cart_outlined),
+              label: AppLocalizations.of(context)!.cart,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.person_outline),
+              label: AppLocalizations.of(context)!.profile,
             ),
           ],
         ),

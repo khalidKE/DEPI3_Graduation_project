@@ -1,5 +1,7 @@
 import 'package:books/features/notification_feature/presentation/views/notification.dart';
 import 'package:books/l10n/app_localizations.dart';
+import 'package:books/core/widgets/language_toggle.dart';
+import 'package:books/core/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:books/features/profile_feature/presentation/views/profile.dart';
 import 'package:books/features/cart_feature/presentation/views/cart_screen.dart';
@@ -215,62 +217,96 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         title: Text(
           AppLocalizations.of(context)!.home,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.search, color: Colors.black),
+          icon: Icon(
+            Icons.search,
+            color: Colors.black,
+            size: Responsive.responsiveIconSize(context, 24),
+          ),
           onPressed: () {},
         ),
         actions: [
+          // Language toggle button
+          const LanguageToggleButton(),
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Colors.black),
+            icon: Icon(
+              Icons.notifications_outlined,
+              color: Colors.black,
+              size: Responsive.responsiveIconSize(context, 24),
+            ),
             onPressed: () {
-              Get.to(NotificationPage());
+              Get.to(() => const NotificationPage());
             },
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final maxWidth = Responsive.maxContentWidth(context);
+          return SingleChildScrollView(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: maxWidth ?? double.infinity,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
             // Special Offer Banner
-            _buildSpecialOfferBanner(),
+            _buildSpecialOfferBanner(context),
 
             // Top of Week Section
-            _buildSectionHeader('Top of Week', () {}),
+            _buildSectionHeader(
+              context,
+              AppLocalizations.of(context)!.top_of_week,
+              () {},
+            ),
             _buildTopOfWeekBooks(),
 
-            const SizedBox(height: 10),
+            SizedBox(height: Responsive.responsiveSpacing(context, 10)),
 
             // Best Vendors Section
-            _buildSectionHeader('Best Vendors', () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const VendorsScreen()),
-              );
-            }),
+            _buildSectionHeader(
+              context,
+              AppLocalizations.of(context)!.best_vendors,
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const VendorsScreen()),
+                );
+              },
+            ),
             _buildVendorsSection(),
 
-            const SizedBox(height: 10),
+            SizedBox(height: Responsive.responsiveSpacing(context, 10)),
 
             // Authors Section
-            _buildSectionHeader('Authors', () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AuthorsScreen()),
-              );
-            }),
+            _buildSectionHeader(
+              context,
+              AppLocalizations.of(context)!.authors,
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AuthorsScreen()),
+                );
+              },
+            ),
             _buildAuthorsSection(),
 
-            const SizedBox(height: 20),
-          ],
-        ),
+                    SizedBox(height: Responsive.responsiveSpacing(context, 20)),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -305,35 +341,40 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
         items: [
-          BottomNavigationBarItem(icon: const Icon(Icons.home), label: AppLocalizations.of(context)!.home),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined),
-            label: 'Orders',
+            icon: const Icon(Icons.home),
+            label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Cart',
+            icon: const Icon(Icons.shopping_bag_outlined),
+            label: AppLocalizations.of(context)!.order,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
+            icon: const Icon(Icons.shopping_cart_outlined),
+            label: AppLocalizations.of(context)!.cart,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person_outline),
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSpecialOfferBanner() {
+  Widget _buildSpecialOfferBanner(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(16),
+      margin: Responsive.responsiveMargin(context),
+      padding: Responsive.responsivePadding(context),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF5B4DB5), Color(0xFF7B6BC4)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(
+          Responsive.responsiveBorderRadius(context, 16),
+        ),
       ),
       child: Row(
         children: [
@@ -341,52 +382,68 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Special Offer',
+                Text(
+                  AppLocalizations.of(context)!.special_offer,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: Responsive.responsiveFontSize(context, 20),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
-                const Text(
-                  'Discover 25%',
-                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                SizedBox(height: Responsive.responsiveSpacing(context, 4)),
+                Text(
+                  AppLocalizations.of(context)!.discover_25_percent,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: Responsive.responsiveFontSize(context, 14),
+                  ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: Responsive.responsiveSpacing(context, 12)),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: const Color(0xFF5B4DB5),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 10,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Responsive.responsiveSpacing(context, 24),
+                      vertical: Responsive.responsiveSpacing(context, 10),
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(
+                        Responsive.responsiveBorderRadius(context, 20),
+                      ),
                     ),
                   ),
-                  child: const Text(
-                    'Order Now',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                  child: Text(
+                    AppLocalizations.of(context)!.order_now,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: Responsive.responsiveFontSize(context, 14),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: Responsive.responsiveSpacing(context, 16)),
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(
+              Responsive.responsiveBorderRadius(context, 8),
+            ),
             child: Container(
-              width: 90,
-              height: 130,
+              width: Responsive.responsiveImageSize(context, 90),
+              height: Responsive.responsiveImageSize(context, 130),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(8),
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(
+                  Responsive.responsiveBorderRadius(context, 8),
+                ),
               ),
-              child: const Icon(Icons.menu_book, size: 50, color: Colors.white),
+              child: Icon(
+                Icons.menu_book,
+                size: Responsive.responsiveIconSize(context, 50),
+                color: Colors.white,
+              ),
             ),
           ),
         ],
@@ -394,19 +451,27 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildSectionHeader(String title, VoidCallback onSeeAll) {
-    final showSeeAll = title == 'Best Vendors' || title == 'Authors';
+  Widget _buildSectionHeader(
+    BuildContext context,
+    String title,
+    VoidCallback onSeeAll,
+  ) {
+    final showSeeAll = title == AppLocalizations.of(context)!.best_vendors ||
+        title == AppLocalizations.of(context)!.authors;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(
+        horizontal: Responsive.responsiveSpacing(context, 16),
+        vertical: Responsive.responsiveSpacing(context, 8),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
-                fontSize: 18,
+              style: TextStyle(
+                fontSize: Responsive.responsiveFontSize(context, 18),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -414,11 +479,12 @@ class _HomeScreenState extends State<HomeScreen> {
           if (showSeeAll)
             TextButton(
               onPressed: onSeeAll,
-              child: const Text(
-                'See all',
+              child: Text(
+                AppLocalizations.of(context)!.see_all,
                 style: TextStyle(
-                  color: Color(0xFF5B4DB5),
+                  color: const Color(0xFF5B4DB5),
                   fontWeight: FontWeight.w500,
+                  fontSize: Responsive.responsiveFontSize(context, 14),
                 ),
               ),
             ),
@@ -458,7 +524,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
+                          color: Colors.black.withValues(alpha: 0.08),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -814,11 +880,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
-                                child: const Text(
-                                  'Add to Cart',
+                                child: Text(
+                                  AppLocalizations.of(context)!.add_to_cart,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
+                                    fontSize: Responsive.responsiveFontSize(context, 14),
                                   ),
                                 ),
                               ),
@@ -856,14 +923,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             ),
 
             // Tabs
-            const TabBar(
-              labelColor: Color(0xFF1E88E5),
+            TabBar(
+              labelColor: const Color(0xFF1E88E5),
               unselectedLabelColor: Colors.grey,
-              indicatorColor: Color(0xFF1E88E5),
+              indicatorColor: const Color(0xFF1E88E5),
               tabs: [
-                Tab(text: 'About'),
-                Tab(text: 'Reviews'),
-                Tab(text: 'Related'),
+                Tab(text: AppLocalizations.of(context)!.about),
+                Tab(text: AppLocalizations.of(context)!.reviews),
+                Tab(text: AppLocalizations.of(context)!.related),
               ],
             ),
             Expanded(
@@ -891,53 +958,77 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Description',
+            AppLocalizations.of(context)!.description,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: Responsive.responsiveFontSize(context, 18),
               fontWeight: FontWeight.bold,
               color: Colors.grey[800],
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: Responsive.responsiveSpacing(context, 8)),
           Text(
             widget.book.description,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: Responsive.responsiveFontSize(context, 14),
               color: Colors.grey[600],
               height: 1.5,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: Responsive.responsiveSpacing(context, 16)),
           Text(
-            'Details',
+            AppLocalizations.of(context)!.details,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: Responsive.responsiveFontSize(context, 18),
               fontWeight: FontWeight.bold,
               color: Colors.grey[800],
             ),
           ),
-          const SizedBox(height: 8),
-          _buildDetailRow('Publisher', 'Riverhead Books'),
-          _buildDetailRow('Publication Date', 'May 29, 2003'),
-          _buildDetailRow('Pages', '400'),
-          _buildDetailRow('ISBN', '978-1594480003'),
-          _buildDetailRow('Language', 'English'),
+          SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+          _buildDetailRow(
+            context,
+            AppLocalizations.of(context)!.publisher,
+            'Riverhead Books',
+          ),
+          _buildDetailRow(
+            context,
+            AppLocalizations.of(context)!.publication_date,
+            'May 29, 2003',
+          ),
+          _buildDetailRow(
+            context,
+            AppLocalizations.of(context)!.pages,
+            '400',
+          ),
+          _buildDetailRow(context, 'ISBN', '978-1594480003'),
+          _buildDetailRow(
+            context,
+            AppLocalizations.of(context)!.language,
+            'English',
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildDetailRow(String label, String value) {
+  Widget _buildDetailRow(BuildContext context, String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: EdgeInsets.symmetric(
+        vertical: Responsive.responsiveSpacing(context, 4),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: Responsive.responsiveFontSize(context, 14),
+              color: Colors.grey[600],
+            ),
+          ),
           Text(
             value,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: Responsive.responsiveFontSize(context, 14),
               fontWeight: FontWeight.bold,
               color: Colors.grey[800],
             ),
@@ -1118,18 +1209,22 @@ class _VendorsScreenState extends State<VendorsScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Vendors',
+        title: Text(
+          AppLocalizations.of(context)!.vendors,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: Colors.black),
+            icon: Icon(
+              Icons.search,
+              color: Colors.black,
+              size: Responsive.responsiveIconSize(context, 24),
+            ),
             onPressed: () {},
           ),
         ],
@@ -1137,18 +1232,27 @@ class _VendorsScreenState extends State<VendorsScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
+          Padding(
+            padding: Responsive.responsivePadding(context).copyWith(
+              top: Responsive.responsiveSpacing(context, 16),
+              bottom: Responsive.responsiveSpacing(context, 4),
+            ),
             child: Text(
-              'Our Vendors',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              AppLocalizations.of(context)!.our_vendors,
+              style: TextStyle(
+                fontSize: Responsive.responsiveFontSize(context, 14),
+                color: Colors.grey,
+              ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: Responsive.responsivePadding(context),
             child: Text(
-              'Vendors',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              AppLocalizations.of(context)!.vendors,
+              style: TextStyle(
+                fontSize: Responsive.responsiveFontSize(context, 26),
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -1211,7 +1315,7 @@ class _VendorsScreenState extends State<VendorsScreen> {
                                     height: 70,
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, error, stackTrace) {
-                                      print(
+                                      debugPrint(
                                           'Error loading ${vendor.imageUrl}: $error');
                                       return Center(
                                         child: Column(
@@ -1367,18 +1471,22 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Authors',
+        title: Text(
+          AppLocalizations.of(context)!.authors,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: Colors.black),
+            icon: Icon(
+              Icons.search,
+              color: Colors.black,
+              size: Responsive.responsiveIconSize(context, 24),
+            ),
             onPressed: () {},
           ),
         ],
@@ -1386,18 +1494,27 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
+          Padding(
+            padding: Responsive.responsivePadding(context).copyWith(
+              top: Responsive.responsiveSpacing(context, 16),
+              bottom: Responsive.responsiveSpacing(context, 4),
+            ),
             child: Text(
-              'Check top authors',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              AppLocalizations.of(context)!.check_top_authors,
+              style: TextStyle(
+                fontSize: Responsive.responsiveFontSize(context, 14),
+                color: Colors.grey,
+              ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: Responsive.responsivePadding(context),
             child: Text(
-              'Authors',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              AppLocalizations.of(context)!.authors,
+              style: TextStyle(
+                fontSize: Responsive.responsiveFontSize(context, 26),
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -1415,10 +1532,11 @@ class _AuthorsScreenState extends State<AuthorsScreen> {
             child: filteredAuthors.isEmpty
                 ? Center(
                     child: Text(
-                      'No authors found in $selectedCategory',
+                      AppLocalizations.of(context)!
+                          .no_authors_found(selectedCategory),
                       style: TextStyle(
                         color: Colors.grey[600],
-                        fontSize: 16,
+                        fontSize: Responsive.responsiveFontSize(context, 16),
                       ),
                     ),
                   )
@@ -1581,12 +1699,12 @@ class AuthorDetailScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Authors',
+        title: Text(
+          AppLocalizations.of(context)!.authors,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: Responsive.responsiveFontSize(context, 18),
           ),
         ),
       ),
@@ -1603,7 +1721,7 @@ class AuthorDetailScreen extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 20,
                     offset: const Offset(0, 5),
                   ),
@@ -1666,13 +1784,19 @@ class AuthorDetailScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: Responsive.responsivePadding(context).copyWith(
+                left: Responsive.responsiveSpacing(context, 24),
+                right: Responsive.responsiveSpacing(context, 24),
+              ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'About',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.about,
+                  style: TextStyle(
+                    fontSize: Responsive.responsiveFontSize(context, 20),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -1688,14 +1812,19 @@ class AuthorDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 32),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: Responsive.responsivePadding(context).copyWith(
+                left: Responsive.responsiveSpacing(context, 24),
+                right: Responsive.responsiveSpacing(context, 24),
+              ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Products',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.products,
+                  style: TextStyle(
+                    fontSize: Responsive.responsiveFontSize(context, 20),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -1742,7 +1871,7 @@ class AuthorDetailScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.08),
+                                    color: Colors.black.withValues(alpha: 0.08),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),

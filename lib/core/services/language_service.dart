@@ -9,6 +9,10 @@ class LanguageService {
   
   static late Box _box;
   static Locale _currentLocale = const Locale(_defaultLanguage);
+  static final ValueNotifier<Locale> _localeNotifier = ValueNotifier<Locale>(const Locale(_defaultLanguage));
+  
+  /// Stream to listen for locale changes
+  static ValueNotifier<Locale> get localeNotifier => _localeNotifier;
 
   /// Initialize the language service
   static Future<void> initialize() async {
@@ -20,6 +24,7 @@ class LanguageService {
   static Future<void> _loadSavedLanguage() async {
     final savedLanguage = _box.get(_languageKey, defaultValue: _defaultLanguage) as String;
     _currentLocale = Locale(savedLanguage);
+    _localeNotifier.value = _currentLocale;
   }
 
   /// Get current locale
@@ -35,6 +40,7 @@ class LanguageService {
     
     _currentLocale = locale;
     await _box.put(_languageKey, locale.languageCode);
+    _localeNotifier.value = locale; // Notify listeners
   }
 
   /// Set language by language code

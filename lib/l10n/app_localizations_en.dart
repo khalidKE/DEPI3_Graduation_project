@@ -81,7 +81,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signup_failed => 'signup failed';
 
   @override
-  String get create_account_and_choose_favorite_menu => 'Create account and choose favorite menu';
+  String get create_account_and_choose_favorite_menu =>
+      'Create account and choose favorite menu';
 
   @override
   String get have_an_account => 'Have an account?';
@@ -90,13 +91,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sign_In => 'Sign In';
 
   @override
-  String get by_clicking_Register_you_agree_to_our => 'By clicking Register, you agree to our  ';
+  String get by_clicking_Register_you_agree_to_our =>
+      'By clicking Register, you agree to our  ';
 
   @override
   String get terms_and_Data_Policy => 'Terms and Data Policy.';
 
   @override
-  String get please_enter_your_phone_number => 'Please enter your phone number, so we can more easily deliver your order';
+  String get please_enter_your_phone_number =>
+      'Please enter your phone number, so we can more easily deliver your order';
 
   @override
   String get continuee => 'Continue';
@@ -108,7 +111,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get congratulation => 'Congratulation!';
 
   @override
-  String get your_account_is_complete => 'your account is complete, please enjoy the best menu from us.';
+  String get your_account_is_complete =>
+      'your account is complete, please enjoy the best menu from us.';
 
   @override
   String get get_Started => 'Get Started';
@@ -147,13 +151,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tell_us_how_we_can_help => 'Tell us how we can help 👋';
 
   @override
-  String get chapter_support_message => 'Chapter are standing by for service & support!';
+  String get chapter_support_message =>
+      'Chapter are standing by for service & support!';
 
   @override
   String get send_to_your_email => 'Send to your email';
 
   @override
-  String get lorem_ipsum_text => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
+  String get lorem_ipsum_text =>
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
 
   @override
   String get you_have_5_coupons_to_use => 'You Have 5 Copons to use';
@@ -177,7 +183,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fifty_percent_discount => '50% discount';
 
   @override
-  String get novel_discount_description => 'on all Books in Novel category with online orders worldwide.';
+  String get novel_discount_description =>
+      'on all Books in Novel category with online orders worldwide.';
 
   @override
   String get new_book_available => 'There is a new book now available';
@@ -192,19 +199,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get information => 'Information';
 
   @override
-  String get today_discount_chapter => 'Today 50% discount on all books in Chapter with online orders';
+  String get today_discount_chapter =>
+      'Today 50% discount on all books in Chapter with online orders';
 
   @override
-  String get discount_feast_phrase => 'Excuse me… Who could ever resist a discount feast? 👀';
+  String get discount_feast_phrase =>
+      'Excuse me… Who could ever resist a discount feast? 👀';
 
   @override
-  String get chapter_discount_announcement => 'Hear me out. Today, October 24, 2025, Chapter has a 50% discount for any book. What are you waiting for, let\'s order now before it runs out.';
+  String get chapter_discount_announcement =>
+      'Hear me out. Today, October 24, 2025, Chapter has a 50% discount for any book. What are you waiting for, let\'s order now before it runs out.';
 
   @override
-  String get chapter_discount_details => 'All books are discounted, just order through the Chapter app to enjoy this discount. From bestsellers to timeless classics, we’ve prepared the best collection for you. Discover, read, and enjoy your next great book with Chapter.';
+  String get chapter_discount_details =>
+      'All books are discounted, just order through the Chapter app to enjoy this discount. From bestsellers to timeless classics, we’ve prepared the best collection for you. Discover, read, and enjoy your next great book with Chapter.';
 
   @override
-  String get whats_your_pick => 'So, what’s your pick? 📖 Don’t miss out—order your next read today 😉';
+  String get whats_your_pick =>
+      'So, what’s your pick? 📖 Don’t miss out—order your next read today 😉';
 
   @override
   String get grab_it_now => 'Grab it now!';
@@ -309,40 +321,51 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dismiss => 'Dismiss';
 
   @override
-  String get error_user_not_found => 'No user found with this email address. Please check your email and try again.';
+  String get error_user_not_found =>
+      'No user found with this email address. Please check your email and try again.';
 
   @override
-  String get error_wrong_password => 'Incorrect password. Please check your password and try again.';
+  String get error_wrong_password =>
+      'Incorrect password. Please check your password and try again.';
 
   @override
-  String get error_email_already_in_use => 'An account already exists with this email address. Please sign in instead.';
+  String get error_email_already_in_use =>
+      'An account already exists with this email address. Please sign in instead.';
 
   @override
-  String get error_weak_password => 'Password is too weak. Please use a stronger password with at least 6 characters.';
+  String get error_weak_password =>
+      'Password is too weak. Please use a stronger password with at least 6 characters.';
 
   @override
-  String get error_invalid_email => 'Invalid email address. Please check your email format and try again.';
+  String get error_invalid_email =>
+      'Invalid email address. Please check your email format and try again.';
 
   @override
-  String get error_user_disabled => 'This account has been disabled. Please contact support for assistance.';
+  String get error_user_disabled =>
+      'This account has been disabled. Please contact support for assistance.';
 
   @override
-  String get error_too_many_requests => 'Too many requests. Please wait a moment and try again later.';
+  String get error_too_many_requests =>
+      'Too many requests. Please wait a moment and try again later.';
 
   @override
-  String get error_operation_not_allowed => 'This operation is not allowed. Please contact support if you need assistance.';
+  String get error_operation_not_allowed =>
+      'This operation is not allowed. Please contact support if you need assistance.';
 
   @override
-  String get error_network_failed => 'Network error. Please check your internet connection and try again.';
+  String get error_network_failed =>
+      'Network error. Please check your internet connection and try again.';
 
   @override
-  String get error_timeout => 'Request timed out. Please check your connection and try again.';
+  String get error_timeout =>
+      'Request timed out. Please check your connection and try again.';
 
   @override
   String get error_generic => 'An error occurred. Please try again.';
 
   @override
-  String get error_unexpected => 'An unexpected error occurred. Please try again.';
+  String get error_unexpected =>
+      'An unexpected error occurred. Please try again.';
 
   @override
   String get loading => 'Loading...';
@@ -365,60 +388,149 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get price => 'Price';
 
-  // In app_localizations_en.dart, add these overrides:
+  @override
+  String get my_cart => 'My Cart';
 
-// Cart Screen
-@override
-String get my_cart => 'My Cart';
+  @override
+  String get cart_empty => 'Your cart is empty';
 
-@override
-String get cart_empty => 'Your cart is empty';
+  @override
+  String get item_removed => 'Item removed from cart';
 
-@override
-String get item_removed => 'Item removed from cart';
+  @override
+  String get proceed_to_checkout => 'Proceed to Checkout';
 
-@override
-String get proceed_to_checkout => 'Proceed to Checkout';
+  @override
+  String get total => 'Total';
 
-@override
-String get total => 'Total';
+  @override
+  String get my_orders => 'My Orders';
 
-// Orders Screen
-@override
-String get my_orders => 'My Orders';
+  @override
+  String get processing => 'Processing';
 
+  @override
+  String get shipped => 'Shipped';
 
+  @override
+  String get delivered => 'Delivered';
 
-@override
-String get processing => 'Processing';
+  @override
+  String get no_orders_yet => 'No orders yet';
 
-@override
-String get shipped => 'Shipped';
+  @override
+  String get start_shopping => 'Start Shopping';
 
-@override
-String get delivered => 'Delivered';
+  @override
+  String get no_orders_in_category => 'No orders in this category';
 
-@override
-String get no_orders_yet => 'No orders yet';
+  @override
+  String get order => 'Order';
 
-@override
-String get start_shopping => 'Start Shopping';
+  @override
+  String get orders => 'Orders';
 
-@override
-String get no_orders_in_category => 'No orders in this category';
+  @override
+  String get cart => 'Cart';
 
-@override
-String get order => 'Order';
+  @override
+  String get date => 'Date';
 
-@override
-String get date => 'Date';
+  @override
+  String get qty => 'Qty';
 
-@override
-String get qty => 'Qty';
+  @override
+  String get rate_order => 'Rate Order';
 
-@override
-String get rate_order => 'Rate Order';
+  @override
+  String get view_details => 'View';
 
-@override
-String get view_details => 'View Details';
+  @override
+  String get special_offer => 'Special Offer';
+
+  @override
+  String get discover_25_percent => 'Discover 25%';
+
+  @override
+  String get order_now => 'Order Now';
+
+  @override
+  String get top_of_week => 'Top of Week';
+
+  @override
+  String get best_vendors => 'Best Vendors';
+
+  @override
+  String get authors => 'Authors';
+
+  @override
+  String get see_all => 'See all';
+
+  @override
+  String get vendors => 'Vendors';
+
+  @override
+  String get our_vendors => 'Our Vendors';
+
+  @override
+  String get check_top_authors => 'Check top authors';
+
+  @override
+  String get onboarding_title_1 => 'Now reading books will be easier';
+
+  @override
+  String get onboarding_desc_1 =>
+      'Discover new worlds, join a vibrant reading community. Start your reading adventure effortlessly with us.';
+
+  @override
+  String get onboarding_title_2 => 'Your Bookish Soulmate Awaits';
+
+  @override
+  String get onboarding_desc_2 =>
+      'Let us be your guide to the perfect read. Discover books tailored to your tastes for a truly rewarding experience.';
+
+  @override
+  String get onboarding_title_3 => 'Start Your Adventure';
+
+  @override
+  String get onboarding_desc_3 =>
+      'Ready to embark on a quest for inspiration and knowledge? Your adventure begins now. Let\'s go!';
+
+  @override
+  String get get_started => 'Get Started';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get reviews => 'Reviews';
+
+  @override
+  String get related => 'Related';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get publisher => 'Publisher';
+
+  @override
+  String get publication_date => 'Publication Date';
+
+  @override
+  String get pages => 'Pages';
+
+  @override
+  String get add_to_cart => 'Add to Cart';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String no_authors_found(String category) {
+    return 'No authors found in $category';
+  }
 }

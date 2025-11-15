@@ -1,24 +1,20 @@
 import 'package:books/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 
-class Purplebuttun extends StatefulWidget {
-  late String buttunText;
-  late void Function() onTapFunction;
-  Purplebuttun({
+class PurpleButton extends StatelessWidget {
+  final String buttonText;
+  final void Function() onTapFunction;
+
+  const PurpleButton({
     super.key,
-    required this.buttunText,
+    required this.buttonText,
     required this.onTapFunction,
   });
 
   @override
-  State<Purplebuttun> createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<Purplebuttun> {
-  @override
   Widget build(BuildContext context) {
-    return (InkWell(
-      onTap: widget.onTapFunction,
+    return InkWell(
+      onTap: onTapFunction,
       child: Container(
         height: 50,
         width: double.infinity,
@@ -28,7 +24,7 @@ class _MyWidgetState extends State<Purplebuttun> {
         ),
         child: Center(
           child: Text(
-            widget.buttunText,
+            buttonText,
             style: TextStyle(
               color: AppColors.white,
               fontWeight: FontWeight.bold,
@@ -37,6 +33,6 @@ class _MyWidgetState extends State<Purplebuttun> {
           ),
         ),
       ),
-    ));
+    );
   }
 }

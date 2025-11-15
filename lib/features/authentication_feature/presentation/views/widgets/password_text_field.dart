@@ -1,27 +1,22 @@
 import 'package:books/core/colors/colors.dart';
 import 'package:books/l10n/app_localizations.dart';
-import 'package:fancy_password_field/fancy_password_field.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
 
-class Passwordtextfield extends StatefulWidget {
-  late TextEditingController enteredPassword;
-  late String? Function(String?)? validation;
+class PasswordTextField extends StatefulWidget {
+  final TextEditingController enteredPassword;
+  final String? Function(String?)? validation;
 
-  Passwordtextfield({
+  const PasswordTextField({
     super.key,
     required this.enteredPassword,
     required this.validation,
   });
 
   @override
-  State<Passwordtextfield> createState() => _PasswordtextfieldState();
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
 }
 
-class _PasswordtextfieldState extends State<Passwordtextfield> {
-  @override
+class _PasswordTextFieldState extends State<PasswordTextField> {
   bool obscureText = true;
 
   @override

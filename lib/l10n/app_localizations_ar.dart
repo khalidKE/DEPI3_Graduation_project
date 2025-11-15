@@ -364,60 +364,147 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get price => 'السعر';
-  // In app_localizations_ar.dart, add these overrides:
 
-// Cart Screen
-@override
-String get my_cart => 'سلة التسوق';
+  @override
+  String get my_cart => 'سلة التسوق';
 
-@override
-String get cart_empty => 'سلة التسوق فارغة';
+  @override
+  String get cart_empty => 'سلة التسوق فارغة';
 
-@override
-String get item_removed => 'تمت إزالة العنصر من السلة';
+  @override
+  String get item_removed => 'تمت إزالة العنصر من السلة';
 
-@override
-String get proceed_to_checkout => 'إتمام الشراء';
+  @override
+  String get proceed_to_checkout => 'إتمام الشراء';
 
-@override
-String get total => 'الإجمالي';
+  @override
+  String get total => 'الإجمالي';
 
-// Orders Screen
-@override
-String get my_orders => 'طلباتي';
+  @override
+  String get my_orders => 'طلباتي';
 
+  @override
+  String get processing => 'قيد المعالجة';
 
+  @override
+  String get shipped => 'تم الشحن';
 
-@override
-String get processing => 'قيد المعالجة';
+  @override
+  String get delivered => 'تم التوصيل';
 
-@override
-String get shipped => 'تم الشحن';
+  @override
+  String get no_orders_yet => 'لا توجد طلبات حتى الآن';
 
-@override
-String get delivered => 'تم التوصيل';
+  @override
+  String get start_shopping => 'ابدأ التسوق';
 
-@override
-String get no_orders_yet => 'لا توجد طلبات حتى الآن';
+  @override
+  String get no_orders_in_category => 'لا توجد طلبات في هذه الفئة';
 
-@override
-String get start_shopping => 'ابدأ التسوق';
+  @override
+  String get order => 'الطلب';
 
-@override
-String get no_orders_in_category => 'لا توجد طلبات في هذه الفئة';
+  @override
+  String get orders => 'الطلبات';
 
-@override
-String get order => 'الطلب';
+  @override
+  String get cart => 'السلة';
 
-@override
-String get date => 'التاريخ';
+  @override
+  String get date => 'التاريخ';
 
-@override
-String get qty => 'الكمية';
+  @override
+  String get qty => 'الكمية';
 
-@override
-String get rate_order => 'تقييم الطلب';
+  @override
+  String get rate_order => 'تقييم الطلب';
 
-@override
-String get view_details => 'عرض التفاصيل';
+  @override
+  String get view_details => 'عرض التفاصيل';
+
+  @override
+  String get special_offer => 'عرض خاص';
+
+  @override
+  String get discover_25_percent => 'اكتشف 25%';
+
+  @override
+  String get order_now => 'اطلب الآن';
+
+  @override
+  String get top_of_week => 'الأفضل هذا الأسبوع';
+
+  @override
+  String get best_vendors => 'أفضل البائعين';
+
+  @override
+  String get authors => 'المؤلفون';
+
+  @override
+  String get see_all => 'عرض الكل';
+
+  @override
+  String get vendors => 'البائعون';
+
+  @override
+  String get our_vendors => 'بائعونا';
+
+  @override
+  String get check_top_authors => 'تحقق من أفضل المؤلفين';
+
+  @override
+  String get onboarding_title_1 => 'قراءة الكتب أصبحت أسهل الآن';
+
+  @override
+  String get onboarding_desc_1 => 'اكتشف عوالم جديدة، انضم إلى مجتمع قراءة نابض بالحياة. ابدأ مغامرة القراءة الخاصة بك بسهولة معنا.';
+
+  @override
+  String get onboarding_title_2 => 'رفيقك في القراءة ينتظرك';
+
+  @override
+  String get onboarding_desc_2 => 'دعنا نكون دليلك إلى القراءة المثالية. اكتشف كتبًا مصممة خصيصًا لأذواقك لتجربة مجزية حقًا.';
+
+  @override
+  String get onboarding_title_3 => 'ابدأ مغامرتك';
+
+  @override
+  String get onboarding_desc_3 => 'هل أنت مستعد للانطلاق في رحلة بحث عن الإلهام والمعرفة؟ مغامرتك تبدأ الآن. هيا بنا!';
+
+  @override
+  String get get_started => 'ابدأ';
+
+  @override
+  String get about => 'حول';
+
+  @override
+  String get reviews => 'التقييمات';
+
+  @override
+  String get related => 'ذات صلة';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get details => 'التفاصيل';
+
+  @override
+  String get publisher => 'الناشر';
+
+  @override
+  String get publication_date => 'تاريخ النشر';
+
+  @override
+  String get pages => 'الصفحات';
+
+  @override
+  String get add_to_cart => 'أضف إلى السلة';
+
+  @override
+  String get products => 'المنتجات';
+
+  @override
+  String no_authors_found(String category) {
+    return 'لم يتم العثور على مؤلفين في $category';
+  }
 }

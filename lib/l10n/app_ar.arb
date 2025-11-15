@@ -135,8 +135,47 @@
   "start_shopping": "ابدأ التسوق",
   "no_orders_in_category": "لا توجد طلبات في هذه الفئة",
   "order": "الطلب",
+  "orders": "الطلبات",
+  "cart": "السلة",
   "date": "التاريخ",
   "qty": "الكمية",
   "rate_order": "تقييم الطلب",
-  "view_details": "عرض التفاصيل"
+  "view_details": "عرض التفاصيل",
+  "special_offer": "عرض خاص",
+  "discover_25_percent": "اكتشف 25%",
+  "order_now": "اطلب الآن",
+  "top_of_week": "الأفضل هذا الأسبوع",
+  "best_vendors": "أفضل البائعين",
+  "authors": "المؤلفون",
+  "see_all": "عرض الكل",
+  "vendors": "البائعون",
+  "our_vendors": "بائعونا",
+  "check_top_authors": "تحقق من أفضل المؤلفين",
+  "onboarding_title_1": "قراءة الكتب أصبحت أسهل الآن",
+  "onboarding_desc_1": "اكتشف عوالم جديدة، انضم إلى مجتمع قراءة نابض بالحياة. ابدأ مغامرة القراءة الخاصة بك بسهولة معنا.",
+  "onboarding_title_2": "رفيقك في القراءة ينتظرك",
+  "onboarding_desc_2": "دعنا نكون دليلك إلى القراءة المثالية. اكتشف كتبًا مصممة خصيصًا لأذواقك لتجربة مجزية حقًا.",
+  "onboarding_title_3": "ابدأ مغامرتك",
+  "onboarding_desc_3": "هل أنت مستعد للانطلاق في رحلة بحث عن الإلهام والمعرفة؟ مغامرتك تبدأ الآن. هيا بنا!",
+  "get_started": "ابدأ",
+  "about": "حول",
+  "reviews": "التقييمات",
+  "related": "ذات صلة",
+  "description": "الوصف",
+  "details": "التفاصيل",
+  "publisher": "الناشر",
+  "publication_date": "تاريخ النشر",
+  "pages": "الصفحات",
+  "language": "اللغة",
+  "add_to_cart": "أضف إلى السلة",
+  "products": "المنتجات",
+  "no_authors_found": "لم يتم العثور على مؤلفين في {category}",
+  "@no_authors_found": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  }
+
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:books/l10n/app_localizations.dart';
+import 'package:books/core/widgets/language_toggle.dart';
+import 'package:books/core/utils/responsive.dart';
 import 'package:books/features/cart_feature/presentation/views/confirm_order_screen.dart';
 import 'package:books/core/widgets/error_boundary.dart';
 
@@ -67,32 +69,53 @@ class _CartScreenState extends State<CartScreen> {
     return ErrorBoundary(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.my_cart),
+          title: Text(
+            AppLocalizations.of(context)!.my_cart,
+            style: TextStyle(
+              fontSize: Responsive.responsiveFontSize(context, 20),
+            ),
+          ),
           centerTitle: true,
           elevation: 0,
+          actions: const [
+            LanguageToggleButton(),
+          ],
         ),
-        body: Column(
-          children: [
-            // Cart items list
-            Expanded(
-              child: _cartItems.isEmpty
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.shopping_cart_outlined,
-                              size: 64, color: Colors.grey),
-                          const SizedBox(height: 16),
-                          Text(
-                            AppLocalizations.of(context)!.cart_empty,
-                            style: const TextStyle(
-                                fontSize: 18, color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    )
-                  : ListView.builder(
-                      padding: const EdgeInsets.all(16),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final maxWidth = Responsive.maxContentWidth(context);
+            return Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: maxWidth ?? double.infinity,
+                ),
+                child: Column(
+                  children: [
+                    // Cart items list
+                    Expanded(
+                      child: _cartItems.isEmpty
+                          ? Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.shopping_cart_outlined,
+                                    size: Responsive.responsiveIconSize(context, 64),
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+                                  Text(
+                                    AppLocalizations.of(context)!.cart_empty,
+                                    style: TextStyle(
+                                      fontSize: Responsive.responsiveFontSize(context, 18),
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : ListView.builder(
+                              padding: Responsive.responsivePadding(context),
                       itemCount: _cartItems.length,
                       itemBuilder: (context, index) {
                         final item = _cartItems[index];
@@ -200,18 +223,18 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                           ),
                         );
-                      },
+                            },
+                          ),
                     ),
-            ),
-            // Checkout section
-            if (_cartItems.isNotEmpty)
-              Container(
-                padding: const EdgeInsets.all(16),
+                    // Checkout section
+                    if (_cartItems.isNotEmpty)
+                      Container(
+                        padding: Responsive.responsivePadding(context),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
+                      color: Colors.grey.withValues(alpha: 0.2),
                       spreadRadius: 1,
                       blurRadius: 5,
                       offset: const Offset(0, -2),
@@ -223,49 +246,55 @@ class _CartScreenState extends State<CartScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          AppLocalizations.of(context)!.total,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                          Text(
+                            AppLocalizations.of(context)!.total,
+                            style: TextStyle(
+                              fontSize: Responsive.responsiveFontSize(context, 18),
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          '\$${_totalPrice.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF6C47FF),
+                          Text(
+                            '\$${_totalPrice.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontSize: Responsive.responsiveFontSize(context, 20),
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF6C47FF),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _checkout,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF6C47FF),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                        ],
+                      ),
+                      SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: _checkout,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF6C47FF),
+                            padding: EdgeInsets.symmetric(
+                              vertical: Responsive.responsiveSpacing(context, 16),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                Responsive.responsiveBorderRadius(context, 12),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.proceed_to_checkout,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          child: Text(
+                            AppLocalizations.of(context)!.proceed_to_checkout,
+                            style: TextStyle(
+                              fontSize: Responsive.responsiveFontSize(context, 16),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-          ],
+              ]),
+            ));
+          },
         ),
       ),
     );
