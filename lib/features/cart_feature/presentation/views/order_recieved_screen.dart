@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:books/features/home_feature/presentation/views/home_screen.dart';
 import 'package:books/core/utils/responsive.dart';
+import 'package:books/l10n/app_localizations.dart';
 
 class OrderReceivedScreen extends StatefulWidget {
   const OrderReceivedScreen({super.key});
@@ -80,7 +81,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
 
                     // Order Confirmation Text
                     Text(
-                      'You Received The Order!',
+                      AppLocalizations.of(context)!.you_received_the_order,
                       style: TextStyle(
                         fontSize: Responsive.responsiveFontSize(context, 24),
                         fontWeight: FontWeight.bold,
@@ -93,7 +94,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
 
                     // 🔢 رقم الأوردر العشوائي
                     Text(
-                      'Order #$_orderNumber',
+                      AppLocalizations.of(context)!.order_number(_orderNumber),
                       style: TextStyle(
                         fontSize: Responsive.responsiveFontSize(context, 16),
                         color: Colors.grey,
@@ -120,7 +121,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Tell us your feedback ✨',
+                            AppLocalizations.of(context)!.tell_us_your_feedback,
                             style: TextStyle(
                               fontSize: Responsive.responsiveFontSize(context, 18),
                               fontWeight: FontWeight.bold,
@@ -160,7 +161,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                           ),
                           SizedBox(height: Responsive.responsiveSpacing(context, 8)),
                           Text(
-                            '$_rating out of 5 stars',
+                            AppLocalizations.of(context)!.out_of_5_stars(_rating),
                             style: TextStyle(
                               fontSize: Responsive.responsiveFontSize(context, 14),
                               color: Colors.grey[600],
@@ -174,7 +175,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                           TextFormField(
                             controller: _feedbackController,
                             decoration: InputDecoration(
-                              hintText: 'Write something for us!',
+                              hintText: AppLocalizations.of(context)!.write_something_for_us,
                               hintStyle: TextStyle(
                                 color: Colors.grey,
                                 fontSize: Responsive.responsiveFontSize(context, 14),
@@ -241,7 +242,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                           elevation: 0,
                         ),
                         child: Text(
-                          'Done',
+                          AppLocalizations.of(context)!.done,
                           style: TextStyle(
                             fontSize: Responsive.responsiveFontSize(context, 16),
                             fontWeight: FontWeight.bold,

@@ -176,6 +176,37 @@
         "type": "String"
       }
     }
-  }
+  },
+  "you_received_the_order": "لقد استلمت الطلب!",
+  "order_number": "الطلب رقم {number}",
+  "@order_number": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "tell_us_your_feedback": "أخبرنا برأيك ✨",
+  "write_something_for_us": "اكتب شيئًا لنا!",
+  "done": "تم",
+  "out_of_5_stars": "{rating} من 5 نجوم",
+  "@out_of_5_stars": {
+    "placeholders": {
+      "rating": {
+        "type": "int"
+      }
+    }
+  },
+  "choose_date_and_time": "اختر التاريخ والوقت",
+  "no_address_set": "لم يتم تعيين العنوان",
+  "change": "تغيير",
+  "summary": "الملخص",
+  "total_payment": "إجمالي الدفع",
+  "see_details": "عرض التفاصيل",
+  "date_and_time": "التاريخ والوقت",
+  "location": "الموقع",
+  "governorate": "المحافظة",
+  "city": "المدينة",
+  "confirmation": "تأكيد"
 
 }

@@ -176,6 +176,37 @@
         "type": "String"
       }
     }
-  }
+  },
+  "you_received_the_order": "You Received The Order!",
+  "order_number": "Order #{number}",
+  "@order_number": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "tell_us_your_feedback": "Tell us your feedback ✨",
+  "write_something_for_us": "Write something for us!",
+  "done": "Done",
+  "out_of_5_stars": "{rating} out of 5 stars",
+  "@out_of_5_stars": {
+    "placeholders": {
+      "rating": {
+        "type": "int"
+      }
+    }
+  },
+  "choose_date_and_time": "Choose date and time",
+  "no_address_set": "No Address Set",
+  "change": "Change",
+  "summary": "Summary",
+  "total_payment": "Total Payment",
+  "see_details": "See details",
+  "date_and_time": "Date & time",
+  "location": "Location",
+  "governorate": "Governorate",
+  "city": "City",
+  "confirmation": "Confirmation"
 
    }

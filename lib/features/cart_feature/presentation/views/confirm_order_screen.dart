@@ -101,7 +101,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
 
   String _getFormattedDateTime() {
     if (_selectedDateTime == null) {
-      return 'Choose date and time';
+      return AppLocalizations.of(context)!.choose_date_and_time;
     }
     return DateFormat('MMM d, yyyy - h:mm a').format(_selectedDateTime!);
   }
@@ -233,7 +233,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 children: [
                   Flexible(
                     child: Text(
-                      'Total Payment',
+                      AppLocalizations.of(context)!.total_payment,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: Responsive.responsiveFontSize(context, 16),
@@ -382,7 +382,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  _addressData['name'] ?? 'No Address Set',
+                                  _addressData['name'] ?? AppLocalizations.of(context)!.no_address_set,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: Responsive.responsiveFontSize(context, 16),
@@ -407,7 +407,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                   ),
                                   child: Text(
-                                    'Change',
+                                    AppLocalizations.of(context)!.change,
                                     style: TextStyle(
                                       color: const Color(0xFF6C47FF),
                                       fontSize: Responsive.responsiveFontSize(context, 14),
@@ -450,7 +450,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Summary',
+                            AppLocalizations.of(context)!.summary,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: Responsive.responsiveFontSize(context, 16),
@@ -463,7 +463,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                             children: [
                               Flexible(
                                 child: Text(
-                                  'Price',
+                                  AppLocalizations.of(context)!.price,
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: Responsive.responsiveFontSize(context, 14),
@@ -509,7 +509,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                             children: [
                               Flexible(
                                 child: Text(
-                                  'Total Payment',
+                                  AppLocalizations.of(context)!.total_payment,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
@@ -541,7 +541,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'See details',
+                                  AppLocalizations.of(context)!.see_details,
                                   style: TextStyle(
                                     color: const Color(0xFF6C47FF),
                                     fontSize: Responsive.responsiveFontSize(context, 14),
@@ -604,7 +604,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Date & time',
+                                    AppLocalizations.of(context)!.date_and_time,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: Responsive.responsiveFontSize(context, 16),

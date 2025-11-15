@@ -60,7 +60,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Location',
+          AppLocalizations.of(context)!.location,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -88,8 +88,8 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                     TextFormField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        labelText: 'Name',
-                        hintText: 'Name',
+                        labelText: AppLocalizations.of(context)!.name,
+                        hintText: AppLocalizations.of(context)!.name,
                         labelStyle: TextStyle(
                           fontSize: Responsive.responsiveFontSize(context, 14),
                         ),
@@ -133,8 +133,8 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                     TextFormField(
                       controller: _governorateController,
                       decoration: InputDecoration(
-                        labelText: 'Governorate',
-                        hintText: 'Governorate',
+                        labelText: AppLocalizations.of(context)!.governorate,
+                        hintText: AppLocalizations.of(context)!.governorate,
                         labelStyle: TextStyle(
                           fontSize: Responsive.responsiveFontSize(context, 14),
                         ),
@@ -178,8 +178,8 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                     TextFormField(
                       controller: _cityController,
                       decoration: InputDecoration(
-                        labelText: 'City',
-                        hintText: 'City',
+                        labelText: AppLocalizations.of(context)!.city,
+                        hintText: AppLocalizations.of(context)!.city,
                         labelStyle: TextStyle(
                           fontSize: Responsive.responsiveFontSize(context, 14),
                         ),
@@ -238,7 +238,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                           elevation: 0,
                         ),
                         child: Text(
-                          'Confirmation',
+                          AppLocalizations.of(context)!.confirmation,
                           style: TextStyle(
                             fontSize: Responsive.responsiveFontSize(context, 16),
                             fontWeight: FontWeight.bold,

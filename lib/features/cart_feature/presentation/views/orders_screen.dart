@@ -219,7 +219,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 .withValues(alpha: 0.3)),
                       ),
                       child: Text(
-                        order['status'],
+                        _getLocalizedStatus(order['status']),
                         style: TextStyle(
                           color: _getStatusColor(order['status']),
                           fontSize: Responsive.responsiveFontSize(context, 12),
@@ -389,6 +389,19 @@ class _OrdersScreenState extends State<OrdersScreen> {
         );
       },
     );
+  }
+
+  String _getLocalizedStatus(String status) {
+    switch (status) {
+      case 'Processing':
+        return AppLocalizations.of(context)!.processing;
+      case 'Shipped':
+        return AppLocalizations.of(context)!.shipped;
+      case 'Delivered':
+        return AppLocalizations.of(context)!.delivered;
+      default:
+        return status;
+    }
   }
 
   Color _getStatusColor(String status) {

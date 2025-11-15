@@ -507,4 +507,59 @@ class AppLocalizationsAr extends AppLocalizations {
   String no_authors_found(String category) {
     return 'لم يتم العثور على مؤلفين في $category';
   }
+
+  @override
+  String get you_received_the_order => 'لقد استلمت الطلب!';
+
+  @override
+  String order_number(int number) {
+    return 'الطلب رقم $number';
+  }
+
+  @override
+  String get tell_us_your_feedback => 'أخبرنا برأيك ✨';
+
+  @override
+  String get write_something_for_us => 'اكتب شيئًا لنا!';
+
+  @override
+  String get done => 'تم';
+
+  @override
+  String out_of_5_stars(int rating) {
+    return '$rating من 5 نجوم';
+  }
+
+  @override
+  String get choose_date_and_time => 'اختر التاريخ والوقت';
+
+  @override
+  String get no_address_set => 'لم يتم تعيين العنوان';
+
+  @override
+  String get change => 'تغيير';
+
+  @override
+  String get summary => 'الملخص';
+
+  @override
+  String get total_payment => 'إجمالي الدفع';
+
+  @override
+  String get see_details => 'عرض التفاصيل';
+
+  @override
+  String get date_and_time => 'التاريخ والوقت';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get governorate => 'المحافظة';
+
+  @override
+  String get city => 'المدينة';
+
+  @override
+  String get confirmation => 'تأكيد';
 }
