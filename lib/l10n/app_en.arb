@@ -117,5 +117,27 @@
    "empty_state_no_favorites":"No favorites yet",
    "try_again":"Try Again",
    "order_details":"Order Details",
-   "price":"Price"
+   "price":"Price",
+    "@@locale": "en",
+
+  "my_cart": "My Cart",
+  "cart_empty": "Your cart is empty",
+  "item_removed": "Item removed from cart",
+  "proceed_to_checkout": "Proceed to Checkout",
+  "total": "Total",
+
+  "my_orders": "My Orders",
+  "all": "All",
+  "processing": "Processing",
+  "shipped": "Shipped",
+  "delivered": "Delivered",
+  "no_orders_yet": "No orders yet",
+  "start_shopping": "Start Shopping",
+  "no_orders_in_category": "No orders in this category",
+  "order": "Order",
+  "date": "Date",
+  "qty": "Qty",
+  "rate_order": "Rate Order",
+  "view_details": "View Details"
+
 }

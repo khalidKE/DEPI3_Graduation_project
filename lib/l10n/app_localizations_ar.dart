@@ -81,8 +81,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signup_failed => 'فشل التسجيل';
 
   @override
-  String get create_account_and_choose_favorite_menu =>
-      'انشئ حسابا و اختر قائمتك المفضلة';
+  String get create_account_and_choose_favorite_menu => 'انشئ حسابا و اختر قائمتك المفضلة';
 
   @override
   String get have_an_account => 'تمتلك حسابا ؟';
@@ -91,15 +90,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sign_In => 'تسجيل الحساب';
 
   @override
-  String get by_clicking_Register_you_agree_to_our =>
-      ' بالضغط على زر التسجيل انت توافق على  ';
+  String get by_clicking_Register_you_agree_to_our => ' بالضغط على زر التسجيل انت توافق على  ';
 
   @override
   String get terms_and_Data_Policy => 'الشروط وسياسة البيانات';
 
   @override
-  String get please_enter_your_phone_number =>
-      'يرجى إدخال رقم هاتفك، حتى نتمكن من توصيل طلبك بسهولة أكبر';
+  String get please_enter_your_phone_number => 'يرجى إدخال رقم هاتفك، حتى نتمكن من توصيل طلبك بسهولة أكبر';
 
   @override
   String get continuee => 'استمرار';
@@ -111,8 +108,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get congratulation => 'تهانيا!';
 
   @override
-  String get your_account_is_complete =>
-      'حسابك مكتمل، من فضلك استمتع بأفضل قائمة منا.';
+  String get your_account_is_complete => 'حسابك مكتمل، من فضلك استمتع بأفضل قائمة منا.';
 
   @override
   String get get_Started => 'ابدأ الان';
@@ -157,8 +153,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get send_to_your_email => 'أرسل إلى بريدك الإلكتروني';
 
   @override
-  String get lorem_ipsum_text =>
-      'لوريم إيبسوم هو نص تجريبي في صناعة الطباعة والتنضيد.';
+  String get lorem_ipsum_text => 'لوريم إيبسوم هو نص تجريبي في صناعة الطباعة والتنضيد.';
 
   @override
   String get you_have_5_coupons_to_use => 'لديك 5 كوبونات للاستخدام';
@@ -182,8 +177,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get fifty_percent_discount => 'خصم 50٪';
 
   @override
-  String get novel_discount_description =>
-      'على جميع كتب الروايات مع الطلبات عبر الإنترنت حول العالم';
+  String get novel_discount_description => 'على جميع كتب الروايات مع الطلبات عبر الإنترنت حول العالم';
 
   @override
   String get new_book_available => 'يوجد كتاب جديد متاح الآن';
@@ -198,23 +192,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get information => 'معلومة';
 
   @override
-  String get today_discount_chapter =>
-      'اليوم خصم 50٪ على جميع كتب Chapter مع الطلبات عبر التطبيق';
+  String get today_discount_chapter => 'اليوم خصم 50٪ على جميع كتب Chapter مع الطلبات عبر التطبيق';
 
   @override
   String get discount_feast_phrase => 'من يستطيع مقاومة وليمة الخصومات؟ 👀';
 
   @override
-  String get chapter_discount_announcement =>
-      'اسمعني جيدًا، اليوم 24 أكتوبر 2025، لدى Chapter خصم 50٪ على أي كتاب. ماذا تنتظر؟ اطلب الآن قبل نفاد الكمية.';
+  String get chapter_discount_announcement => 'اسمعني جيدًا، اليوم 24 أكتوبر 2025، لدى Chapter خصم 50٪ على أي كتاب. ماذا تنتظر؟ اطلب الآن قبل نفاد الكمية.';
 
   @override
-  String get chapter_discount_details =>
-      'جميع الكتب عليها خصم، فقط اطلب عبر تطبيق Chapter للاستفادة. من الكتب الأكثر مبيعًا إلى الكلاسيكيات الخالدة، جهزنا لك أفضل مجموعة. اكتشف، واقرأ، واستمتع بكتابك القادم.';
+  String get chapter_discount_details => 'جميع الكتب عليها خصم، فقط اطلب عبر تطبيق Chapter للاستفادة. من الكتب الأكثر مبيعًا إلى الكلاسيكيات الخالدة، جهزنا لك أفضل مجموعة. اكتشف، واقرأ، واستمتع بكتابك القادم.';
 
   @override
-  String get whats_your_pick =>
-      'ما هو اختيارك؟ 📖 لا تفوت الفرصة—اطلب كتابك القادم اليوم 😉';
+  String get whats_your_pick => 'ما هو اختيارك؟ 📖 لا تفوت الفرصة—اطلب كتابك القادم اليوم 😉';
 
   @override
   String get grab_it_now => 'احصل عليه الآن!';
@@ -319,44 +309,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dismiss => 'إلغاء';
 
   @override
-  String get error_user_not_found =>
-      'لم يتم العثور على مستخدم بهذا البريد الإلكتروني. يرجى التحقق من بريدك والمحاولة مرة أخرى.';
+  String get error_user_not_found => 'لم يتم العثور على مستخدم بهذا البريد الإلكتروني. يرجى التحقق من بريدك والمحاولة مرة أخرى.';
 
   @override
-  String get error_wrong_password =>
-      'كلمة مرور غير صحيحة. يرجى التحقق من كلمة المرور والمحاولة مرة أخرى.';
+  String get error_wrong_password => 'كلمة مرور غير صحيحة. يرجى التحقق من كلمة المرور والمحاولة مرة أخرى.';
 
   @override
-  String get error_email_already_in_use =>
-      'يوجد حساب بالفعل بهذا البريد الإلكتروني. يرجى تسجيل الدخول بدلاً من ذلك.';
+  String get error_email_already_in_use => 'يوجد حساب بالفعل بهذا البريد الإلكتروني. يرجى تسجيل الدخول بدلاً من ذلك.';
 
   @override
-  String get error_weak_password =>
-      'كلمة المرور ضعيفة جداً. يرجى استخدام كلمة مرور أقوى تحتوي على 6 أحرف على الأقل.';
+  String get error_weak_password => 'كلمة المرور ضعيفة جداً. يرجى استخدام كلمة مرور أقوى تحتوي على 6 أحرف على الأقل.';
 
   @override
-  String get error_invalid_email =>
-      'عنوان بريد إلكتروني غير صالح. يرجى التحقق من تنسيق البريد والمحاولة مرة أخرى.';
+  String get error_invalid_email => 'عنوان بريد إلكتروني غير صالح. يرجى التحقق من تنسيق البريد والمحاولة مرة أخرى.';
 
   @override
-  String get error_user_disabled =>
-      'تم تعطيل هذا الحساب. يرجى الاتصال بالدعم للحصول على المساعدة.';
+  String get error_user_disabled => 'تم تعطيل هذا الحساب. يرجى الاتصال بالدعم للحصول على المساعدة.';
 
   @override
-  String get error_too_many_requests =>
-      'طلبات كثيرة جداً. يرجى الانتظار قليلاً والمحاولة مرة أخرى لاحقاً.';
+  String get error_too_many_requests => 'طلبات كثيرة جداً. يرجى الانتظار قليلاً والمحاولة مرة أخرى لاحقاً.';
 
   @override
-  String get error_operation_not_allowed =>
-      'هذه العملية غير مسموحة. يرجى الاتصال بالدعم إذا كنت بحاجة إلى مساعدة.';
+  String get error_operation_not_allowed => 'هذه العملية غير مسموحة. يرجى الاتصال بالدعم إذا كنت بحاجة إلى مساعدة.';
 
   @override
-  String get error_network_failed =>
-      'خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
+  String get error_network_failed => 'خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
 
   @override
-  String get error_timeout =>
-      'انتهت مهلة الطلب. يرجى التحقق من اتصالك والمحاولة مرة أخرى.';
+  String get error_timeout => 'انتهت مهلة الطلب. يرجى التحقق من اتصالك والمحاولة مرة أخرى.';
 
   @override
   String get error_generic => 'حدث خطأ. يرجى المحاولة مرة أخرى.';
@@ -384,4 +364,60 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get price => 'السعر';
+  // In app_localizations_ar.dart, add these overrides:
+
+// Cart Screen
+@override
+String get my_cart => 'سلة التسوق';
+
+@override
+String get cart_empty => 'سلة التسوق فارغة';
+
+@override
+String get item_removed => 'تمت إزالة العنصر من السلة';
+
+@override
+String get proceed_to_checkout => 'إتمام الشراء';
+
+@override
+String get total => 'الإجمالي';
+
+// Orders Screen
+@override
+String get my_orders => 'طلباتي';
+
+
+
+@override
+String get processing => 'قيد المعالجة';
+
+@override
+String get shipped => 'تم الشحن';
+
+@override
+String get delivered => 'تم التوصيل';
+
+@override
+String get no_orders_yet => 'لا توجد طلبات حتى الآن';
+
+@override
+String get start_shopping => 'ابدأ التسوق';
+
+@override
+String get no_orders_in_category => 'لا توجد طلبات في هذه الفئة';
+
+@override
+String get order => 'الطلب';
+
+@override
+String get date => 'التاريخ';
+
+@override
+String get qty => 'الكمية';
+
+@override
+String get rate_order => 'تقييم الطلب';
+
+@override
+String get view_details => 'عرض التفاصيل';
 }

@@ -117,5 +117,26 @@
   "empty_state_no_favorites": "لا توجد عناصر مفضلة",
   "try_again": "حاول مرة أخرى",
   "order_details": "تفاصيل الطلب",
-  "price": "السعر"
+  "price": "السعر",
+    "@@locale": "ar",
+
+  "my_cart": "سلة التسوق",
+  "cart_empty": "سلة التسوق فارغة",
+  "item_removed": "تمت إزالة العنصر من السلة",
+  "proceed_to_checkout": "إتمام الشراء",
+  "total": "الإجمالي",
+
+  "my_orders": "طلباتي",
+  "all": "الكل",
+  "processing": "قيد المعالجة",
+  "shipped": "تم الشحن",
+  "delivered": "تم التوصيل",
+  "no_orders_yet": "لا توجد طلبات حتى الآن",
+  "start_shopping": "ابدأ التسوق",
+  "no_orders_in_category": "لا توجد طلبات في هذه الفئة",
+  "order": "الطلب",
+  "date": "التاريخ",
+  "qty": "الكمية",
+  "rate_order": "تقييم الطلب",
+  "view_details": "عرض التفاصيل"
 }

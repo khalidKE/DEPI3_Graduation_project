@@ -12,6 +12,7 @@ import 'package:books/features/onboarding_feature/data/hive_helper.dart';
 import 'package:books/features/splash_feature/presentation/views/splash_screen.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:intl/intl.dart' show Bidi;
 
 @pragma('vm:entry-point')
 Future<void> _backgroundHandler(RemoteMessage message) async {
@@ -97,7 +98,24 @@ class _MyAppState extends State<MyApp> {
               }
             });
           }
-          return child ?? const SizedBox.shrink();
+          
+          // Ensure we have a valid context before using it
+          if (child == null) return const SizedBox.shrink();
+          
+          // Get the current locale and set text direction
+          final locale = Localizations.localeOf(context);
+          final isRTL = Bidi.isRtlLanguage(locale.languageCode);
+          
+          return Directionality(
+            textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+            child: MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                // Ensure text size respects accessibility settings
+                textScaleFactor: MediaQuery.textScaleFactorOf(context).clamp(0.8, 1.5),
+              ),
+              child: child,
+            ),
+          );
         },
       ),
     );

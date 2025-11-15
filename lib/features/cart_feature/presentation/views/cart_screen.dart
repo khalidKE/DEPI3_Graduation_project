@@ -1,0 +1,273 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:books/l10n/app_localizations.dart';
+import 'package:books/features/cart_feature/presentation/views/confirm_order_screen.dart';
+import 'package:books/core/widgets/error_boundary.dart';
+
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  // Sample cart items - in a real app, this would come from a state management solution
+  final List<Map<String, dynamic>> _cartItems = [
+    {
+      'id': '1',
+      'title': 'The Kite Runner',
+      'author': 'Khaled Hosseini',
+      'price': 39.99,
+      'quantity': 1,
+      'imageUrl': 'assets/b1.png',
+    },
+    {
+      'id': '2',
+      'title': 'The Subtle Art',
+      'author': 'Mark Manson',
+      'price': 19.99,
+      'quantity': 2,
+      'imageUrl': 'assets/b2.png',
+    },
+  ];
+
+  double get _totalPrice {
+    return _cartItems.fold(
+        0, (sum, item) => sum + (item['price'] * item['quantity']));
+  }
+
+  void _updateQuantity(int index, int newQuantity) {
+    setState(() {
+      if (newQuantity > 0) {
+        _cartItems[index]['quantity'] = newQuantity;
+      } else {
+        _cartItems.removeAt(index);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.item_removed)),
+        );
+      }
+    });
+  }
+
+  void _checkout() {
+    if (_cartItems.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context)!.cart_empty)),
+      );
+      return;
+    }
+
+    // Navigate to confirm order screen
+    Get.to(() => const ConfirmOrderScreen());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ErrorBoundary(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.my_cart),
+          centerTitle: true,
+          elevation: 0,
+        ),
+        body: Column(
+          children: [
+            // Cart items list
+            Expanded(
+              child: _cartItems.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.shopping_cart_outlined,
+                              size: 64, color: Colors.grey),
+                          const SizedBox(height: 16),
+                          Text(
+                            AppLocalizations.of(context)!.cart_empty,
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: _cartItems.length,
+                      itemBuilder: (context, index) {
+                        final item = _cartItems[index];
+                        return Card(
+                          margin: const EdgeInsets.only(bottom: 16),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Row(
+                              children: [
+                                // Book cover
+                                Container(
+                                  width: 80,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.grey[200],
+                                  ),
+                                  child: item['imageUrl'] != null &&
+                                          item['imageUrl'].startsWith('http')
+                                      ? Image.network(
+                                          item['imageUrl'],
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  const Icon(Icons.book,
+                                                      size: 40,
+                                                      color: Colors.grey),
+                                        )
+                                      : item['imageUrl'] != null
+                                          ? Image.asset(
+                                              item['imageUrl'],
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (context, error,
+                                                      stackTrace) =>
+                                                  const Icon(Icons.book,
+                                                      size: 40,
+                                                      color: Colors.grey),
+                                            )
+                                          : const Icon(Icons.book,
+                                              size: 40, color: Colors.grey),
+                                ),
+                                const SizedBox(width: 16),
+                                // Book details
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item['title'],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        item['author'],
+                                        style: TextStyle(
+                                          color: Colors.grey[600],
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        '\$${item['price'].toStringAsFixed(2)}',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF6C47FF),
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // Quantity controls
+                                Column(
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.add_circle_outline,
+                                          size: 20),
+                                      onPressed: () => _updateQuantity(
+                                        index,
+                                        item['quantity'] + 1,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${item['quantity']}',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(
+                                          Icons.remove_circle_outline,
+                                          size: 20),
+                                      onPressed: () => _updateQuantity(
+                                        index,
+                                        item['quantity'] - 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+            // Checkout section
+            if (_cartItems.isNotEmpty)
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, -2),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.total,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '\$${_totalPrice.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF6C47FF),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _checkout,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF6C47FF),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.proceed_to_checkout,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

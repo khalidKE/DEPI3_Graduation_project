@@ -2,6 +2,8 @@ import 'package:books/features/notification_feature/presentation/views/notificat
 import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:books/features/profile_feature/presentation/views/profile.dart';
+import 'package:books/features/cart_feature/presentation/views/cart_screen.dart';
+import 'package:books/features/cart_feature/presentation/views/orders_screen.dart';
 import 'package:get/get.dart';
 
 // Models
@@ -272,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF5B4DB5),
+        selectedItemColor: const Color(0xFF6C47FF),
         unselectedItemColor: Colors.grey,
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -287,15 +289,11 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
             case 1:
               // Orders
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalizations.of(context)!.orders_screen_coming_soon)),
-              );
+              Get.to(() => const OrdersScreen());
               break;
             case 2:
               // Cart
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalizations.of(context)!.cart_screen_coming_soon)),
-              );
+              Get.to(() => const CartScreen());
               break;
             case 3:
               // Profile
