@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({super.key});
+  const SuccessScreen({super.key, required this.user});
+
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +65,20 @@ class SuccessScreen extends StatelessWidget {
                       SizedBox(height: Responsive.responsiveSpacing(context, 40)),
                       PurpleButton(
                         buttonText: AppLocalizations.of(context)!.get_Started,
-                        onTapFunction: () {
-                          FirestoreServices.addUser(UserModel.user.toJson());
-                          Get.to(() => const HomeScreen());
-                          //get data from json
+                        onTapFunction: () async {
+                          final localizations = AppLocalizations.of(context);
+                          try {
+                            await FirestoreServices.addUser(user);
+                            Get.to(() => const HomeScreen());
+                          } catch (e) {
+                            Get.snackbar(
+                              localizations?.error ?? 'Error',
+                              localizations?.signup_failed ??
+                                  'Could not complete signup',
+                              backgroundColor: AppColors.purple,
+                              colorText: AppColors.white,
+                            );
+                          }
                         },
                       ),
                     ],

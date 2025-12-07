@@ -1,310 +1,350 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:books/l10n/app_localizations.dart';
-import 'package:books/core/widgets/language_toggle.dart';
 import 'package:books/core/utils/responsive.dart';
-import 'package:books/features/cart_feature/presentation/views/confirm_order_screen.dart';
 import 'package:books/core/widgets/error_boundary.dart';
+import 'package:books/core/widgets/language_toggle.dart';
+import 'package:books/features/cart_feature/data/cart_item.dart';
+import 'package:books/features/cart_feature/presentation/view_model/cart_state.dart';
+import 'package:books/features/cart_feature/presentation/view_model/cart_view_model.dart';
+import 'package:books/features/cart_feature/presentation/views/confirm_order_screen.dart';
+import 'package:books/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CartViewModel(),
+      child: const ErrorBoundary(
+        child: _CartView(),
+      ),
+    );
+  }
 }
 
-class _CartScreenState extends State<CartScreen> {
-  // Sample cart items - in a real app, this would come from a state management solution
-  final List<Map<String, dynamic>> _cartItems = [
-    {
-      'id': '1',
-      'title': 'The Kite Runner',
-      'author': 'Khaled Hosseini',
-      'price': 39.99,
-      'quantity': 1,
-      'imageUrl': 'assets/b1.png',
-    },
-    {
-      'id': '2',
-      'title': 'The Subtle Art',
-      'author': 'Mark Manson',
-      'price': 19.99,
-      'quantity': 2,
-      'imageUrl': 'assets/b2.png',
-    },
-  ];
+class _CartView extends StatelessWidget {
+  const _CartView();
 
-  double get _totalPrice {
-    return _cartItems.fold(
-        0, (sum, item) => sum + (item['price'] * item['quantity']));
-  }
-
-  void _updateQuantity(int index, int newQuantity) {
-    setState(() {
-      if (newQuantity > 0) {
-        _cartItems[index]['quantity'] = newQuantity;
-      } else {
-        _cartItems.removeAt(index);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.item_removed)),
-        );
-      }
-    });
-  }
-
-  void _checkout() {
-    if (_cartItems.isEmpty) {
+  void _handleMessages(BuildContext context, CartState state) {
+    final localizations = AppLocalizations.of(context);
+    if (state.message == 'removed') {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.cart_empty)),
+        SnackBar(content: Text(localizations?.item_removed ?? 'Item removed')),
       );
-      return;
+    } else if (state.message == 'empty') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(localizations?.cart_empty ?? 'Cart is empty')),
+      );
     }
-
-    // Navigate to confirm order screen
-    Get.to(() => const ConfirmOrderScreen());
   }
 
   @override
   Widget build(BuildContext context) {
-    return ErrorBoundary(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            AppLocalizations.of(context)!.my_cart,
-            style: TextStyle(
-              fontSize: Responsive.responsiveFontSize(context, 20),
+    return BlocConsumer<CartViewModel, CartState>(
+      listener: (context, state) {
+        _handleMessages(context, state);
+        if (state.shouldNavigateToConfirm) {
+          context.read<CartViewModel>().acknowledgeNavigation();
+          Get.to(() => const ConfirmOrderScreen());
+        }
+      },
+      builder: (context, state) {
+        final viewModel = context.read<CartViewModel>();
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              AppLocalizations.of(context)!.my_cart,
+              style: TextStyle(
+                fontSize: Responsive.responsiveFontSize(context, 20),
+              ),
             ),
+            centerTitle: true,
+            elevation: 0,
+            actions: const [
+              LanguageToggleButton(),
+            ],
           ),
-          centerTitle: true,
-          elevation: 0,
-          actions: const [
-            LanguageToggleButton(),
-          ],
-        ),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            final maxWidth = Responsive.maxContentWidth(context);
-            return Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: maxWidth ?? double.infinity,
-                ),
-                child: Column(
-                  children: [
-                    // Cart items list
-                    Expanded(
-                      child: _cartItems.isEmpty
-                          ? Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.shopping_cart_outlined,
-                                    size: Responsive.responsiveIconSize(context, 64),
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(height: Responsive.responsiveSpacing(context, 16)),
-                                  Text(
-                                    AppLocalizations.of(context)!.cart_empty,
-                                    style: TextStyle(
-                                      fontSize: Responsive.responsiveFontSize(context, 18),
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              final maxWidth = Responsive.maxContentWidth(context);
+              return Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: maxWidth ?? double.infinity,
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: state.isEmpty
+                            ? _EmptyCart(state: state)
+                            : ListView.builder(
+                                padding: Responsive.responsivePadding(context),
+                                itemCount: state.items.length,
+                                itemBuilder: (context, index) {
+                                  final item = state.items[index];
+                                  return _CartItemCard(
+                                    item: item,
+                                    onIncrease: () =>
+                                        viewModel.increaseQuantity(item.id),
+                                    onDecrease: () =>
+                                        viewModel.decreaseQuantity(item.id),
+                                    onRemove: () =>
+                                        viewModel.removeItem(item.id),
+                                  );
+                                },
                               ),
-                            )
-                          : ListView.builder(
-                              padding: Responsive.responsivePadding(context),
-                      itemCount: _cartItems.length,
-                      itemBuilder: (context, index) {
-                        final item = _cartItems[index];
-                        return Card(
-                          margin: EdgeInsets.only(
-                            bottom: Responsive.responsiveSpacing(context, 16),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(
-                              Responsive.responsiveSpacing(context, 12),
-                            ),
-                            child: Row(
-                              children: [
-                                // Book cover
-                                Container(
-                                  width: Responsive.responsiveImageSize(context, 80),
-                                  height: Responsive.responsiveImageSize(context, 100),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      Responsive.responsiveBorderRadius(context, 8),
-                                    ),
-                                    color: Colors.grey[200],
-                                  ),
-                                  child: item['imageUrl'] != null &&
-                                          item['imageUrl'].startsWith('http')
-                                      ? Image.network(
-                                          item['imageUrl'],
-                                          fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
-                                                  Icon(Icons.book,
-                                                      size: Responsive.responsiveIconSize(context, 40),
-                                                      color: Colors.grey),
-                                        )
-                                      : item['imageUrl'] != null
-                                          ? Image.asset(
-                                              item['imageUrl'],
-                                              fit: BoxFit.cover,
-                                              errorBuilder: (context, error,
-                                                      stackTrace) =>
-                                                  Icon(Icons.book,
-                                                      size: Responsive.responsiveIconSize(context, 40),
-                                                      color: Colors.grey),
-                                            )
-                                          : Icon(Icons.book,
-                                              size: Responsive.responsiveIconSize(context, 40),
-                                              color: Colors.grey),
-                                ),
-                                SizedBox(width: Responsive.responsiveSpacing(context, 16)),
-                                // Book details
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item['title'],
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: Responsive.responsiveFontSize(context, 16),
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      SizedBox(height: Responsive.responsiveSpacing(context, 4)),
-                                      Text(
-                                        item['author'],
-                                        style: TextStyle(
-                                          color: Colors.grey[600],
-                                          fontSize: Responsive.responsiveFontSize(context, 14),
-                                        ),
-                                      ),
-                                      SizedBox(height: Responsive.responsiveSpacing(context, 8)),
-                                      Text(
-                                        '\$${item['price'].toStringAsFixed(2)}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color(0xFF6C47FF),
-                                          fontSize: Responsive.responsiveFontSize(context, 16),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                // Quantity controls
-                                Column(
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.add_circle_outline,
-                                          size: Responsive.responsiveIconSize(context, 20)),
-                                      onPressed: () => _updateQuantity(
-                                        index,
-                                        item['quantity'] + 1,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${item['quantity']}',
-                                      style: TextStyle(
-                                        fontSize: Responsive.responsiveFontSize(context, 16),
-                                      ),
-                                    ),
-                                    IconButton(
-                                      icon: Icon(
-                                          Icons.remove_circle_outline,
-                                          size: Responsive.responsiveIconSize(context, 20)),
-                                      onPressed: () => _updateQuantity(
-                                        index,
-                                        item['quantity'] - 1,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                            },
-                          ),
-                    ),
-                    // Checkout section
-                    if (_cartItems.isNotEmpty)
-                      Container(
-                        padding: Responsive.responsivePadding(context),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withValues(alpha: 0.2),
-                      spreadRadius: 1,
-                      blurRadius: 5,
-                      offset: const Offset(0, -2),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                          Text(
-                            AppLocalizations.of(context)!.total,
-                            style: TextStyle(
-                              fontSize: Responsive.responsiveFontSize(context, 18),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '\$${_totalPrice.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontSize: Responsive.responsiveFontSize(context, 20),
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xFF6C47FF),
-                            ),
-                          ),
-                        ],
                       ),
-                      SizedBox(height: Responsive.responsiveSpacing(context, 16)),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: _checkout,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF6C47FF),
-                            padding: EdgeInsets.symmetric(
-                              vertical: Responsive.responsiveSpacing(context, 16),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                Responsive.responsiveBorderRadius(context, 12),
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.proceed_to_checkout,
-                            style: TextStyle(
-                              fontSize: Responsive.responsiveFontSize(context, 16),
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
+                      if (!state.isEmpty) _CheckoutBar(total: state.total, onCheckout: viewModel.checkout),
                     ],
                   ),
                 ),
-              ]),
-            ));
-          },
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _EmptyCart extends StatelessWidget {
+  const _EmptyCart({required this.state});
+
+  final CartState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.shopping_cart_outlined,
+            size: Responsive.responsiveIconSize(context, 64),
+            color: Colors.grey,
+          ),
+          SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+          Text(
+            AppLocalizations.of(context)!.cart_empty,
+            style: TextStyle(
+              fontSize: Responsive.responsiveFontSize(context, 18),
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CartItemCard extends StatelessWidget {
+  const _CartItemCard({
+    required this.item,
+    required this.onIncrease,
+    required this.onDecrease,
+    required this.onRemove,
+  });
+
+  final CartItem item;
+  final VoidCallback onIncrease;
+  final VoidCallback onDecrease;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.only(
+        bottom: Responsive.responsiveSpacing(context, 16),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(
+          Responsive.responsiveSpacing(context, 12),
         ),
+        child: Row(
+          children: [
+            _buildCover(context),
+            SizedBox(width: Responsive.responsiveSpacing(context, 16)),
+            Expanded(child: _buildDetails(context)),
+            _buildQuantityControls(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCover(BuildContext context) {
+    return Container(
+      width: Responsive.responsiveImageSize(context, 80),
+      height: Responsive.responsiveImageSize(context, 100),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          Responsive.responsiveBorderRadius(context, 8),
+        ),
+        color: Colors.grey[200],
+      ),
+      child: item.imageUrl.isNotEmpty
+          ? Image.asset(
+              item.imageUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Icon(
+                Icons.book,
+                size: Responsive.responsiveIconSize(context, 40),
+                color: Colors.grey,
+              ),
+            )
+          : Icon(
+              Icons.book,
+              size: Responsive.responsiveIconSize(context, 40),
+              color: Colors.grey,
+            ),
+    );
+  }
+
+  Widget _buildDetails(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          item.title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: Responsive.responsiveFontSize(context, 16),
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        SizedBox(height: Responsive.responsiveSpacing(context, 4)),
+        Text(
+          item.author,
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: Responsive.responsiveFontSize(context, 14),
+          ),
+        ),
+        SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+        Text(
+          '\$${item.price.toStringAsFixed(2)}',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFF6C47FF),
+            fontSize: Responsive.responsiveFontSize(context, 16),
+          ),
+        ),
+        TextButton(
+          onPressed: onRemove,
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero,
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          child: Text(
+            AppLocalizations.of(context)?.cart ?? 'Remove',
+            style: const TextStyle(color: Colors.red),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQuantityControls(BuildContext context) {
+    return Column(
+      children: [
+        IconButton(
+          icon: Icon(Icons.add_circle_outline,
+              size: Responsive.responsiveIconSize(context, 20)),
+          onPressed: onIncrease,
+        ),
+        Text(
+          '${item.quantity}',
+          style: TextStyle(
+            fontSize: Responsive.responsiveFontSize(context, 16),
+          ),
+        ),
+        IconButton(
+          icon: Icon(Icons.remove_circle_outline,
+              size: Responsive.responsiveIconSize(context, 20)),
+          onPressed: onDecrease,
+        ),
+      ],
+    );
+  }
+}
+
+class _CheckoutBar extends StatelessWidget {
+  const _CheckoutBar({
+    required this.total,
+    required this.onCheckout,
+  });
+
+  final double total;
+  final VoidCallback onCheckout;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: Responsive.responsivePadding(context),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withValues(alpha: 0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.total,
+                style: TextStyle(
+                  fontSize: Responsive.responsiveFontSize(context, 18),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                '\$${total.toStringAsFixed(2)}',
+                style: TextStyle(
+                  fontSize: Responsive.responsiveFontSize(context, 20),
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF6C47FF),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: Responsive.responsiveSpacing(context, 16)),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: onCheckout,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF6C47FF),
+                padding: EdgeInsets.symmetric(
+                  vertical: Responsive.responsiveSpacing(context, 16),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    Responsive.responsiveBorderRadius(context, 12),
+                  ),
+                ),
+              ),
+              child: Text(
+                AppLocalizations.of(context)!.proceed_to_checkout,
+                style: TextStyle(
+                  fontSize: Responsive.responsiveFontSize(context, 16),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

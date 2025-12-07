@@ -1,9 +1,10 @@
+import 'package:books/core/base/view_state.dart';
 import 'package:books/core/colors/colors.dart';
 import 'package:books/core/utils/responsive.dart';
 import 'package:books/core/widgets/language_toggle.dart';
-import 'package:books/features/authentication_feature/presentation/manager/signup_cubit.dart';
-import 'package:books/features/authentication_feature/presentation/manager/signup_state.dart';
 import 'package:books/features/authentication_feature/data/user_model.dart';
+import 'package:books/features/authentication_feature/presentation/view_model/signup_view_model.dart';
+import 'package:books/features/authentication_feature/presentation/view_model/signup_state.dart';
 import 'package:books/features/authentication_feature/presentation/views/login_screen.dart';
 import 'package:books/features/authentication_feature/presentation/views/phone_number_screen.dart';
 import 'package:books/features/authentication_feature/presentation/views/widgets/custom_password_field_with_validate.dart';
@@ -40,18 +41,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignupCubit(),
-      child: BlocListener<SignupCubit, SignupState>(
+      create: (context) => SignupViewModel(),
+      child: BlocListener<SignupViewModel, SignupState>(
         listener: (context, state) {
-          if (state is SignupSuccessState) {
+          if (state.isSuccess && state.user != null) {
             Get.snackbar(
               AppLocalizations.of(context)!.success,
               AppLocalizations.of(context)!.signup_is_done_successfully,
               backgroundColor: AppColors.purple,
               colorText: AppColors.white,
             );
-            Get.off(() => const PhoneScreen());
-          } else if (state is SignupErrorState) {
+            Get.off(() => PhoneScreen(user: state.user!));
+          } else if (state.hasError) {
             Get.snackbar(
               AppLocalizations.of(context)!.error,
               AppLocalizations.of(context)!.signup_failed,
@@ -130,20 +131,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               enteredPassword: _passwordController,
                             ),
                             SizedBox(height: Responsive.responsiveSpacing(context, 30)),
-                            BlocBuilder<SignupCubit, SignupState>(
+                            BlocBuilder<SignupViewModel, SignupState>(
                               builder: (context, state) {
-                                final cubit = context.read<SignupCubit>();
-                                if (state is SignupLoadingState) {
+                                final viewModel = context.read<SignupViewModel>();
+                                if (state.status == ViewStatus.loading) {
                                   return const Center(child: CircularProgressIndicator());
                                 }
                                 return PurpleButton(
                                   buttonText: AppLocalizations.of(context)!.sign_up,
                                   onTapFunction: () {
                                     if (_formKeySignup.currentState!.validate()) {
-                                      UserModel.user.name = _nameController.text;
-                                      UserModel.user.email = _emailController.text;
-                                      UserModel.user.password = _passwordController.text;
-                                      cubit.signupWithFirebase(UserModel.user);
+                                      final user = UserModel(
+                                        name: _nameController.text.trim(),
+                                        email: _emailController.text.trim(),
+                                        password: _passwordController.text,
+                                      );
+                                      viewModel.signup(user);
                                     }
                                   },
                                 );

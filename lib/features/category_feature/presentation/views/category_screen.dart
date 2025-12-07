@@ -1,16 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:books/features/category_feature/presentation/view_model/category_state.dart';
+import 'package:books/features/category_feature/presentation/view_model/category_view_model.dart';
 import 'package:books/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'search_screen.dart';
 
-class CategoryScreen extends StatefulWidget {
+class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
-
-  @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
-}
-
-class _CategoryScreenState extends State<CategoryScreen> {
-  int selectedCategoryIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,97 +21,97 @@ class _CategoryScreenState extends State<CategoryScreen> {
       AppLocalizations.of(context)!.romantic,
     ];
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.search_outlined),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SearchScreen()),
-            );
-          },
-        ),
-        title: Padding(
-          padding: EdgeInsets.all(screenWidth * 0.02),
-          child: Text(
-            AppLocalizations.of(context)!.category,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
+    return BlocProvider(
+      create: (_) => CategoryViewModel(categories: categories),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.search_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchScreen()),
+              );
+            },
           ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: EdgeInsets.all(screenWidth * 0.03),
-            child: IconButton(
-              icon: const Icon(Icons.notification_add_outlined),
-              onPressed: () {},
-            ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.03),
-              child: Wrap(
-                spacing: screenWidth * 0.03,
-                runSpacing: screenHeight * 0.01,
-                alignment: WrapAlignment.center,
-                children: List.generate(categories.length, (index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedCategoryIndex = index;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        Text(
-                          categories[index],
-                          style: TextStyle(
-                            fontSize: screenWidth * 0.04,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        AnimatedContainer(
-                          duration: Duration(milliseconds: 200),
-                          height: 2,
-                          width: selectedCategoryIndex == index ? 20 : 0,
-                          
-                          decoration: BoxDecoration(
-                            color: Color(0xff54408c),
-                            borderRadius: BorderRadius.circular(10), 
-                         ),
-
-
-                        ),
-                      ],
-                    ),
-                  );
-                }),
+          title: Padding(
+            padding: EdgeInsets.all(screenWidth * 0.02),
+            child: Text(
+              AppLocalizations.of(context)!.category,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
             ),
+          ),
+          centerTitle: true,
+          actions: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
-              child: Column(
-                children: [
-                  bookRow(screenWidth),
-                  SizedBox(height: screenHeight * 0.02),
-                  bookRow(screenWidth, startIndex: 2),
-                  SizedBox(height: screenHeight * 0.02),
-                  bookRow(screenWidth, startIndex: 4),
-                ],
+              padding: EdgeInsets.all(screenWidth * 0.03),
+              child: IconButton(
+                icon: const Icon(Icons.notification_add_outlined),
+                onPressed: () {},
               ),
             ),
           ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.03),
+                child: BlocBuilder<CategoryViewModel, CategoryState>(
+                  builder: (context, state) {
+                    return Wrap(
+                      spacing: screenWidth * 0.03,
+                      runSpacing: screenHeight * 0.01,
+                      alignment: WrapAlignment.center,
+                      children: List.generate(state.categories.length, (index) {
+                        return GestureDetector(
+                          onTap: () => context.read<CategoryViewModel>().selectCategory(index),
+                          child: Column(
+                            children: [
+                              Text(
+                                state.categories[index],
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                height: 2,
+                                width: state.selectedIndex == index ? 20 : 0,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xff54408c),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+                child: Column(
+                  children: [
+                    bookRow(screenWidth),
+                    SizedBox(height: screenHeight * 0.02),
+                    bookRow(screenWidth, startIndex: 2),
+                    SizedBox(height: screenHeight * 0.02),
+                    bookRow(screenWidth, startIndex: 4),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

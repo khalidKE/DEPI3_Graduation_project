@@ -4,74 +4,52 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 class FirestoreServices {
-  static const String users = 'Users';
-  static const String name = 'name';
-  static const String email = 'email';
-  static const String phone = 'phone';
-  static const String address = 'address';
-  static const String profilePic = 'profile pic';
-  static final db = FirebaseFirestore.instance;
+  static const String usersCollection = 'users';
+  static final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  static void addUser(Map<String, dynamic> user) async {
-    db.settings = const Settings(persistenceEnabled: true);
+  static Future<void> addUser(UserModel user, {String? uid}) async {
+    _db.settings = const Settings(persistenceEnabled: true);
     try {
-      User? currentUser = FirebaseAuth.instance.currentUser;
-
-      if (currentUser == null) {
-        debugPrint('no user signed in');
+      final currentUserId = uid ?? FirebaseAuth.instance.currentUser?.uid;
+      if (currentUserId == null) {
         throw Exception('No user is signed in');
       }
-      CollectionReference usersCollection =
-          FirebaseFirestore.instance.collection('users');
-      await usersCollection.doc(currentUser.uid).set({
-        name: user[name],
-        email: user[email],
-        phone: user[phone],
-        address: user[address],
-        profilePic: user[profilePic],
+
+      await _db.collection(usersCollection).doc(currentUserId).set({
+        UserModel.fieldName: user.name,
+        UserModel.fieldEmail: user.email,
+        UserModel.fieldPhone: user.phone,
+        UserModel.fieldAddress: user.address,
+        UserModel.fieldProfilePic: user.profilePic,
       });
-      debugPrint('User added with custom ID!');
+      debugPrint('User added with ID $currentUserId');
     } catch (e) {
       debugPrint('Error adding user: $e');
       rethrow;
     }
   }
 
-  static void addUserFromGoogle(Map<String, dynamic> user, String uid) async {
-    db.settings = const Settings(persistenceEnabled: true);
-    try {
-      CollectionReference usersCollection =
-          FirebaseFirestore.instance.collection('users');
-      await usersCollection.doc(uid).set({
-        name: user[name],
-        email: user[email],
-        phone: user[phone],
-        address: user[address],
-        profilePic: user[profilePic],
-      });
-      debugPrint('User added with custom ID!');
-    } catch (e) {
-      debugPrint('Error adding user from Google: $e');
-      rethrow;
-    }
+  static Future<void> addUserFromGoogle(UserModel user, String uid) async {
+    await addUser(user, uid: uid);
   }
 
-  static Future<void> getUserData() async {
-    db.settings = const Settings(persistenceEnabled: true);
+  static Future<UserModel?> getUserData() async {
+    _db.settings = const Settings(persistenceEnabled: true);
     try {
-      User? currentUser = FirebaseAuth.instance.currentUser;
-
+      final currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
         debugPrint('no user signed in');
-        throw Exception('No user is signed in');
+        return null;
       }
-      final result = await db.collection('users').doc(currentUser.uid).get();
-      if (result.data() != null) {
-        UserModel.user.fromJson(result.data()!);
+
+      final result = await _db.collection(usersCollection).doc(currentUser.uid).get();
+      final data = result.data();
+      if (data != null) {
+        return UserModel.fromJson(data);
       }
     } catch (e) {
       debugPrint('Error getting user data: $e');
-      rethrow;
     }
+    return null;
   }
 }

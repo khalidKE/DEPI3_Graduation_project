@@ -1,11 +1,10 @@
-import 'dart:io';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:books/features/profile_feature/presentation/views/custom/custom_text_field.dart';
-import 'package:books/features/profile_feature/presentation/manager/profile_cubit.dart';
-import 'package:books/features/profile_feature/presentation/manager/profile_state.dart';
+import 'package:books/features/profile_feature/presentation/view_model/profile_view_model.dart';
+import 'package:books/features/profile_feature/presentation/view_model/profile_state.dart';
 
 class Account extends StatelessWidget {
   const Account({super.key});
@@ -22,7 +21,7 @@ class Account extends StatelessWidget {
     TextEditingController password = TextEditingController();
 
     return BlocProvider(
-      create: (_) => ProfileCubit(),
+      create: (_) => ProfileViewModel(),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -45,16 +44,9 @@ class Account extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: height * 0.01),
-                BlocBuilder<ProfileCubit, ProfileState>(
+                BlocBuilder<ProfileViewModel, ProfileState>(
                   builder: (context, state) {
-                    final cubit = context.watch<ProfileCubit>();
-                    File? image;
-
-                    if (state is ProfileImageChanged) {
-                      image = state.image;
-                    } else {
-                      image = cubit.image;
-                    }
+                    final image = state.image;
 
                     return Column(
                       children: [
@@ -75,7 +67,7 @@ class Account extends StatelessWidget {
                         ),
                         SizedBox(height: height * 0.001),
                         InkWell(
-                          onTap: () => cubit.pickImage(),
+                          onTap: () => context.read<ProfileViewModel>().pickImage(),
                           child: Text(
                             AppLocalizations.of(context)!.change_picture,
                             style: GoogleFonts.roboto(

@@ -1,9 +1,10 @@
+import 'package:books/core/base/view_state.dart';
 import 'package:books/core/colors/colors.dart';
 import 'package:books/core/utils/error_handler.dart';
 import 'package:books/core/utils/responsive.dart';
 import 'package:books/core/widgets/language_toggle.dart';
-import 'package:books/features/authentication_feature/presentation/manager/login_cubit.dart';
-import 'package:books/features/authentication_feature/presentation/manager/login_state.dart';
+import 'package:books/features/authentication_feature/presentation/view_model/login_state.dart';
+import 'package:books/features/authentication_feature/presentation/view_model/login_view_model.dart';
 import 'package:books/features/authentication_feature/data/user_model.dart';
 import 'package:books/features/home_feature/presentation/views/home_screen.dart';
 import 'package:books/features/authentication_feature/presentation/views/signup_screen.dart';
@@ -38,16 +39,16 @@ class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: BlocListener<LoginCubit, LoginState>(
+      create: (context) => LoginViewModel(),
+      child: BlocListener<LoginViewModel, LoginState>(
         listener: (context, state) {
-          if (state is LoginSuccessState) {
+          if (state.isSuccess) {
             ErrorHandler.showSuccessSnackBar(
               context,
               AppLocalizations.of(context)!.login_is_done_successfully,
             );
             Get.to(() => const HomeScreen());
-          } else if (state is LoginErrorState) {
+          } else if (state.hasError) {
             final errorMessage = state.error != null
                 ? ErrorHandler.getAuthErrorMessage(context, state.error)
                 : AppLocalizations.of(context)!.login_failed;
@@ -123,19 +124,21 @@ class _LogInScreenState extends State<LogInScreen> {
                               validation: loginValidation,
                             ),
                             SizedBox(height: Responsive.responsiveSpacing(context, 35)),
-                            BlocBuilder<LoginCubit, LoginState>(
+                            BlocBuilder<LoginViewModel, LoginState>(
                               builder: (context, state) {
-                                final cubit = context.read<LoginCubit>();
-                                if (state is LoginLoadingState) {
+                                final viewModel = context.read<LoginViewModel>();
+                                if (state.status == ViewStatus.loading) {
                                   return const Center(child: CircularProgressIndicator());
                                 }
                                 return PurpleButton(
                                   buttonText: AppLocalizations.of(context)!.login,
                                   onTapFunction: () {
                                     if (_formKeyLogin.currentState!.validate()) {
-                                      UserModel.user.email = _emailController.text;
-                                      UserModel.user.password = _passwordController.text;
-                                      cubit.loginWithFirebase(UserModel.user);
+                                      final user = UserModel(
+                                        email: _emailController.text.trim(),
+                                        password: _passwordController.text,
+                                      );
+                                      viewModel.login(user);
                                     }
                                   },
                                 );
@@ -205,14 +208,14 @@ class _LogInScreenState extends State<LogInScreen> {
                             ),
                             SizedBox(height: Responsive.responsiveSpacing(context, 30)),
                             Center(
-                              child: BlocBuilder<LoginCubit, LoginState>(
+                              child: BlocBuilder<LoginViewModel, LoginState>(
                                 builder: (context, state) {
-                                  final cubit = context.read<LoginCubit>();
+                                  final viewModel = context.read<LoginViewModel>();
                                   return WhiteButton(
                                     buttonText: AppLocalizations.of(context)!
                                         .sign_in_with_google,
                                     onTapFunction: () {
-                                      cubit.signInWithGoogleFirebase();
+                                      viewModel.signInWithGoogle();
                                     },
                                     imagePath: 'assets/Google - Original.png',
                                   );

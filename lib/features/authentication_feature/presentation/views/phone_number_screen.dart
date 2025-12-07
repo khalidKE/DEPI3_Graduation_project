@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
 class PhoneScreen extends StatefulWidget {
-  const PhoneScreen({super.key});
+  const PhoneScreen({super.key, required this.user});
+
+  final UserModel user;
 
   @override
   State<PhoneScreen> createState() => _PhoneScreenState();
@@ -86,8 +88,10 @@ class _PhoneScreenState extends State<PhoneScreen> {
                         buttonText: AppLocalizations.of(context)!.continuee,
                         onTapFunction: () {
                           if (_phoneNumberController.text.length == 11) {
-                            UserModel.user.phone = _phoneNumberController.text;
-                            Get.off(() => const SuccessScreen());
+                            final updatedUser = widget.user.copyWith(
+                              phone: _phoneNumberController.text.trim(),
+                            );
+                            Get.off(() => SuccessScreen(user: updatedUser));
                           } else {
                             Get.snackbar(
                               AppLocalizations.of(context)!.error,

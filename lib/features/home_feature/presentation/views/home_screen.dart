@@ -1,214 +1,34 @@
+import 'package:books/features/home_feature/data/app_data.dart';
+import 'package:books/features/home_feature/data/home_models.dart';
+import 'package:books/features/home_feature/presentation/view_model/home_state.dart';
+import 'package:books/features/home_feature/presentation/view_model/home_view_model.dart';
 import 'package:books/features/notification_feature/presentation/views/notification.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:books/core/widgets/language_toggle.dart';
 import 'package:books/core/widgets/theme_toggle.dart';
 import 'package:books/core/utils/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:books/features/profile_feature/presentation/views/profile.dart';
 import 'package:books/features/cart_feature/presentation/views/cart_screen.dart';
 import 'package:books/features/cart_feature/presentation/views/orders_screen.dart';
 import 'package:get/get.dart';
 
-// Models
-class Book {
-  final String id;
-  final String title;
-  final String author;
-  final double price;
-  final double rating;
-  final String description;
-  final String imageUrl;
-  bool isFavorite;
-
-  Book({
-    required this.id,
-    required this.title,
-    required this.author,
-    required this.price,
-    required this.rating,
-    required this.description,
-    required this.imageUrl,
-    this.isFavorite = false,
-  });
-}
-
-class Author {
-  final String id;
-  final String name;
-  final String role;
-  final String bio;
-  final double rating;
-  final String imageUrl;
-  final List<Book> books;
-
-  Author({
-    required this.id,
-    required this.name,
-    required this.role,
-    required this.bio,
-    required this.rating,
-    required this.imageUrl,
-    required this.books,
-  });
-}
-
-class Vendor {
-  final String id;
-  final String name;
-  final double rating;
-  final String imageUrl;
-
-  Vendor({
-    required this.id,
-    required this.name,
-    required this.rating,
-    required this.imageUrl,
-  });
-}
-
-// Sample Data
-class AppData {
-  static List<Book> books = [
-    Book(
-      id: '1',
-      title: 'The Kite Runner',
-      author: 'Khaled Hosseini',
-      price: 39.99,
-      rating: 4.0,
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dignissim sit amet nisl vel eleifend.',
-      imageUrl: 'assets/b1.png',
-    ),
-    Book(
-      id: '2',
-      title: 'The Subtle Art',
-      author: 'Mark Manson',
-      price: 19.99,
-      rating: 4.5,
-      description: 'A counterintuitive approach to living a good life.',
-      imageUrl: 'assets/b2.png',
-    ),
-    Book(
-      id: '3',
-      title: 'The Da Vinci Code',
-      author: 'Dan Brown',
-      price: 14.95,
-      rating: 4.2,
-      description: 'A gripping mystery thriller novel.',
-      imageUrl: 'assets/b3.png',
-    ),
-    Book(
-      id: '4',
-      title: 'Game Fisher',
-      author: 'Tess Gunty',
-      price: 27.12,
-      rating: 4.3,
-      description: 'An exciting adventure novel.',
-      imageUrl: '',
-    ),
-    Book(
-      id: '5',
-      title: 'The Good Sister',
-      author: 'Tess Gunty',
-      price: 27.12,
-      rating: 4.1,
-      description: 'A compelling family drama.',
-      imageUrl: '',
-    ),
-    Book(
-      id: '6',
-      title: 'The Waiting',
-      author: 'Tess Gunty',
-      price: 27.12,
-      rating: 4.4,
-      description: 'A suspenseful thriller.',
-      imageUrl: '',
-    ),
-  ];
-
-  static List<Vendor> vendors = [
-    Vendor(id: '1', name: 'Wattpad', rating: 4.0, imageUrl: 'assets/v1.png'),
-    Vendor(id: '2', name: 'Kuronii', rating: 4.5, imageUrl: 'assets/v2.png'),
-    Vendor(id: '3', name: 'Crane & Co', rating: 4.2, imageUrl: 'assets/v4.png'),
-    Vendor(id: '4', name: 'GoodBuy', rating: 4.3, imageUrl: 'assets/v3.png'),
-    Vendor(id: '5', name: 'Warehouse', rating: 4.1, imageUrl: 'assets/v5.png'),
-    Vendor(id: '6', name: 'Peppa Pig', rating: 4.4, imageUrl: 'assets/v6.png'),
-    Vendor(id: '7', name: 'Jstor', rating: 4.0, imageUrl: 'assets/v7.png'),
-    Vendor(id: '8', name: 'Peloton', rating: 4.2, imageUrl: 'assets/v8.png'),
-    Vendor(id: '9', name: 'Haymarket', rating: 4.3, imageUrl: 'assets/v9.png'),
-  ];
-
-  static List<Author> authors = [
-    Author(
-      id: '1',
-      name: 'John Freeman',
-      role: 'Writer',
-      bio:
-          'American writer who was the editor of several prestigious publications.',
-      rating: 4.2,
-      imageUrl: 'assets/a1.png',
-      books: [],
-    ),
-    Author(
-      id: '2',
-      name: 'Adam Dalva',
-      role: 'Writer',
-      bio: 'He is a writer and the fiction editor of a renowned magazine.',
-      rating: 4.0,
-      imageUrl: 'assets/a2.png',
-      books: [],
-    ),
-    Author(
-      id: '3',
-      name: 'Abraham Verghese',
-      role: 'Professor',
-      bio:
-          'He is the professor and Sofia Anesaki Chair at Stanford University.',
-      rating: 4.5,
-      imageUrl: 'assets/a3.png',
-      books: [],
-    ),
-    Author(
-      id: '4',
-      name: 'Tess Gunty',
-      role: 'Novelist',
-      bio:
-          'Gunty was born and raised in South Bend, Indiana. She graduated from Yale University and received an MFA in Fiction and English from New York University.',
-      rating: 4.0,
-      imageUrl: 'assets/a4.png',
-      books: AppData.books.where((b) => b.author == 'Tess Gunty').toList(),
-    ),
-    Author(
-      id: '5',
-      name: 'Ann Napolitano',
-      role: 'Novelist',
-      bio: 'She is the author of the novel A Good Hard Look.',
-      rating: 4.3,
-      imageUrl: 'assets/a5.png',
-      books: [],
-    ),
-    Author(
-      id: '6',
-      name: 'Hernan Diaz',
-      role: 'Writer',
-      bio: 'Award-winning novelist and essayist.',
-      rating: 4.4,
-      imageUrl: 'assets/a6.png',
-      books: [],
-    ),
-  ];
-}
-
 // Home Screen
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => HomeViewModel(),
+      child: const _HomeView(),
+    );
+  }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
+class _HomeView extends StatelessWidget {
+  const _HomeView();
 
   @override
   Widget build(BuildContext context) {
@@ -300,56 +120,52 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF6C47FF),
-        unselectedItemColor: Colors.grey,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-
-          // Navigate to different screens based on index
-          switch (index) {
-            case 0:
-              // Home - already here
-              break;
-            case 1:
-              // Orders
-              Get.to(() => const OrdersScreen());
-              break;
-            case 2:
-              // Cart
-              Get.to(() => const CartScreen());
-              break;
-            case 3:
-              // Profile
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Profile()),
-              );
-              break;
-          }
+      bottomNavigationBar: BlocBuilder<HomeViewModel, HomeState>(
+        builder: (context, state) {
+          return BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: const Color(0xFF6C47FF),
+            unselectedItemColor: Colors.grey,
+            currentIndex: state.currentIndex,
+            onTap: (index) {
+              context.read<HomeViewModel>().selectIndex(index);
+              switch (index) {
+                case 0:
+                  break;
+                case 1:
+                  Get.to(() => const OrdersScreen());
+                  break;
+                case 2:
+                  Get.to(() => const CartScreen());
+                  break;
+                case 3:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Profile()),
+                  );
+                  break;
+              }
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.home),
+                label: AppLocalizations.of(context)!.home,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.shopping_bag_outlined),
+                label: AppLocalizations.of(context)!.order,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.shopping_cart_outlined),
+                label: AppLocalizations.of(context)!.cart,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.person_outline),
+                label: AppLocalizations.of(context)!.profile,
+              ),
+            ],
+          );
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: AppLocalizations.of(context)!.home,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.shopping_bag_outlined),
-            label: AppLocalizations.of(context)!.order,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            label: AppLocalizations.of(context)!.cart,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person_outline),
-            label: AppLocalizations.of(context)!.profile,
-          ),
-        ],
       ),
     );
   }
