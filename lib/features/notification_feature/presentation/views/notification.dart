@@ -1,27 +1,83 @@
+import 'package:books/core/utils/responsive.dart';
+import 'package:books/features/notification_feature/presentation/view_model/notification_state.dart';
+import 'package:books/features/notification_feature/presentation/view_model/notification_view_model.dart';
 import 'package:books/features/notification_feature/presentation/views/promotion.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-class NotificationPage extends StatefulWidget {
+class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
 
   @override
-  State<NotificationPage> createState() => _NotificationPageState();
-}
-
-class _NotificationPageState extends State<NotificationPage> {
-  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     final isTablet = width > 600;
 
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: appbar(width, isTablet),
-        body: TabBarView(
+    return BlocProvider(
+      create: (_) => NotificationViewModel(),
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: _AppBar(width: width, isTablet: isTablet),
+          body: const _NotificationTabs(),
+        ),
+      ),
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _AppBar({required this.width, required this.isTablet});
+
+  final double width;
+  final bool isTablet;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: InkWell(
+        onTap: () {
+          Get.back();
+        },
+        child: const Icon(Icons.arrow_back),
+      ),
+      title: Text(
+        AppLocalizations.of(context)!.notification,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      titleSpacing: isTablet ? width * 0.25 : 71,
+      bottom: TabBar(
+        tabs: [
+          Tab(
+            text: AppLocalizations.of(context)!.delivery,
+          ),
+          Tab(
+            text: AppLocalizations.of(context)!.news,
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight + 48);
+}
+
+class _NotificationTabs extends StatelessWidget {
+  const _NotificationTabs();
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+    final isTablet = width > 600;
+
+    return BlocBuilder<NotificationViewModel, NotificationState>(
+      builder: (context, state) {
+        return TabBarView(
           children: [
             SingleChildScrollView(
               child: Padding(
@@ -41,12 +97,15 @@ class _NotificationPageState extends State<NotificationPage> {
                       ),
                     ),
                     SizedBox(height: height * 0.02),
-                    delievryContainer(
-                      context,
-                      film: 'The Da vinci Code',
-                      status: 'On the way',
-                      quantity: '1 item',
-                      poster: 'assets/images/Image.png',
+                    ...state.deliveries.map(
+                      (delivery) => Padding(
+                        padding:
+                            EdgeInsets.only(bottom: Responsive.responsiveSpacing(context, 12)),
+                        child: _DeliveryCard(
+                          data: delivery,
+                          isTablet: isTablet,
+                        ),
+                      ),
                     ),
                     SizedBox(height: height * 0.03),
                     Text(
@@ -56,22 +115,6 @@ class _NotificationPageState extends State<NotificationPage> {
                         fontSize: isTablet ? 22 : 18,
                       ),
                     ),
-                    SizedBox(height: height * 0.02),
-                    delievryContainer(context,
-                        film: 'Carrie Fisher',
-                        status: 'Delivered',
-                        quantity: '1 item',
-                        poster: 'assets/images/Rectangle.png'),
-                    delievryContainer(context,
-                        film: 'The Waiting',
-                        status: 'Delivered',
-                        quantity: '5 items',
-                        poster: 'assets/images/Rectanglee.png'),
-                    delievryContainer(context,
-                        film: 'Bright Young',
-                        status: 'Cancelled',
-                        quantity: '2 items',
-                        poster: 'assets/images/Ractangleee.png'),
                   ],
                 ),
               ),
@@ -98,125 +141,78 @@ class _NotificationPageState extends State<NotificationPage> {
                       onTap: () {
                         Get.to(const PromotionPage());
                       },
-                      child: newsPromotionRow(
-                          text: AppLocalizations.of(context)!.promotion,
-                          date: 'Oct 24',
-                          time: '08.00'),
+                      child: _NewsRow(
+                        item: state.news.first,
+                        isTablet: isTablet,
+                      ),
                     ),
                     SizedBox(height: height * 0.01),
-                    RichText(
-                      text: TextSpan(
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 14),
-                        children: [
-                          TextSpan(
-                            text: AppLocalizations.of(context)!.october_2021,
-                          ),
-                          TextSpan(
-                            text: AppLocalizations.of(context)!
-                                .fifty_percent_discount,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(
-                            text: AppLocalizations.of(context)!
-                                .novel_discount_description,
-                          ),
-                        ],
-                      ),
+                    Text(
+                      AppLocalizations.of(context)!.fifty_percent_discount,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: height * 0.02),
                     Image.asset("assets/images/Line.png"),
                     SizedBox(height: height * 0.02),
-                    newsPromotionRow(
-                        text: AppLocalizations.of(context)!.promotion,
-                        date: 'Oct 08',
-                        time: '20.30'),
-                    SizedBox(height: height * 0.01),
-                    RichText(
-                      text: TextSpan(
-                        style: TextStyle(color: Colors.black, fontSize: 14),
-                        children: [
-                          TextSpan(
-                            text:
-                                AppLocalizations.of(context)!.buy_2_get_1_free,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                    ...state.news.skip(1).map((item) => Padding(
+                          padding: EdgeInsets.only(
+                            bottom: Responsive.responsiveSpacing(context, 16),
                           ),
-                          TextSpan(
-                            text:
-                                AppLocalizations.of(context)!.books_offer_date,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _NewsRow(item: item, isTablet: isTablet),
+                              SizedBox(height: height * 0.01),
+                              Text(
+                                _newsDescription(context, item.description),
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        )),
                     SizedBox(height: height * 0.03),
-                    Text(
-                      AppLocalizations.of(context)!.september_2021,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: isTablet ? 22 : 18,
-                      ),
-                    ),
-                    SizedBox(height: height * 0.02),
-                    newsPromotionRow(
-                        text: AppLocalizations.of(context)!.information,
-                        date: 'Sept 16',
-                        time: '11.00'),
-                    SizedBox(height: height * 0.01),
-                    Text(
-                      AppLocalizations.of(context)!.new_book_available,
-                      style: const TextStyle(fontSize: 14),
-                    ),
                   ],
                 ),
               ),
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 
-  AppBar appbar(double width, bool isTablet) {
-    return AppBar(
-      leading: InkWell(
-        onTap: () {
-          Get.back();
-        },
-        child: const Icon(Icons.arrow_back),
-      ),
-      title: Text(
-        AppLocalizations.of(context)!.notification,
-        style: const TextStyle(fontWeight: FontWeight.bold),
-      ),
-      titleSpacing: isTablet ? width * 0.25 : 71,
-      bottom: TabBar(
-        tabs: [
-          Tab(
-            text: AppLocalizations.of(context)!.delivery,
-          ),
-          Tab(
-            text: AppLocalizations.of(context)!.news,
-          ),
-        ],
-      ),
-    );
+  String _newsDescription(BuildContext context, String key) {
+    final loc = AppLocalizations.of(context)!;
+    switch (key) {
+      case 'fifty_percent_discount':
+        return '${loc.october_2021}${loc.fifty_percent_discount}${loc.novel_discount_description}';
+      case 'buy_2_get_1_free':
+        return '${loc.buy_2_get_1_free}${loc.books_offer_date}';
+      case 'new_book_available':
+        return loc.new_book_available;
+      default:
+        return key;
+    }
   }
+}
 
-  Widget delievryContainer(BuildContext context,
-      {required String film,
-      required String status,
-      required String quantity,
-      required String poster}) {
+class _DeliveryCard extends StatelessWidget {
+  const _DeliveryCard({required this.data, required this.isTablet});
+
+  final NotificationTabData data;
+  final bool isTablet;
+
+  @override
+  Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final isTablet = width > 600;
 
     final Map<String, Color> statusColors = {
       "on the way": const Color(0xFF3784FB),
       "delivered": const Color(0XFF18A057),
       "cancelled": const Color(0XFFEF5A56),
     };
-    final statusColor = statusColors[status.toLowerCase()] ?? Colors.black;
+    final statusColor = statusColors[data.status.toLowerCase()] ?? Colors.black;
 
     return Container(
       margin: EdgeInsets.only(bottom: height * 0.02),
@@ -229,7 +225,7 @@ class _NotificationPageState extends State<NotificationPage> {
       child: Row(
         children: [
           Image.asset(
-            poster,
+            data.poster,
             width: isTablet ? width * 0.08 : width * 0.18,
             fit: BoxFit.cover,
           ),
@@ -239,7 +235,7 @@ class _NotificationPageState extends State<NotificationPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  film,
+                  data.film,
                   style: TextStyle(
                     fontSize: isTablet ? 18 : 16,
                     fontWeight: FontWeight.bold,
@@ -249,7 +245,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 Row(
                   children: [
                     Text(
-                      status,
+                      data.status,
                       style: TextStyle(
                         fontSize: isTablet ? 16 : 14,
                         color: statusColor,
@@ -267,7 +263,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     SizedBox(width: width * 0.015),
                     Text(
-                      quantity,
+                      data.quantity,
                       style: TextStyle(
                         fontSize: isTablet ? 16 : 14,
                         color: const Color(0XFF7A7A7A),
@@ -283,31 +279,35 @@ class _NotificationPageState extends State<NotificationPage> {
       ),
     );
   }
+}
 
-  Row newsPromotionRow({
-    required String text,
-    required String date,
-    required String time,
-  }) {
+class _NewsRow extends StatelessWidget {
+  const _NewsRow({required this.item, required this.isTablet});
+
+  final NewsItem item;
+  final bool isTablet;
+
+  @override
+  Widget build(BuildContext context) {
     final Map<String, Color> textColors = {
       "promotion": const Color(0XFF54408C),
       "information": const Color(0XFF3784FB),
     };
-    final textColor = textColors[text.toLowerCase()] ?? Colors.black;
+    final textColor = textColors[item.type.toLowerCase()] ?? Colors.black;
 
     return Row(
       children: [
         Text(
-          text,
+          item.type,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: isTablet ? 16 : 14,
             color: textColor,
           ),
         ),
         const Spacer(),
         Text(
-          date,
+          item.date,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12,
@@ -325,7 +325,7 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
         const SizedBox(width: 6),
         Text(
-          time,
+          item.time,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12,

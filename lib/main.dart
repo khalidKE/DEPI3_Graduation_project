@@ -3,6 +3,8 @@ import 'package:books/core/services/language_service.dart';
 import 'package:books/core/services/theme_service.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:books/secrets/secrets.dart';
+import 'package:books/features/authentication_feature/presentation/views/login_screen.dart';
+import 'package:books/features/home_feature/presentation/views/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -141,9 +143,26 @@ void _initializeLocaleHandling() {
         themeMode: themeMode,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        // Don't provide locale - GetMaterialApp will use Get.locale automatically
-        // This ensures GetMaterialApp never rebuilds when locale changes
-        home: const _LocaleAwareWrapper(child: SplashScreen()),
+        // Route table for external initialRoute (e.g., /HomeScreen) support
+        initialRoute: '/',
+        getPages: [
+          GetPage(
+            name: '/',
+            page: () => const _LocaleAwareWrapper(child: SplashScreen()),
+          ),
+          GetPage(
+            name: '/HomeScreen',
+            page: () => const HomeScreen(),
+          ),
+          GetPage(
+            name: '/LogInScreen',
+            page: () => const LogInScreen(),
+          ),
+        ],
+        unknownRoute: GetPage(
+          name: '/not-found',
+          page: () => const _LocaleAwareWrapper(child: SplashScreen()),
+        ),
       );
     },
   );

@@ -2,14 +2,9 @@ import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
-class PromotionPage extends StatefulWidget {
+class PromotionPage extends StatelessWidget {
   const PromotionPage({super.key});
 
-  @override
-  State<PromotionPage> createState() => _PromotionPageState();
-}
-
-class _PromotionPageState extends State<PromotionPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -38,7 +33,7 @@ class _PromotionPageState extends State<PromotionPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            promoContainer(context),
+            _PromoContainer(isTablet: isTablet),
             SizedBox(height: height * 0.03),
             Text(
               AppLocalizations.of(context)!.today_discount_chapter,
@@ -57,7 +52,8 @@ class _PromotionPageState extends State<PromotionPage> {
             ),
             SizedBox(height: height * 0.02),
             Text(
-                AppLocalizations.of(context)!.chapter_discount_announcement,style: TextStyle(
+              AppLocalizations.of(context)!.chapter_discount_announcement,
+              style: TextStyle(
                 fontSize: isTablet ? 18 : 14,
                 color: const Color(0XFF7A7A7A),
               ),
@@ -83,11 +79,17 @@ class _PromotionPageState extends State<PromotionPage> {
       ),
     );
   }
+}
 
-  Widget promoContainer(BuildContext context) {
+class _PromoContainer extends StatelessWidget {
+  const _PromoContainer({required this.isTablet});
+
+  final bool isTablet;
+
+  @override
+  Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final isTablet = width > 600;
 
     return Container(
       width: double.infinity,
@@ -137,9 +139,7 @@ class _PromotionPageState extends State<PromotionPage> {
                   ),
                   child: Center(
                     child: InkWell(
-                      onTap: () {
-                        // navigate to home page
-                      },
+                      onTap: () {},
                       child: Text(
                         AppLocalizations.of(context)!.shop_now,
                         style: TextStyle(
@@ -154,9 +154,7 @@ class _PromotionPageState extends State<PromotionPage> {
               ],
             ),
           ),
-
           SizedBox(width: width * 0.05),
-
           Flexible(
             child: Image.asset(
               "assets/images/Frame.png",
