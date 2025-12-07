@@ -24,7 +24,6 @@ class CustomTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final lightGray = isDark ? Colors.grey[800]! : const Color(0xFFF4F1F1);
     final textColor = Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.black;
     final hintColor = isDark ? Colors.grey[500]! : Colors.grey[600]!;
     final iconColor = isDark ? Colors.grey[400]! : AppColors.purple;

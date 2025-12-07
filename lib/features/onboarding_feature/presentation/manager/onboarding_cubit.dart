@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
-  OnboardingCubit() : super(onboardingInitialState());
+  OnboardingCubit() : super(OnboardingInitialState());
   int count = 0;
   OnboardingData onboardingData = OnboardingData();
   
@@ -54,27 +54,27 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     onboardingData = _getLocalizedData(localizations, index);
     // Emit current state to trigger rebuild
     if (count == 0) {
-      emit(onboardingInitialState());
+      emit(OnboardingInitialState());
     } else if (count == 1) {
-      emit(onboardingSecondState());
+      emit(OnboardingSecondState());
     } else if (count == 2) {
-      emit(onboardingThirdState());
+      emit(OnboardingThirdState());
     }
   }
   
   void getOnbourdingData(BuildContext context) {
     count++;
-    emit(onboardingLoadingState());
+    emit(OnboardingLoadingState());
     final localizations = AppLocalizations.of(context);
     if (localizations != null) {
       if (count == 1) {
-        emit(onboardingSecondState());
+        emit(OnboardingSecondState());
         onboardingData = _getLocalizedData(localizations, 1);
       } else if (count == 2) {
-        emit(onboardingThirdState());
+        emit(OnboardingThirdState());
         onboardingData = _getLocalizedData(localizations, 2);
       } else if (count >= 3) {
-        emit(onboardingGetToLogin());
+        emit(OnboardingGetToLogin());
         Get.to(() => const LogInScreen());
       }
     }

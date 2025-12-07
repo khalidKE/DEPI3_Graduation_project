@@ -36,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               return BlocConsumer<OnboardingCubit, OnboardingState>(
                 key: ValueKey(currentLocale.languageCode),
                 listener: (context, state) {
-                  if (state is onboardingGetToLogin) {
+                  if (state is OnboardingGetToLogin) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       if (mounted) {
                         Get.offAll(() => const LogInScreen());
@@ -70,7 +70,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         }
                       });
 
-                      if (state is onboardingLoadingState) {
+                      if (state is OnboardingLoadingState) {
+                        // Show loading indicator while onboarding data is fetched
                         return Center(
                           child: CircularProgressIndicator(
                               color: AppColors.purple),

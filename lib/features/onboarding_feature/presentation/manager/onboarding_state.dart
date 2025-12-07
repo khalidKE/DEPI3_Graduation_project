@@ -1,11 +1,11 @@
 sealed class OnboardingState {}
 
-final class onboardingInitialState extends OnboardingState {}
+final class OnboardingInitialState extends OnboardingState {}
 
-final class onboardingLoadingState extends OnboardingState {}
+final class OnboardingLoadingState extends OnboardingState {}
 
-final class onboardingSecondState extends OnboardingState {}
+final class OnboardingSecondState extends OnboardingState {}
 
-final class onboardingThirdState extends OnboardingState {}
+final class OnboardingThirdState extends OnboardingState {}
 
-final class onboardingGetToLogin extends OnboardingState {}
+final class OnboardingGetToLogin extends OnboardingState {}
