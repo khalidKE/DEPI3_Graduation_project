@@ -15,7 +15,7 @@ class CartViewModel extends Cubit<CartState> {
                 author: 'Khaled Hosseini',
                 price: 39.99,
                 quantity: 1,
-                imageUrl: 'assets/b1.png',
+                imageUrl: 'assets/images/home/b1.png',
               ),
               CartItem(
                 id: '2',
@@ -23,7 +23,7 @@ class CartViewModel extends Cubit<CartState> {
                 author: 'Mark Manson',
                 price: 19.99,
                 quantity: 2,
-                imageUrl: 'assets/b2.png',
+                imageUrl: 'assets/images/home/b2.png',
               ),
             ],
           ),

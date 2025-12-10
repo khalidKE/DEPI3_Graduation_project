@@ -10,7 +10,7 @@ class AppData {
       rating: 4.0,
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dignissim sit amet nisl vel eleifend.',
-      imageUrl: 'assets/b1.png',
+      imageUrl: 'assets/images/home/b1.png',
     ),
     Book(
       id: '2',
@@ -19,7 +19,7 @@ class AppData {
       price: 19.99,
       rating: 4.5,
       description: 'A counterintuitive approach to living a good life.',
-      imageUrl: 'assets/b2.png',
+      imageUrl: 'assets/images/home/b2.png',
     ),
     Book(
       id: '3',
@@ -28,7 +28,7 @@ class AppData {
       price: 14.95,
       rating: 4.2,
       description: 'A gripping mystery thriller novel.',
-      imageUrl: 'assets/b3.png',
+      imageUrl: 'assets/images/home/b3.png',
     ),
     Book(
       id: '4',
@@ -60,15 +60,15 @@ class AppData {
   ];
 
   static const List<Vendor> vendors = [
-    Vendor(id: '1', name: 'Wattpad', rating: 4.0, imageUrl: 'assets/v1.png'),
-    Vendor(id: '2', name: 'Kuronii', rating: 4.5, imageUrl: 'assets/v2.png'),
-    Vendor(id: '3', name: 'Crane & Co', rating: 4.2, imageUrl: 'assets/v4.png'),
-    Vendor(id: '4', name: 'GoodBuy', rating: 4.3, imageUrl: 'assets/v3.png'),
-    Vendor(id: '5', name: 'Warehouse', rating: 4.1, imageUrl: 'assets/v5.png'),
-    Vendor(id: '6', name: 'Peppa Pig', rating: 4.4, imageUrl: 'assets/v6.png'),
-    Vendor(id: '7', name: 'Jstor', rating: 4.0, imageUrl: 'assets/v7.png'),
-    Vendor(id: '8', name: 'Peloton', rating: 4.2, imageUrl: 'assets/v8.png'),
-    Vendor(id: '9', name: 'Haymarket', rating: 4.3, imageUrl: 'assets/v9.png'),
+    Vendor(id: '1', name: 'Wattpad', rating: 4.0, imageUrl: 'assets/images/home/v1.png'),
+    Vendor(id: '2', name: 'Kuronii', rating: 4.5, imageUrl: 'assets/images/home/v2.png'),
+    Vendor(id: '3', name: 'Crane & Co', rating: 4.2, imageUrl: 'assets/images/home/v4.png'),
+    Vendor(id: '4', name: 'GoodBuy', rating: 4.3, imageUrl: 'assets/images/home/v3.png'),
+    Vendor(id: '5', name: 'Warehouse', rating: 4.1, imageUrl: 'assets/images/home/v5.png'),
+    Vendor(id: '6', name: 'Peppa Pig', rating: 4.4, imageUrl: 'assets/images/home/v6.png'),
+    Vendor(id: '7', name: 'Jstor', rating: 4.0, imageUrl: 'assets/images/home/v7.png'),
+    Vendor(id: '8', name: 'Peloton', rating: 4.2, imageUrl: 'assets/images/home/v8.png'),
+    Vendor(id: '9', name: 'Haymarket', rating: 4.3, imageUrl: 'assets/images/home/v9.png'),
   ];
 
   static List<Author> authors = [
@@ -79,7 +79,7 @@ class AppData {
       bio:
           'American writer who was the editor of several prestigious publications.',
       rating: 4.2,
-      imageUrl: 'assets/a1.png',
+      imageUrl: 'assets/images/home/a1.png',
       books: [],
     ),
     const Author(
@@ -88,7 +88,7 @@ class AppData {
       role: 'Writer',
       bio: 'He is a writer and the fiction editor of a renowned magazine.',
       rating: 4.0,
-      imageUrl: 'assets/a2.png',
+      imageUrl: 'assets/images/home/a2.png',
       books: [],
     ),
     const Author(
@@ -98,7 +98,7 @@ class AppData {
       bio:
           'He is the professor and Sofia Anesaki Chair at Stanford University.',
       rating: 4.5,
-      imageUrl: 'assets/a3.png',
+      imageUrl: 'assets/images/home/a3.png',
       books: [],
     ),
     Author(
@@ -108,7 +108,7 @@ class AppData {
       bio:
           'Gunty was born and raised in South Bend, Indiana. She graduated from Yale University and received an MFA in Fiction and English from New York University.',
       rating: 4.0,
-      imageUrl: 'assets/a4.png',
+      imageUrl: 'assets/images/home/a4.png',
       books: books.where((b) => b.author == 'Tess Gunty').toList(),
     ),
     const Author(
@@ -117,7 +117,7 @@ class AppData {
       role: 'Novelist',
       bio: 'She is the author of the novel A Good Hard Look.',
       rating: 4.3,
-      imageUrl: 'assets/a5.png',
+      imageUrl: 'assets/images/home/a5.png',
       books: [],
     ),
     const Author(
@@ -126,7 +126,7 @@ class AppData {
       role: 'Writer',
       bio: 'Award-winning novelist and essayist.',
       rating: 4.4,
-      imageUrl: 'assets/a6.png',
+      imageUrl: 'assets/images/home/a6.png',
       books: [],
     ),
   ];

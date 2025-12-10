@@ -217,7 +217,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                     onTapFunction: () {
                                       viewModel.signInWithGoogle();
                                     },
-                                    imagePath: 'assets/Google - Original.png',
+                                    imagePath: 'assets/images/auth/google_logo.png',
                                   );
                                 },
                               ),

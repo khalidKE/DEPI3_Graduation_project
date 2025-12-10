@@ -40,7 +40,7 @@ class SuccessScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/Group.png',
+                        'assets/images/auth/success_group.png',
                         width: Responsive.responsiveImageSize(context, 200),
                         height: Responsive.responsiveImageSize(context, 200),
                         fit: BoxFit.contain,

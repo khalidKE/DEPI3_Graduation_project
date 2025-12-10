@@ -67,7 +67,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen> {
                           Responsive.responsiveBorderRadius(context, 40),
                         ),
                         child: Image.asset(
-                          'lib/image/img1.jpg',
+                          'assets/images/img1.jpg',
                           width: Responsive.responsiveImageSize(context, 80),
                           height: Responsive.responsiveImageSize(context, 80),
                           fit: BoxFit.cover,

@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
             right: 0,
             child: Center(
               child: SvgPicture.asset(
-                'assets/Vector.svg',
+                'assets/images/splash/splash_vector.svg',
                 width: screenWidth,
                 fit: BoxFit.cover,
               ),
@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           Center(
             child: Image.asset(
-              'assets/Property 1=Small, Property 2=White.png',
+              'assets/images/splash/splash_logo_small_white.png',
               width: Responsive.responsiveImageSize(context, 200),
               height: Responsive.responsiveImageSize(context, 200),
               fit: BoxFit.contain,

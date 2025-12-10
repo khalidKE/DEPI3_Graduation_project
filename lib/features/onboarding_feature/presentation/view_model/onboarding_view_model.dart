@@ -95,16 +95,16 @@ class OnboardingViewModel extends Cubit<OnboardingState> {
         return OnboardingData(
           highlight: localizations.onboarding_title_1,
           description: localizations.onboarding_desc_1,
-          imagePath: 'assets/Frame.png',
-          stagePath: 'assets/Auto Layout Horizontal.png',
+          imagePath: 'assets/images/onboarding/onboarding_frame.png',
+          stagePath: 'assets/images/onboarding/auto_layout_horizontal.png',
           buttonText: localizations.continuee,
         );
       case 1:
         return OnboardingData(
           highlight: localizations.onboarding_title_2,
           description: localizations.onboarding_desc_2,
-          imagePath: 'assets/Frame (1).png',
-          stagePath: 'assets/Auto Layout Horizontal (1).png',
+          imagePath: 'assets/images/onboarding/onboarding_frame_1.png',
+          stagePath: 'assets/images/onboarding/auto_layout_horizontal_1.png',
           buttonText: localizations.get_started,
         );
       case 2:
@@ -112,8 +112,8 @@ class OnboardingViewModel extends Cubit<OnboardingState> {
         return OnboardingData(
           highlight: localizations.onboarding_title_3,
           description: localizations.onboarding_desc_3,
-          imagePath: 'assets/Frame (2).png',
-          stagePath: 'assets/Auto Layout Horizontal (2).png',
+          imagePath: 'assets/images/onboarding/onboarding_frame_2.png',
+          stagePath: 'assets/images/onboarding/auto_layout_horizontal_2.png',
           buttonText: localizations.get_started,
         );
     }
