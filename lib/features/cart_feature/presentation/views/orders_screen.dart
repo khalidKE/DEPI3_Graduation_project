@@ -1,358 +1,202 @@
 import 'package:books/core/utils/responsive.dart';
-import 'package:books/core/widgets/error_boundary.dart';
-import 'package:books/core/widgets/language_toggle.dart';
-import 'package:books/features/cart_feature/data/order_models.dart';
-import 'package:books/features/cart_feature/presentation/view_model/orders_state.dart';
-import 'package:books/features/cart_feature/presentation/view_model/orders_view_model.dart';
+import 'package:books/features/category_feature/data/category_info.dart';
+import 'package:books/features/category_feature/data/category_utils.dart';
+import 'package:books/features/category_feature/presentation/views/category_screen.dart';
+import 'package:books/features/home_feature/data/book_inventory.dart';
+import 'package:books/features/home_feature/data/home_models.dart';
 import 'package:books/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
 
+  void _openCategoryScreen(BuildContext context, String categoryValue) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => CategoryScreen(initialCategory: categoryValue),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => OrdersViewModel(),
-      child: const ErrorBoundary(
-        child: _OrdersView(),
+    final localizations = AppLocalizations.of(context)!;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          localizations.category,
+          style: TextStyle(
+            fontSize: Responsive.responsiveFontSize(context, 20),
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        actions: const [],
+      ),
+      body: ValueListenableBuilder<List<Book>>(
+        valueListenable: BookInventory.booksNotifier,
+        builder: (context, books, _) {
+          final categories = buildCategoryInfo(books, localizations);
+          return Padding(
+            padding: Responsive.responsivePadding(context),
+            child: _CategoriesOverview(
+              categories: categories,
+              onCategoryTap: (value) => _openCategoryScreen(context, value),
+            ),
+          );
+        },
       ),
     );
   }
 }
 
-class _OrdersView extends StatelessWidget {
-  const _OrdersView();
+class _CategoriesOverview extends StatefulWidget {
+  const _CategoriesOverview({
+    required this.categories,
+    required this.onCategoryTap,
+  });
+
+  final List<CategoryInfo> categories;
+  final ValueChanged<String> onCategoryTap;
+
+  @override
+  State<_CategoriesOverview> createState() => _CategoriesOverviewState();
+}
+
+class _CategoriesOverviewState extends State<_CategoriesOverview> {
+  int _selectedIndex = 0;
+
+  void _handleTap(int index) {
+    setState(() => _selectedIndex = index);
+    widget.onCategoryTap(widget.categories[index].value);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrdersViewModel, OrdersState>(
-      builder: (context, state) {
-        return DefaultTabController(
-          length: 4,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(
-                AppLocalizations.of(context)!.my_orders,
+    final localizations = AppLocalizations.of(context)!;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: Responsive.responsiveSpacing(context, 20),
+            vertical: Responsive.responsiveSpacing(context, 16),
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(
+              Responsive.responsiveBorderRadius(context, 16),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 24,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Icon(
+                Icons.book_outlined,
+                size: Responsive.responsiveIconSize(context, 48),
+                color: const Color(0xFF6C47FF),
+              ),
+              SizedBox(height: Responsive.responsiveSpacing(context, 8)),
+              Text(
+                localizations.browse_categories,
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: Responsive.responsiveFontSize(context, 20),
+                  fontSize: Responsive.responsiveFontSize(context, 18),
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              centerTitle: true,
-              actions: const [
-                LanguageToggleButton(),
-              ],
-              bottom: TabBar(
-                isScrollable: true,
-                labelColor: const Color(0xFF6C47FF),
-                unselectedLabelColor: Colors.grey,
-                indicatorColor: const Color(0xFF6C47FF),
-                tabs: [
-                  Tab(text: AppLocalizations.of(context)!.all),
-                  Tab(text: AppLocalizations.of(context)!.processing),
-                  Tab(text: AppLocalizations.of(context)!.shipped),
-                  Tab(text: AppLocalizations.of(context)!.delivered),
-                ],
+            ],
+          ),
+        ),
+        SizedBox(height: Responsive.responsiveSpacing(context, 24)),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final crossAxisCount = constraints.maxWidth > 600 ? 3 : 2;
+            final spacing = Responsive.responsiveSpacing(context, 10);
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: spacing,
+                mainAxisSpacing: spacing,
+                childAspectRatio: 2.6,
               ),
-            ),
-            body: LayoutBuilder(
-              builder: (context, constraints) {
-                final maxWidth = Responsive.maxContentWidth(context);
-                final viewModel = context.read<OrdersViewModel>();
-                return Center(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: maxWidth ?? double.infinity,
-                    ),
-                    child: state.orders.isEmpty
-                        ? _EmptyOrders()
-                        : TabBarView(
-                            children: [
-                              _OrdersList(orders: viewModel.filterByStatus('All')),
-                              _OrdersList(orders: viewModel.filterByStatus('Processing')),
-                              _OrdersList(orders: viewModel.filterByStatus('Shipped')),
-                              _OrdersList(orders: viewModel.filterByStatus('Delivered')),
-                            ],
-                          ),
-                  ),
+              itemCount: widget.categories.length,
+              itemBuilder: (context, index) {
+                final info = widget.categories[index];
+                final selected = index == _selectedIndex;
+                return _CategoryTile(
+                  label: info.label,
+                  selected: selected,
+                  onTap: () => _handleTap(index),
                 );
               },
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _EmptyOrders extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.shopping_bag_outlined,
-            size: Responsive.responsiveIconSize(context, 64),
-            color: Colors.grey,
-          ),
-          SizedBox(height: Responsive.responsiveSpacing(context, 16)),
-          Text(
-            AppLocalizations.of(context)!.no_orders_yet,
-            style: TextStyle(
-              fontSize: Responsive.responsiveFontSize(context, 18),
-              color: Colors.grey,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _OrdersList extends StatelessWidget {
-  const _OrdersList({required this.orders});
-
-  final List<Order> orders;
-
-  @override
-  Widget build(BuildContext context) {
-    if (orders.isEmpty) {
-      return Center(
-        child: Text(
-          AppLocalizations.of(context)!.no_orders_in_category,
-          style: TextStyle(
-            fontSize: Responsive.responsiveFontSize(context, 16),
-            color: Colors.grey,
-          ),
+            );
+          },
         ),
-      );
-    }
-
-    return ListView.builder(
-      padding: Responsive.responsivePadding(context),
-      itemCount: orders.length,
-      itemBuilder: (context, index) {
-        final order = orders[index];
-        return Card(
-          margin: EdgeInsets.only(
-            bottom: Responsive.responsiveSpacing(context, 16),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(
-              Responsive.responsiveSpacing(context, 12),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${AppLocalizations.of(context)!.order} ${order.id}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: Responsive.responsiveFontSize(context, 16),
-                      ),
-                    ),
-                    _StatusChip(status: order.status),
-                  ],
-                ),
-                SizedBox(height: Responsive.responsiveSpacing(context, 8)),
-                Text(
-                  '${AppLocalizations.of(context)!.date}: ${order.date}',
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: Responsive.responsiveFontSize(context, 14),
-                  ),
-                ),
-                SizedBox(height: Responsive.responsiveSpacing(context, 12)),
-                ...order.items.map((item) => Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: Responsive.responsiveSpacing(context, 4),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: Responsive.responsiveImageSize(context, 50),
-                            height: Responsive.responsiveImageSize(context, 70),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                Responsive.responsiveBorderRadius(context, 4),
-                              ),
-                              color: Colors.grey[200],
-                            ),
-                            child: item.imageUrl.isNotEmpty
-                                ? Image.asset(
-                                    item.imageUrl,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) =>
-                                        Icon(Icons.book,
-                                            size: Responsive.responsiveIconSize(context, 24),
-                                            color: Colors.grey),
-                                  )
-                                : Icon(Icons.book,
-                                    size: Responsive.responsiveIconSize(context, 24),
-                                    color: Colors.grey),
-                          ),
-                          SizedBox(width: Responsive.responsiveSpacing(context, 12)),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.title,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: Responsive.responsiveFontSize(context, 14),
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                SizedBox(height: Responsive.responsiveSpacing(context, 2)),
-                                Text(
-                                  '${AppLocalizations.of(context)!.qty}: ${item.quantity}',
-                                  style: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: Responsive.responsiveFontSize(context, 12),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Flexible(
-                            child: Text(
-                              '\$${item.total.toStringAsFixed(2)}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: Responsive.responsiveFontSize(context, 14),
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.end,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Divider(height: Responsive.responsiveSpacing(context, 24)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        '${AppLocalizations.of(context)!.total}: \$${order.total.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontSize: Responsive.responsiveFontSize(context, 16),
-                          fontWeight: FontWeight.bold,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (order.status == 'Delivered')
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              AppLocalizations.of(context)!.rate_order,
-                              style: TextStyle(
-                                color: const Color(0xFF6C47FF),
-                                fontSize: Responsive.responsiveFontSize(context, 14),
-                              ),
-                            ),
-                          ),
-                        SizedBox(width: Responsive.responsiveSpacing(context, 8)),
-                        TextButton(
-                          onPressed: () {},
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: Responsive.responsiveSpacing(context, 16),
-                              vertical: Responsive.responsiveSpacing(context, 8),
-                            ),
-                            backgroundColor:
-                                const Color(0xFF6C47FF).withValues(alpha: 0.1),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                Responsive.responsiveBorderRadius(context, 20),
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.view_details,
-                            style: TextStyle(
-                              color: const Color(0xFF6C47FF),
-                              fontSize: Responsive.responsiveFontSize(context, 14),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+      ],
     );
   }
 }
 
-class _StatusChip extends StatelessWidget {
-  const _StatusChip({required this.status});
+class _CategoryTile extends StatelessWidget {
+  const _CategoryTile({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
 
-  final String status;
-
-  Color _getStatusColor() {
-    switch (status) {
-      case 'Processing':
-        return Colors.orange;
-      case 'Shipped':
-        return Colors.blue;
-      case 'Delivered':
-        return Colors.green;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  String _localizedStatus(BuildContext context) {
-    switch (status) {
-      case 'Processing':
-        return AppLocalizations.of(context)!.processing;
-      case 'Shipped':
-        return AppLocalizations.of(context)!.shipped;
-      case 'Delivered':
-        return AppLocalizations.of(context)!.delivered;
-      default:
-        return status;
-    }
-  }
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final color = _getStatusColor();
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: Responsive.responsiveSpacing(context, 12),
-        vertical: Responsive.responsiveSpacing(context, 4),
-      ),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(
-          Responsive.responsiveBorderRadius(context, 12),
+    final borderColor = selected ? const Color(0xFF6C47FF) : Colors.grey[300]!;
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: borderColor, width: 1.4),
+          color: selected ? const Color(0xFF6C47FF) : Colors.white,
+          boxShadow: [
+            if (!selected)
+              BoxShadow(
+                color: Colors.grey.withValues(alpha: 0.15),
+                blurRadius: 6,
+                offset: const Offset(0, 3),
+              ),
+          ],
         ),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
-      ),
-      child: Text(
-        _localizedStatus(context),
-        style: TextStyle(
-          color: color,
-          fontSize: Responsive.responsiveFontSize(context, 12),
-          fontWeight: FontWeight.w500,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              label,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: selected ? Colors.white : Colors.black87,
+              ),
+            ),
+            const SizedBox(width: 7),
+            Icon(
+              Icons.menu_book_outlined,
+              size: 18,
+              color: selected ? Colors.white : const Color(0xFF6C47FF),
+            ),
+          ],
         ),
       ),
     );

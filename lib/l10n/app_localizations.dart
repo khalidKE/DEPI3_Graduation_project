@@ -386,7 +386,7 @@ abstract class AppLocalizations {
   /// No description provided for @lorem_ipsum_text.
   ///
   /// In en, this message translates to:
-  /// **'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'**
+  /// **'Signing out only affects this device. You can sign back in anytime to keep your library in sync.'**
   String get lorem_ipsum_text;
 
   /// No description provided for @you_have_5_coupons_to_use.
@@ -545,6 +545,12 @@ abstract class AppLocalizations {
   /// **'Novel'**
   String get novel;
 
+  /// Label for the fiction category
+  ///
+  /// In en, this message translates to:
+  /// **'Fiction'**
+  String get fiction;
+
   /// No description provided for @self_love.
   ///
   /// In en, this message translates to:
@@ -557,11 +563,95 @@ abstract class AppLocalizations {
   /// **'Science'**
   String get science;
 
+  /// Label for the science fiction category
+  ///
+  /// In en, this message translates to:
+  /// **'Science Fiction'**
+  String get science_fiction;
+
+  /// Label for the literary criticism category
+  ///
+  /// In en, this message translates to:
+  /// **'Literary Criticism'**
+  String get literary_criticism;
+
+  /// Label for the biography category
+  ///
+  /// In en, this message translates to:
+  /// **'Biography'**
+  String get biography;
+
+  /// Label for the history category
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// Label for the philosophy category
+  ///
+  /// In en, this message translates to:
+  /// **'Philosophy'**
+  String get philosophy;
+
+  /// Label for the adventure category
+  ///
+  /// In en, this message translates to:
+  /// **'Adventure'**
+  String get adventure;
+
+  /// Label for the dystopian category
+  ///
+  /// In en, this message translates to:
+  /// **'Dystopian'**
+  String get dystopian;
+
+  /// Label for the spirituality category
+  ///
+  /// In en, this message translates to:
+  /// **'Spirituality'**
+  String get spirituality;
+
+  /// Label for the psychology category
+  ///
+  /// In en, this message translates to:
+  /// **'Psychology'**
+  String get psychology;
+
   /// No description provided for @romantic.
   ///
   /// In en, this message translates to:
   /// **'Romantic'**
   String get romantic;
+
+  /// No description provided for @memoir.
+  ///
+  /// In en, this message translates to:
+  /// **'Memoir'**
+  String get memoir;
+
+  /// No description provided for @mystery.
+  ///
+  /// In en, this message translates to:
+  /// **'Mystery'**
+  String get mystery;
+
+  /// No description provided for @productivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Productivity'**
+  String get productivity;
+
+  /// Helper text on the categories tab explaining where to find book genres
+  ///
+  /// In en, this message translates to:
+  /// **'Browse book categories'**
+  String get browse_categories;
+
+  /// Button text that opens the book categories screen
+  ///
+  /// In en, this message translates to:
+  /// **'View categories'**
+  String get view_categories;
 
   /// No description provided for @search.
   ///
@@ -842,7 +932,7 @@ abstract class AppLocalizations {
   /// No description provided for @my_orders.
   ///
   /// In en, this message translates to:
-  /// **'My Orders'**
+  /// **'Book Categories'**
   String get my_orders;
 
   /// No description provided for @processing.
@@ -1078,6 +1168,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add to Cart'**
   String get add_to_cart;
+
+  /// Snack bar text when a book is favorited
+  ///
+  /// In en, this message translates to:
+  /// **'Added to favorites'**
+  String get added_to_favorites;
+
+  /// Snack bar text when a book is unfavorited
+  ///
+  /// In en, this message translates to:
+  /// **'Removed from favorites'**
+  String get removed_from_favorites;
+
+  /// Shown when a book is successfully added to the shopping cart
+  ///
+  /// In en, this message translates to:
+  /// **'Added to cart'**
+  String get added_to_cart;
 
   /// No description provided for @products.
   ///

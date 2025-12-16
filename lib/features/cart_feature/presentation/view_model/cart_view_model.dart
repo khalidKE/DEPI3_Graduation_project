@@ -8,26 +8,30 @@ class CartViewModel extends Cubit<CartState> {
       : super(
           CartState(
             status: ViewStatus.success,
-            items: const [
-              CartItem(
-                id: '1',
-                title: 'The Kite Runner',
-                author: 'Khaled Hosseini',
-                price: 39.99,
-                quantity: 1,
-                imageUrl: 'assets/images/home/b1.png',
-              ),
-              CartItem(
-                id: '2',
-                title: 'The Subtle Art',
-                author: 'Mark Manson',
-                price: 19.99,
-                quantity: 2,
-                imageUrl: 'assets/images/home/b2.png',
-              ),
-            ],
+            items: const [],
           ),
         );
+
+  void addItem(CartItem item) {
+    final items = [...state.items];
+    final existingIndex = items.indexWhere((value) => value.id == item.id);
+    if (existingIndex != -1) {
+      final existing = items[existingIndex];
+      items[existingIndex] = existing.copyWith(
+        quantity: existing.quantity + item.quantity,
+      );
+    } else {
+      items.add(item);
+    }
+
+    emit(
+      state.copyWith(
+        items: items,
+        status: ViewStatus.success,
+        shouldNavigateToConfirm: false,
+      ),
+    );
+  }
 
   void increaseQuantity(String id) {
     final updated = state.items.map((item) {

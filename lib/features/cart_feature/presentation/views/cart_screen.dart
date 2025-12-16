@@ -15,11 +15,8 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CartViewModel(),
-      child: const ErrorBoundary(
-        child: _CartView(),
-      ),
+    return const ErrorBoundary(
+      child: _CartView(),
     );
   }
 }

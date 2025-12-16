@@ -153,7 +153,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get send_to_your_email => 'Send to your email';
 
   @override
-  String get lorem_ipsum_text => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
+  String get lorem_ipsum_text => 'Signing out only affects this device. You can sign back in anytime to keep your library in sync.';
 
   @override
   String get you_have_5_coupons_to_use => 'You Have 5 Copons to use';
@@ -234,13 +234,58 @@ class AppLocalizationsEn extends AppLocalizations {
   String get novel => 'Novel';
 
   @override
+  String get fiction => 'Fiction';
+
+  @override
   String get self_love => 'SelfLove';
 
   @override
   String get science => 'Science';
 
   @override
+  String get science_fiction => 'Science Fiction';
+
+  @override
+  String get literary_criticism => 'Literary Criticism';
+
+  @override
+  String get biography => 'Biography';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get philosophy => 'Philosophy';
+
+  @override
+  String get adventure => 'Adventure';
+
+  @override
+  String get dystopian => 'Dystopian';
+
+  @override
+  String get spirituality => 'Spirituality';
+
+  @override
+  String get psychology => 'Psychology';
+
+  @override
   String get romantic => 'Romantic';
+
+  @override
+  String get memoir => 'Memoir';
+
+  @override
+  String get mystery => 'Mystery';
+
+  @override
+  String get productivity => 'Productivity';
+
+  @override
+  String get browse_categories => 'Browse book categories';
+
+  @override
+  String get view_categories => 'View categories';
 
   @override
   String get search => 'Search';
@@ -381,7 +426,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get total => 'Total';
 
   @override
-  String get my_orders => 'My Orders';
+  String get my_orders => 'Book Categories';
 
   @override
   String get processing => 'Processing';
@@ -499,6 +544,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get add_to_cart => 'Add to Cart';
+
+  @override
+  String get added_to_favorites => 'Added to favorites';
+
+  @override
+  String get removed_from_favorites => 'Removed from favorites';
+
+  @override
+  String get added_to_cart => 'Added to cart';
 
   @override
   String get products => 'Products';

@@ -47,7 +47,7 @@
   "tell_us_how_we_can_help": "Tell us how we can help 👋",
   "chapter_support_message": "Chapter are standing by for service & support!",
   "send_to_your_email": "Send to your email",
-  "lorem_ipsum_text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "lorem_ipsum_text": "Signing out only affects this device. You can sign back in anytime to keep your library in sync.",
   "you_have_5_coupons_to_use": "You Have 5 Copons to use",
   "notification": "Notification",
   "current": "Current",
@@ -71,12 +71,63 @@
   "news":"News",
   "all_books":"On All Books",
   "cancel":"Cancel",
-   "category":"Category",
-   "all":"All",
-   "novel":"Novel",
-   "self_love":"SelfLove",
-   "science":"Science",
-   "romantic":"Romantic",
+  "category":"Category",
+  "all":"All",
+  "novel":"Novel",
+  "fiction":"Fiction",
+  "@fiction":{
+    "description":"Label for the fiction category"
+  },
+  "self_love":"SelfLove",
+  "science":"Science",
+  "science_fiction":"Science Fiction",
+  "@science_fiction":{
+    "description":"Label for the science fiction category"
+  },
+  "literary_criticism":"Literary Criticism",
+  "@literary_criticism":{
+    "description":"Label for the literary criticism category"
+  },
+  "biography":"Biography",
+  "@biography":{
+    "description":"Label for the biography category"
+  },
+  "history":"History",
+  "@history":{
+    "description":"Label for the history category"
+  },
+  "philosophy":"Philosophy",
+  "@philosophy":{
+    "description":"Label for the philosophy category"
+  },
+  "adventure":"Adventure",
+  "@adventure":{
+    "description":"Label for the adventure category"
+  },
+  "dystopian":"Dystopian",
+  "@dystopian":{
+    "description":"Label for the dystopian category"
+  },
+  "spirituality":"Spirituality",
+  "@spirituality":{
+    "description":"Label for the spirituality category"
+  },
+  "psychology":"Psychology",
+  "@psychology":{
+    "description":"Label for the psychology category"
+  },
+  "romantic":"Romantic",
+  "memoir":"Memoir",
+  "mystery":"Mystery",
+  "productivity":"Productivity",
+  "browse_categories":"Browse book categories",
+  "@browse_categories":{
+    "description":"Helper text on the categories tab explaining where to find book genres"
+  },
+  "view_categories":"View categories",
+  "@view_categories":{
+    "description":"Button text that opens the book categories screen"
+  },
    "search":"Search",
    "recent_searches":"Recent Searches",
    "skip":"Skip",
@@ -126,7 +177,7 @@
   "proceed_to_checkout": "Proceed to Checkout",
   "total": "Total",
 
-  "my_orders": "My Orders",
+  "my_orders": "Book Categories",
   "all": "All",
   "processing": "Processing",
   "shipped": "Shipped",
@@ -168,6 +219,18 @@
   "pages": "Pages",
   "language": "Language",
   "add_to_cart": "Add to Cart",
+  "added_to_favorites": "Added to favorites",
+  "@added_to_favorites": {
+    "description": "Snack bar text when a book is favorited"
+  },
+  "removed_from_favorites": "Removed from favorites",
+  "@removed_from_favorites": {
+    "description": "Snack bar text when a book is unfavorited"
+  },
+  "added_to_cart": "Added to cart",
+  "@added_to_cart": {
+    "description": "Shown when a book is successfully added to the shopping cart"
+  },
   "products": "Products",
   "no_authors_found": "No authors found in {category}",
   "@no_authors_found": {

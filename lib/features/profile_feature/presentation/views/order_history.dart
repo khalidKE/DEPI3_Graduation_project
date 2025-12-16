@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:books/features/profile_feature/presentation/views/custom/delivery_containers.dart';
 
-class OrederHistory extends StatelessWidget {
-  const OrederHistory({super.key});
+class OrderHistory extends StatelessWidget {
+  const OrderHistory({super.key});
 
   @override
   Widget build(BuildContext context) {

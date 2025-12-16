@@ -3,6 +3,7 @@ import 'package:books/core/colors/colors.dart';
 import 'package:books/core/utils/error_handler.dart';
 import 'package:books/core/utils/responsive.dart';
 import 'package:books/core/widgets/language_toggle.dart';
+import 'package:books/features/admin_feature/presentation/views/admin_dashboard_screen.dart';
 import 'package:books/features/authentication_feature/presentation/view_model/login_state.dart';
 import 'package:books/features/authentication_feature/presentation/view_model/login_view_model.dart';
 import 'package:books/features/authentication_feature/data/user_model.dart';
@@ -29,6 +30,13 @@ class _LogInScreenState extends State<LogInScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
+  bool _isAdminCredentials() {
+    const adminEmail = 'admin@gmail.com';
+    const adminPassword = 'admin@123';
+    return _emailController.text.trim().toLowerCase() == adminEmail &&
+        _passwordController.text == adminPassword;
+  }
+
   @override
   void dispose() {
     _passwordController.dispose();
@@ -43,11 +51,16 @@ class _LogInScreenState extends State<LogInScreen> {
       child: BlocListener<LoginViewModel, LoginState>(
         listener: (context, state) {
           if (state.isSuccess) {
+            final isAdmin = _isAdminCredentials();
             ErrorHandler.showSuccessSnackBar(
               context,
               AppLocalizations.of(context)!.login_is_done_successfully,
             );
-            Get.to(() => const HomeScreen());
+            if (isAdmin) {
+              Get.off(() => const AdminDashboardScreen());
+            } else {
+              Get.to(() => const HomeScreen());
+            }
           } else if (state.hasError) {
             final errorMessage = state.error != null
                 ? ErrorHandler.getAuthErrorMessage(context, state.error)
@@ -87,7 +100,8 @@ class _LogInScreenState extends State<LogInScreen> {
                               },
                               child: Icon(
                                 Icons.arrow_back,
-                                size: Responsive.responsiveIconSize(context, 24),
+                                size:
+                                    Responsive.responsiveIconSize(context, 24),
                               ),
                             ),
                             Container(
@@ -100,40 +114,68 @@ class _LogInScreenState extends State<LogInScreen> {
                                   Text(
                                     AppLocalizations.of(context)!.welcome_back,
                                     style: TextStyle(
-                                      fontSize: Responsive.responsiveFontSize(context, 28),
+                                      fontSize: Responsive.responsiveFontSize(
+                                          context, 28),
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: Responsive.responsiveSpacing(context, 2)),
+                                  SizedBox(
+                                      height: Responsive.responsiveSpacing(
+                                          context, 2)),
                                   Text(
                                     AppLocalizations.of(context)!
                                         .sign_to_your_account,
                                     style: TextStyle(
-                                      fontSize: Responsive.responsiveFontSize(context, 18),
-                                      color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
+                                      fontSize: Responsive.responsiveFontSize(
+                                          context, 18),
+                                      color: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.color ??
+                                          AppColors.grey,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(height: Responsive.responsiveSpacing(context, 40)),
+                            SizedBox(
+                                height:
+                                    Responsive.responsiveSpacing(context, 40)),
                             EmailTextField(enteredEmail: _emailController),
-                            SizedBox(height: Responsive.responsiveSpacing(context, 15)),
+                            SizedBox(
+                                height:
+                                    Responsive.responsiveSpacing(context, 15)),
                             PasswordTextField(
                               enteredPassword: _passwordController,
                               validation: loginValidation,
                             ),
-                            SizedBox(height: Responsive.responsiveSpacing(context, 35)),
+                            SizedBox(
+                                height:
+                                    Responsive.responsiveSpacing(context, 35)),
                             BlocBuilder<LoginViewModel, LoginState>(
                               builder: (context, state) {
-                                final viewModel = context.read<LoginViewModel>();
+                                final viewModel =
+                                    context.read<LoginViewModel>();
                                 if (state.status == ViewStatus.loading) {
-                                  return const Center(child: CircularProgressIndicator());
+                                  return const Center(
+                                      child: CircularProgressIndicator());
                                 }
                                 return PurpleButton(
-                                  buttonText: AppLocalizations.of(context)!.login,
+                                  buttonText:
+                                      AppLocalizations.of(context)!.login,
                                   onTapFunction: () {
-                                    if (_formKeyLogin.currentState!.validate()) {
+                                    if (_formKeyLogin.currentState!
+                                        .validate()) {
+                                      if (_isAdminCredentials()) {
+                                        ErrorHandler.showSuccessSnackBar(
+                                          context,
+                                          AppLocalizations.of(context)!
+                                              .login_is_done_successfully,
+                                        );
+                                        Get.off(
+                                            () => const AdminDashboardScreen());
+                                        return;
+                                      }
                                       final user = UserModel(
                                         email: _emailController.text.trim(),
                                         password: _passwordController.text,
@@ -144,15 +186,23 @@ class _LogInScreenState extends State<LogInScreen> {
                                 );
                               },
                             ),
-                            SizedBox(height: Responsive.responsiveSpacing(context, 30)),
+                            SizedBox(
+                                height:
+                                    Responsive.responsiveSpacing(context, 30)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context)!.dont_have_account,
+                                  AppLocalizations.of(context)!
+                                      .dont_have_account,
                                   style: TextStyle(
-                                    color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
-                                    fontSize: Responsive.responsiveFontSize(context, 16),
+                                    color: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.color ??
+                                        AppColors.grey,
+                                    fontSize: Responsive.responsiveFontSize(
+                                        context, 16),
                                   ),
                                 ),
                                 InkWell(
@@ -164,20 +214,24 @@ class _LogInScreenState extends State<LogInScreen> {
                                     style: TextStyle(
                                       color: AppColors.purple,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: Responsive.responsiveFontSize(context, 17),
+                                      fontSize: Responsive.responsiveFontSize(
+                                          context, 17),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: Responsive.responsiveSpacing(context, 30)),
+                            SizedBox(
+                                height:
+                                    Responsive.responsiveSpacing(context, 30)),
                             Row(
                               children: [
                                 Expanded(
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
-                                      color: Theme.of(context).brightness == Brightness.dark
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
                                           ? Colors.grey[800]!
                                           : AppColors.lightGray,
                                     ),
@@ -185,11 +239,16 @@ class _LogInScreenState extends State<LogInScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
                                   child: Text(
                                     AppLocalizations.of(context)!.or_with,
                                     style: TextStyle(
-                                      color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.grey,
+                                      color: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.color ??
+                                          AppColors.grey,
                                     ),
                                   ),
                                 ),
@@ -197,7 +256,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
-                                      color: Theme.of(context).brightness == Brightness.dark
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
                                           ? Colors.grey[800]!
                                           : AppColors.lightGray,
                                     ),
@@ -206,23 +266,29 @@ class _LogInScreenState extends State<LogInScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: Responsive.responsiveSpacing(context, 30)),
+                            SizedBox(
+                                height:
+                                    Responsive.responsiveSpacing(context, 30)),
                             Center(
                               child: BlocBuilder<LoginViewModel, LoginState>(
                                 builder: (context, state) {
-                                  final viewModel = context.read<LoginViewModel>();
+                                  final viewModel =
+                                      context.read<LoginViewModel>();
                                   return WhiteButton(
                                     buttonText: AppLocalizations.of(context)!
                                         .sign_in_with_google,
                                     onTapFunction: () {
                                       viewModel.signInWithGoogle();
                                     },
-                                    imagePath: 'assets/images/auth/google_logo.png',
+                                    imagePath:
+                                        'assets/images/auth/google_logo.png',
                                   );
                                 },
                               ),
                             ),
-                            SizedBox(height: Responsive.responsiveSpacing(context, 12)),
+                            SizedBox(
+                                height:
+                                    Responsive.responsiveSpacing(context, 12)),
                           ],
                         ),
                       ),

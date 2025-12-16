@@ -153,7 +153,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get send_to_your_email => 'أرسل إلى بريدك الإلكتروني';
 
   @override
-  String get lorem_ipsum_text => 'لوريم إيبسوم هو نص تجريبي في صناعة الطباعة والتنضيد.';
+  String get lorem_ipsum_text => 'سيتم تسجيل خروجك من هذا الجهاز فقط، ويمكنك تسجيل الدخول في أي وقت لاستعادة مكتبتك.';
 
   @override
   String get you_have_5_coupons_to_use => 'لديك 5 كوبونات للاستخدام';
@@ -234,13 +234,58 @@ class AppLocalizationsAr extends AppLocalizations {
   String get novel => 'رواية';
 
   @override
+  String get fiction => 'خيال';
+
+  @override
   String get self_love => 'حب الذات';
 
   @override
   String get science => 'علم';
 
   @override
+  String get science_fiction => 'خيال علمي';
+
+  @override
+  String get literary_criticism => 'النقد الأدبي';
+
+  @override
+  String get biography => 'سيرة ذاتية';
+
+  @override
+  String get history => 'تاريخ';
+
+  @override
+  String get philosophy => 'فلسفة';
+
+  @override
+  String get adventure => 'مغامرة';
+
+  @override
+  String get dystopian => 'مستقبل بائس';
+
+  @override
+  String get spirituality => 'روحانيات';
+
+  @override
+  String get psychology => 'علم النفس';
+
+  @override
   String get romantic => 'رومانسي';
+
+  @override
+  String get memoir => 'مذكرات';
+
+  @override
+  String get mystery => 'غموض';
+
+  @override
+  String get productivity => 'الإنتاجية';
+
+  @override
+  String get browse_categories => 'استعرض تصنيفات الكتب';
+
+  @override
+  String get view_categories => 'إظهار التصنيفات';
 
   @override
   String get search => 'بحث';
@@ -381,7 +426,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get total => 'الإجمالي';
 
   @override
-  String get my_orders => 'طلباتي';
+  String get my_orders => 'تصنيفات صنف الكتب';
 
   @override
   String get processing => 'قيد المعالجة';
@@ -499,6 +544,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get add_to_cart => 'أضف إلى السلة';
+
+  @override
+  String get added_to_favorites => 'تمت الإضافة إلى المفضلة';
+
+  @override
+  String get removed_from_favorites => 'تمت الإزالة من المفضلة';
+
+  @override
+  String get added_to_cart => 'تمت الإضافة إلى السلة';
 
   @override
   String get products => 'المنتجات';

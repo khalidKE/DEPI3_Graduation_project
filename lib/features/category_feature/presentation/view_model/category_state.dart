@@ -1,5 +1,7 @@
+import 'package:books/features/category_feature/data/category_info.dart';
+
 class CategoryState {
-  final List<String> categories;
+  final List<CategoryInfo> categories;
   final int selectedIndex;
 
   const CategoryState({
@@ -8,7 +10,7 @@ class CategoryState {
   });
 
   CategoryState copyWith({
-    List<String>? categories,
+    List<CategoryInfo>? categories,
     int? selectedIndex,
   }) {
     return CategoryState(
